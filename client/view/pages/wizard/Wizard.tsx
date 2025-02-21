@@ -1,9 +1,9 @@
 import React from 'react'
 
-const wizard = () => {
+const Wizard = () => {
   return (
     <div>wizard1</div>
   )
 }
 
-export default wizard
+export default Wizard
