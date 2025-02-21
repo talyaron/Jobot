@@ -1,4 +1,5 @@
 import './App.css'
+import Auth from './view/pages/auth/Auth'
 import Candidate from './view/pages/candidate/Candidate'
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
       <div>
         <h1>Jobot system</h1>
         <br />
-        <Candidate />
+        <Auth></Auth>
       </div>
   )
 }
