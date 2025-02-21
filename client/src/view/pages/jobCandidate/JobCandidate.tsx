@@ -1,10 +1,13 @@
 
 import JobDetails from '../../components/jobDetails/JobDetails'
+import { Job, useJobCandidateVM } from './JobCandidateVM';
 
 const JobCandidate = () => {
+    
+  const { job } = useJobCandidateVM();
   return (
     <div>
-      <JobDetails />
+      {job && <JobDetails job={job} />}
       <button>Apply to job</button>
     </div>
   )

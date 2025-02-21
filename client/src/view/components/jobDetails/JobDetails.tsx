@@ -1,11 +1,16 @@
-import React from 'react'
+import { Job } from "../../pages/jobCandidate/JobCandidateVM";
 
-function JobDetails() {
-  return (
-    <div>
-      
-    </div>
-  )
+interface Props {
+  job: Job;
 }
 
-export default JobDetails
+const JobDetails: React.FC<Props> = ({ job }) => {
+  return (
+    <div>
+      <h1>{job.jobName}</h1>
+      <div>{job.details}</div>
+    </div>
+  );
+};
+
+export default JobDetails;
