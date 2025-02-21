@@ -1,244 +1,232 @@
-import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import React, { useState, useEffect, FormEvent } from 'react';
 
-// Types and Enums
-enum LocationType {
-    REMOTE = 'remote',
-    ONSITE = 'onsite',
-    HYBRID = 'hybrid'
-  }
-  
-  enum Term {
-    PERMANENT = 'permanent',
-    TEMPORARY = 'temporary',
-    CONTRACT = 'contract'
-  }
-  
-  interface Job {
-    _id: string;
-    jobName: string;
-    details: string;
-    address: string;
-    locationType: LocationType;
-    location: string;
-    company: string;
-    employmentType: string;
-    Industry: string;
-    salary: number;
-    housingIncluded: boolean;
-    type: string;
-    term: Term;
-    benefits: string;
-    websiteURL?: string;
-    createdAt: Date;
-  }
-  
-  interface JobFormData {
-    jobName: string;
-    details: string;
-    address: string;
-    locationType: LocationType;
-    location: string;
-    company: string;
-    employmentType: string;
-    Industry: string;
-    salary: number;
-    housingIncluded: boolean;
-    type: string;
-    term: Term;
-    benefits: string;
-    websiteURL?: string;
-  }
+interface Job {
+	_id: string;
+	jobName: string;
+	details: string;
+	address: string;
+	location: string;
+	locationType: string;
+	company: string;
+	employmentType: string;
+	Industry: string;
+	salary: number;
+	housingIncluded: boolean;
+	type: string;
+	term: string;
+	benefits: string;
+	websiteURL: string;
+}
 
-  export const JobsEmployerMV: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [editingJob, setEditingJob] = useState<Job | null>(null);
-    const [formData, setFormData] = useState<JobFormData>({
-      jobName: '',
-      details: '',
-      address: '',
-      locationType: LocationType.ONSITE,
-      location: '',
-      company: '',
-      employmentType: '',
-      Industry: '',
-      salary: 0,
-      housingIncluded: false,
-      type: '',
-      term: Term.PERMANENT,
-      benefits: '',
-      websiteURL: ''
-    });
-  
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      try {
-        const url = editingJob 
-          ? `/api/jobs/${editingJob._id}`
-          : '/api/jobs';
-        
-        const method = editingJob ? 'PUT' : 'POST';
-        
-        const response = await fetch(url, {
-          method,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (!response.ok) throw new Error('Failed to save job');
-        
-        setIsOpen(false);
-        resetForm();
-      } catch (error) {
-        console.error('Error saving job:', error);
-      }
-    };
-  
-    const resetForm = () => {
-      setFormData({
-        jobName: '',
-        details: '',
-        address: '',
-        locationType: LocationType.ONSITE,
-        location: '',
-        company: '',
-        employmentType: '',
-        Industry: '',
-        salary: 0,
-        housingIncluded: false,
-        type: '',
-        term: Term.PERMANENT,
-        benefits: '',
-        websiteURL: ''
-      });
-      setEditingJob(null);
-    };
-  
-    const handleChange = (name: keyof JobFormData, value: string | number | boolean) => {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    };
-  
-    return (
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>{editingJob ? 'Edit Job' : 'Create New Job'}</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Input
-                  placeholder="Job Title"
-                  value={formData.jobName}
-                  onChange={e => handleChange('jobName', e.target.value)}
-                />
-              </div>
-              <div>
-                <Input
-                  placeholder="Company ID"
-                  value={formData.company}
-                  onChange={e => handleChange('company', e.target.value)}
-                />
-              </div>
-            </div>
-  
-            <Textarea
-              placeholder="Job Details"
-              value={formData.details}
-              onChange={e => handleChange('details', e.target.value)}
-            />
-  
-            <div className="grid grid-cols-2 gap-4">
-              <Select
-                value={formData.locationType}
-                onValueChange={value => handleChange('locationType', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Location Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(LocationType).map(type => (
-                    <SelectItem key={type} value={type}>
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-  
-              <Input
-                placeholder="Location"
-                value={formData.location}
-                onChange={e => handleChange('location', e.target.value)}
-              />
-            </div>
-  
-            <div className="grid grid-cols-2 gap-4">
-              <Select
-                value={formData.term}
-                onValueChange={value => handleChange('term', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Term" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(Term).map(term => (
-                    <SelectItem key={term} value={term}>
-                      {term.charAt(0).toUpperCase() + term.slice(1)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-  
-              <Input
-                type="number"
-                placeholder="Salary"
-                value={formData.salary}
-                onChange={e => handleChange('salary', Number(e.target.value))}
-              />
-            </div>
-  
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="housingIncluded"
-                checked={formData.housingIncluded}
-                onChange={e => handleChange('housingIncluded', e.target.checked)}
-                className="form-checkbox"
-              />
-              <label htmlFor="housingIncluded">Housing Included</label>
-            </div>
-  
-            <Input
-              placeholder="Website URL"
-              value={formData.websiteURL}
-              onChange={e => handleChange('websiteURL', e.target.value)}
-            />
-  
-            <Textarea
-              placeholder="Benefits"
-              value={formData.benefits}
-              onChange={e => handleChange('benefits', e.target.value)}
-            />
-  
-            <div className="flex justify-end space-x-2">
-              <Button variant="outline" onClick={() => setIsOpen(false)}>
-                Cancel
-              </Button>
-              <Button type="submit">
-                {editingJob ? 'Update Job' : 'Create Job'}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
-    );
-  };
+interface JobsEmployerMVProps {
+	jobs: Job[];
+	onCreate: (jobData: Job) => void;
+	onDelete: (id: string) => void;
+	onEdit: (job: Job) => void;
+	onEditSave: (jobData: Job) => void;
+	jobToEdit: Job | null;
+}
+
+const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
+	jobs,
+	onCreate,
+	onDelete,
+	onEdit,
+	jobToEdit,
+}) => {
+	const [formData, setFormData] = useState<Job>({
+		_id: '',
+		jobName: '',
+		details: '',
+		address: '',
+		location: '',
+		locationType: '',
+		company: '',
+		employmentType: '',
+		Industry: '',
+		salary: 0,
+		housingIncluded: false,
+		type: '',
+		term: '',
+		benefits: '',
+		websiteURL: '',
+	});
+
+	useEffect(() => {
+		if (jobToEdit) {
+			setFormData({ ...jobToEdit });
+		}
+	}, [jobToEdit]);
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData({
+			...formData,
+			[name]: value,
+		});
+	};
+
+	const handleSubmit = (e: FormEvent) => {
+		e.preventDefault();
+		if (jobToEdit) {
+			onEdit(formData);
+		} else {
+			onCreate(formData);
+		}
+		setFormData({
+			_id: '',
+			jobName: '',
+			details: '',
+			address: '',
+			location: '',
+			locationType: '',
+			company: '', 
+			employmentType: '',
+			Industry: '',
+			salary: 0,
+			housingIncluded: false,
+			type: '',
+			term: '',
+			benefits: '',
+			websiteURL: '',
+		});
+	};
+
+	return (
+		<div>
+			<h2>{jobToEdit ? 'Edit Job' : 'Create New Job'}</h2>
+			<form onSubmit={handleSubmit}>
+				<input
+					type="text"
+					name="jobName"
+					value={formData.jobName}
+					onChange={handleInputChange}
+					placeholder="Job Name"
+					required
+				/>
+				<input
+					type="text"
+					name="details"
+					value={formData.details}
+					onChange={handleInputChange}
+					placeholder="Details"
+					required
+				/>
+				<input
+					type="text"
+					name="address"
+					value={formData.address}
+					onChange={handleInputChange}
+					placeholder="Address"
+					required
+				/>
+				<input
+					type="text"
+					name="location"
+					value={formData.location}
+					onChange={handleInputChange}
+					placeholder="Location"
+					required
+				/>
+				<input
+					type="text"
+					name="locationType"
+					value={formData.locationType}
+					onChange={handleInputChange}
+					placeholder="Location Type"
+					required
+				/>
+				<input
+					type="text"
+					name="company"
+					value={formData.company}
+					onChange={handleInputChange}
+					placeholder="Company"
+					required
+				/>
+				<input
+					type="text"
+					name="employmentType"
+					value={formData.employmentType}
+					onChange={handleInputChange}
+					placeholder="Employment Type"
+					required
+				/>
+				<input
+					type="text"
+					name="Industry"
+					value={formData.Industry}
+					onChange={handleInputChange}
+					placeholder="Industry"
+					required
+				/>
+				<input
+					type="number"
+					name="salary"
+					value={formData.salary}
+					onChange={handleInputChange}
+					placeholder="Salary"
+					required
+				/>
+				<input
+					type="checkbox"
+					name="housingIncluded"
+					checked={formData.housingIncluded}
+					onChange={(e) =>
+						setFormData({
+							...formData,
+							housingIncluded: e.target.checked,
+						})
+					}
+				/>
+				<label>Housing Included</label>
+				<input
+					type="text"
+					name="type"
+					value={formData.type}
+					onChange={handleInputChange}
+					placeholder="Job Type"
+					required
+				/>
+				<input
+					type="text"
+					name="term"
+					value={formData.term}
+					onChange={handleInputChange}
+					placeholder="Term"
+					required
+				/>
+				<input
+					type="text"
+					name="benefits"
+					value={formData.benefits}
+					onChange={handleInputChange}
+					placeholder="Benefits"
+					required
+				/>
+				<input
+					type="text"
+					name="websiteURL"
+					value={formData.websiteURL}
+					onChange={handleInputChange}
+					placeholder="Website URL"
+					required
+				/>
+				<button type="submit">{jobToEdit ? 'Save Changes' : 'Create Job'}</button>
+			</form>
+			<div>
+				<h3>All Jobs</h3>
+				{jobs &&
+					jobs.map((job) => (
+						<div key={job._id}>
+							<h4>{job.jobName}</h4>
+							<button onClick={() => onDelete(job._id)}>Delete</button>
+							<button onClick={() => onEdit(job)}>Edit</button>
+						</div>
+					))}
+			</div>
+		</div>
+	);
+};
+
+export default JobsEmployerMV;

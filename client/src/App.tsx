@@ -1,5 +1,6 @@
 import './App.css'
 import Candidate from './view/pages/candidate/Candidate'
+import JobsEmployer from './view/pages/jobsEmployer/JobsEmployer'
 
 function App() {
 

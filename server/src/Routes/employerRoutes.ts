@@ -1,15 +1,21 @@
-import  express from "express"
-import { craeteJob } from "../Controllers/Employer/job/createJob"
+import express from "express";
+import { craeteJob } from "../Controllers/Employer/job/createJob";
 import { getAllJobs } from "../Controllers/Employer/job/fetchJobs";
 import { deleteJob } from "../Controllers/Employer/job/deleteJob";
 import { editJob } from "../Controllers/Employer/job/editJob";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post(`/create-job`, craeteJob);
-router.put(`/edit-job`, editJob);
-router.delete(`/delete-job/:id`, deleteJob);
-router.get(`/fetch-jobs`, getAllJobs);
+// Route to create a new job
+router.post(`/jobs/create`, craeteJob);
 
+// Route to get all jobs
+router.get(`/jobs/get-all-jobs`, getAllJobs);
+
+// Route to delete a job by id
+router.delete(`/jobs/delete/:id`, deleteJob);
+
+// Route to edit a job by id
+router.put(`/jobs/edit/:id`, editJob);
 
 export default router;

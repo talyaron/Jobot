@@ -1,108 +1,118 @@
-import React, { useEffect, useState } from 'react';
-import { JobsEmployerMV } from './JobsEmployerMV';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Pencil, Trash2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import JobsEmployerMV from './JobsEmployerMV';
 
-const JobsEmployer = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+interface Job {
+	_id: string;
+	jobName: string;
+	details: string;
+	address: string;
+	location: string;
+	locationType: string;
+	company: string; 
+	employmentType: string;
+	Industry: string;
+	salary: number;
+	housingIncluded: boolean; 
+	type: string;
+	term: string;
+	benefits: string;
+	websiteURL: string; 
+}
 
-  useEffect(() => {
-    fetchJobs();
-  }, []);
+const JobsEmployer: React.FC = () => {
+	const [jobs, setJobs] = useState<Job[]>([]);
+	const [jobToEdit, setJobToEdit] = useState<Job | null>(null);
 
-  const fetchJobs = async () => {
-    try {
-      const response = await fetch('/api/employer/fetch-jobs');
-      if (!response.ok) throw new Error('Failed to fetch jobs');
-      const data = await response.json();
-      setJobs(data);
-    } catch (error) {
-      console.error('Error fetching jobs:', error);
-    }
-  };
+	useEffect(() => {
+		const fetchJobs = async () => {
+			try {
+				const response = await fetch('/api/employer/jobs/get-all-jobs');
+				const data: Job[] = await response.json();
+				setJobs(data);
+			} catch (error) {
+				console.error('Error fetching jobs:', error);
+			}
+		};
+		fetchJobs();
+	}, []);
 
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await fetch(`/api/employer/delete-job/${id}`, {
-        method: 'DELETE',
-      });
+	const createJob = async (jobData: Job) => {
+		try {
+			const response = await fetch('/api/employer/jobs/create', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(jobData),
+			});
 
-      if (!response.ok) throw new Error('Failed to delete job');
-      
-      await fetchJobs();
-    } catch (error) {
-      console.error('Error deleting job:', error);
-    }
-  };
+			const result = await response.json();
+			if (response.ok) {
+				setJobs((prevJobs) => [...prevJobs, result.job]);
+			} else {
+				console.error('Error creating job:', result.error);
+			}
+		} catch (error) {
+			console.error('Error creating job:', error);
+		}
+	};
 
-  const handleEdit = (job: Job) => {
-    setSelectedJob(job);
-    setShowModal(true);
-  };
+	const deleteJob = async (id: string) => {
+		try {
+			const response = await fetch(`/api/employer/jobs/delete/${id}`, {
+				method: 'DELETE',
+			});
+			const result = await response.json();
+			if (response.ok) {
+				setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
+			} else {
+				console.error('Error deleting job:', result.error);
+			}
+		} catch (error) {
+			console.error('Error deleting job:', error);
+		}
+	};
 
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Job Listings</h1>
-        <Button onClick={() => setShowModal(true)}>Create New Job</Button>
-      </div>
+	const editJob = async (jobData: Job) => {
+		try {
+			const response = await fetch(`/api/epmloyer/jobs/edit/${jobData._id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(jobData),
+			});
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {jobs.map((job) => (
-          <Card key={job._id}>
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                <span>{job.jobName}</span>
-                <div className="flex space-x-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleEdit(job)}
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleDelete(job._id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-gray-600">{job.Industry}</p>
-              <p className="text-sm text-gray-600">{job.location}</p>
-              <p className="text-sm font-semibold mt-2">${job.salary.toLocaleString()}</p>
-              <p className="text-sm text-gray-600">{job.term}</p>
-              {job.housingIncluded && (
-                <p className="text-sm text-green-600">Housing Included</p>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+			const result = await response.json();
+			if (response.ok) {
+				setJobs((prevJobs) =>
+					prevJobs.map((job) => (job._id === jobData._id ? result.job : job))
+				);
+				setJobToEdit(null);
+			} else {
+				console.error('Error updating job:', result.error);
+			}
+		} catch (error) {
+			console.error('Error updating job:', error);
+		}
+	};
 
-      {showModal && (
-        <JobsEmployerMV
-          isOpen={showModal}
-          onClose={() => {
-            setShowModal(false);
-            setSelectedJob(null);
-          }}
-          job={selectedJob}
-          onSave={() => {
-            setShowModal(false);
-            fetchJobs();
-          }}
-        />
-      )}
-    </div>
-  );
+	const handleEditSave = (jobData: Job) => {
+		editJob(jobData);
+	};
+
+	return (
+		<div>
+			<JobsEmployerMV
+				jobs={jobs}
+				onCreate={createJob}
+				onDelete={deleteJob}
+				onEdit={setJobToEdit}
+				onEditSave={handleEditSave}
+				jobToEdit={jobToEdit}
+			/>
+		</div>
+	);
 };
 
 export default JobsEmployer;
