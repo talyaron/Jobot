@@ -4,7 +4,7 @@ import { employerJobStatus } from "../utils/modelsEnums";
 
 const EmployerJobSchema = new Schema({
   employerId:Types.ObjectId,
-  jobID:Types.ObjectId,
+  jobId:Types.ObjectId,
   status: Object.values(employerJobStatus),
 })
 

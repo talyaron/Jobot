@@ -1,4 +1,3 @@
-//jop enums
 export enum term{
     "short", "long"
    }
@@ -14,16 +13,4 @@ export enum term{
     "shifts",
   }
 
-//jobUserSchema  Enum
-  export enum jobUserStatus {
-    "pending",
-    "hired",
-    "rejected",
-  }
   
-  //employerJob Enum
-export enum employerJobStatus {
-    "open",
-    "closed",
-}
-
