@@ -1,6 +1,5 @@
 
 export interface WorkExperience {
-    _id?: string;        
     jobName: string;    
     jobTitle: string;    
     jobType: string;     
