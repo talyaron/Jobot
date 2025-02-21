@@ -2,7 +2,7 @@ import React from 'react'
 
 const Stam = () => {
   return (
-    <div>Stam</div>
+    <div>Stam 22</div>
   )
 }
 
