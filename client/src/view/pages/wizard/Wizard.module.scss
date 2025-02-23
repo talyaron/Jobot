@@ -1,0 +1,61 @@
+.wizardContainer {
+    background: white;
+    color: black;
+    padding: 40px; 
+    border-radius: 10%;
+    text-align: center;
+    margin: auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    width: 120vh; 
+    height:80vh;
+  }
+  
+  progress {
+    width: 100%;
+    height: 15px; 
+    border-radius: 10%;
+    margin-bottom: 25px;
+    appearance: none;
+  }
+  
+  .questionText {
+    font-size: 1.5rem; 
+    margin-bottom: 20px;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  button {
+    background: white;
+    color: black;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 10%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  
+    &:hover {
+      background: black;
+      color: white;
+    }
+    &:active {
+        background: grey;
+        color: rgb(204, 204, 204);
+      }
+    }
+  textarea {
+    width: 500px;
+    height: 200px;
+    border-radius: 10%;
+    color: lightgrey;
+    border: 2px solid black;
+    padding: 15px;
+    font-size: 1.1rem;
+    resize: none;
+  }
+  
