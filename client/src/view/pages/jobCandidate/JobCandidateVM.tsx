@@ -1,8 +1,6 @@
 import { useState } from "react";
-export interface Job { //delete this 
-    jobName: string,
-    details: string,
-}
+import { Job } from "../../../model/jobModel";
+
 export function useJobCandidateVM() {
     const [job, setJob] = useState<Job>();
     async function fetchJob() {
