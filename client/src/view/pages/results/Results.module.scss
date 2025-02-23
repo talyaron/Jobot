@@ -1,0 +1,14 @@
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loading {
+    text-align: center;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
