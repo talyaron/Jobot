@@ -8,8 +8,6 @@ function App() {
   return (
       <div>
         <h1>Jobot system</h1>
-        <br />
-        <Candidate />
         <DesignCvWizard />
       </div>
   )
