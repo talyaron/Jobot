@@ -1,40 +1,29 @@
-<<<<<<< Updated upstream
-export function useResultsVM() {
- 
-}
-=======
-import { useEffect, useState } from "react";
-import { Job } from "../../model/JobModel";
+import { useState, useEffect } from "react";
 
-export const useJobs = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
+export const useJobs = (userId: string) => {
+  const [jobIds, setJobIds] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchJobIds = async () => {
       try {
-        const response = await fetch("/api/jobs");
+        const response = await fetch(
+          `http://localhost:3000/api/matched-jobs/${userId}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch job IDs");
 
-        if (!response.ok) {
-          const errorData = await response.json(); 
-          throw new Error(errorData.message || "Failed to fetch jobs");
-        }
-
-        const data: Job[] = await response.json();
-        setJobs(data);
-        setError(null); // If response is successful, clear the error
+        const data = await response.json();
+        setJobIds(data.map((job: any) => job._id)); // Get job IDs only
       } catch (err) {
-        // If an error occurred, set the error message
-        setError(err instanceof Error ? err.message : "Unknown error");
+        setError("Failed to fetch job IDs");
       } finally {
-        setLoading(false); // Hide the loading spinner
+        setLoading(false);
       }
     };
 
-    fetchJobs();
-  }, []);
+    fetchJobIds();
+  }, [userId]);
 
-  return { jobs, loading, error };
+  return { jobIds, loading, error };
 };
->>>>>>> Stashed changes
