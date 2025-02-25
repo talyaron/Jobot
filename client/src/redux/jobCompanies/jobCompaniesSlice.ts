@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { JobCompany } from '../../models/jobCompany/jobCompany';
+import { JobCompany } from '../../models/jobCompany/jobCompanyModel';
 
 
 

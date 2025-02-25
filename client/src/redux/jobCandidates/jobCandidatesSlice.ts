@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { JobCandidateState } from '../../models/jobCandidates/jobCandidates';
+import { JobCandidateState } from '../../models/jobCandidates/jobCandidatesModel';
 
 interface JobCandidatesState {
   jobCandidates: JobCandidateState[];
