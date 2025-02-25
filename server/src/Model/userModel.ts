@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import { WorkExperienceSchema } from "./workExperience"; 
 
 const UserSchema = new Schema({
   fullName: String,
@@ -9,8 +10,7 @@ const UserSchema = new Schema({
   password: String,
   phoneNumber: String,
   aiData: String,
-  workExperience: String,
-  
+  workExperience: [{ type: WorkExperienceSchema }],  
   isHiring: Boolean,
   isCandidate: Boolean,
 });
