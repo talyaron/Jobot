@@ -3,22 +3,36 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface JobCandidateState {
   candidateId: string;
-  jobId: string; 
+  jobId: string;
 }
 
-const initialState: JobCandidateState[] = []
+interface JobCandidatesState {
+  [jobId: string]: JobCandidateState[];
+}
+
+const initialState: JobCandidatesState = {} 
 
 export const jobCandidateSlice = createSlice({
-  name: 'jobCandidate',
+  name: 'jobCandidates',
   initialState,
   reducers: {
     addJobCandidate: (state, action: PayloadAction<JobCandidateState>) => {
-      state.push(action.payload)
+      const { jobId } = action.payload;
+
+      if (!state[jobId]) {
+        state[jobId] = []; 
+      }
+
+      state[jobId].push(action.payload); 
     },
     removeJobCandidate: (state, action: PayloadAction<JobCandidateState>) => {
-      return state.filter(
-        (item) => item.candidateId !== action.payload.candidateId || item.jobId !== action.payload.jobId
-      )
+      const { jobId, candidateId } = action.payload;
+
+      if (state[jobId]) {
+        state[jobId] = state[jobId].filter(
+          (item) => item.candidateId !== candidateId
+        );
+      }
     },
   },
 })

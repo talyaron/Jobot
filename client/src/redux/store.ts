@@ -1,19 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from "./counter/counterSlice"
 import userReducer from "./user/userSlice"
-import companyReducer from "./company/companySlice"
-import jobReducer from "./job/jobSlice"
-import jobCompanyReducer from "./jobCompany/jobCompanySlice"
-import jobCandidateReducer from "./jobCandidate/jobCandidateSlice"
+import companiesReducer from "./companies/companiesSlice"
+import jobsReducer from "./jobs/jobsSlice"
+import jobCompaniesReducer from "./jobCompanies/jobCompaniesSlice"
+import jobCandidatesReducer from "./jobCandidates/jobCandidatesSlice"
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     user: userReducer,
-    company: companyReducer,
-    jobCompany: jobCompanyReducer,
-    jobCandidate: jobCandidateReducer,
-    job: jobReducer,
+    companies: companiesReducer,
+    jobCompanies: jobCompaniesReducer,
+    jobCandidates: jobCandidatesReducer,
+    jobs: jobsReducer,
 
   },
 })
