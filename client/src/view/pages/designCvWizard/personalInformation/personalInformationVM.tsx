@@ -1,35 +1,33 @@
 import { useEffect, useState } from "react";
 
+export interface PersonalInformation {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    city: string;
+}
+
 export function usePersonalInformationVM() {
+    const [personalInformation, setPersonalInformation] = useState<PersonalInformation>({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        city: ""
+    });
 
-
-    // const sendDataToServer = async () => {
-    //     try {
-    //         const response = await fetch("https://your-api.com/work-experience", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify(workExperienceCvData)
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error("שגיאה בשליחת הנתונים");
-    //         }
-
-    //         const data = await response.json();
-    //         console.log("הנתונים נשלחו בהצלחה:", data);
-    //     } catch (error) {
-    //         console.error("שגיאה:", error);
-    //     }
-    // };
+    // פונקציה לעדכון הנתונים בזמן אמת
+    const updatePersonalInfo = (field: keyof PersonalInformation, value: string) => {
+        setPersonalInformation((prev) => ({
+            ...prev,
+            [field]: value
+        }));
+    };
 
     useEffect(() => {
-        // sendDataToServer();
-      
-    }, []);
-    
-    return {
+        console.log("עדכון נתונים:", personalInformation);
+    }, [personalInformation]); // הדפסת הנתונים כאשר הם מתעדכנים
 
-    };
+    return { personalInformation, updatePersonalInfo };
 }
