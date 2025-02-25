@@ -12,7 +12,7 @@ function App() {
     <div dir="rtl">
          <h1>Jobot system</h1>
         <br />
-        <Wizard />
+        <Auth />
       </div>
   )
 }
