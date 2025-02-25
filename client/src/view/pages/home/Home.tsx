@@ -24,7 +24,7 @@ const Home: React.FC = () => {
           <button className={styles.linkButton}>לכל המשרות</button>
         </Link>
       </div>
-      <Wizard />
+      {openWizard  && <Wizard closeButton={() => setOpenWizard(false)}/>}
     </div>
   );
 };
