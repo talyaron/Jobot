@@ -1,14 +1,17 @@
-import "./App.css";
-import Auth from "./view/pages/auth/Auth";
+import './App.css'
+import Auth from './view/pages/auth/Auth'
+import Candidate from './view/pages/candidate/Candidate'
 
 function App() {
+
+
   return (
-    <div>
-      <h1>Jobot system</h1>
-      <br />
-      <Auth></Auth>
-    </div>
-  );
+      <div>
+        <h1>Jobot system</h1>
+        <br />
+        <Auth></Auth>
+      </div>
+  )
 }
 
-export default App;
+export default App
