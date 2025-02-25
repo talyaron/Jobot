@@ -6,27 +6,34 @@ const cvFormModel = new Schema({
         lastName: String,
         email: String,
         phoneNumber: String,
-        address: String,
-        dateOfBirth: Date,
-    }]
-    userId: Types.ObjectId,
-    resume: String,
-    coverLetter: String,
-    skills: [String],
-    experiences: [{
-        company: String,
-        position: String,
-        startDate: Date,
-        endDate: Date,
-        description: String,
+        city: String,
+    }],
+    professionalSummary:[{
+        professionalSummary: String,
     }],
     educations: [{
         institution: String,
         degree: String,
-        startDate: Date,
-        endDate: Date,
-        fieldOfStudy: String,
-    }]
+        studyYears: Date,
+    }],
+    workExperience: [{
+        jobName: String,    
+        jobTitle: String,    
+        jobType: String,     
+        startDate: Date,    
+        endDate: { type: Date, required: false },  // פתרון נכון ✅
+        responsibility: String, 
+    }],
+    serviceType:[{
+        serviceType: String,
+        organizationName: String,
+        serviceYears: String,
+    }],
+    skills: [{
+        technicalSkills: String,
+        spokenLanguages: String,
+    }],
+
 });
 
 export const CVFormModel = model("CVForm", cvFormModel);
