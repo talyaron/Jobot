@@ -1,17 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-<<<<<<< HEAD
-import App from './App.tsx'
-import { store } from './redux/store'
-import { Provider } from 'react-redux'
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-  <Provider store={store}>
-    <App />
-  </Provider>
-=======
 
 import { BrowserRouter, Route, Routes } from 'react-router'
 
@@ -31,6 +20,5 @@ createRoot(document.getElementById('root')!).render(
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </BrowserRouter>
->>>>>>> origin/dev
   </StrictMode>,
 )
