@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import TextChanger from '../textChanger/TextChanger';
 import styles from './FirstPage.module.scss';
 
