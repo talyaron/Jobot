@@ -1,16 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+
 import { BrowserRouter, Route, Routes } from 'react-router'
-import FirstPage from './view/pages/firstPage/FirstPage.tsx'
+
 import Wizard from './view/pages/wizard/Wizard.tsx'
+import Login from './view/pages/login/Login.tsx'
+import Home from './view/pages/home/Home.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FirstPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/wizard" element={<Wizard />} />
       </Routes>
     </BrowserRouter>
