@@ -1,43 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { JobCompany } from '../../models/jobCompany/jobCompany';
+
+
 
 interface JobCompaniesState {
-  companyId: string;  
-  jobId: string;     
+  jobCompanies: JobCompany[];
 }
 
-interface JobCompaniesStateMap {
-  [companyId: string]: JobCompaniesState[];
+const initialState: JobCompaniesState = {
+  jobCompanies: [],
 }
-
-const initialState: JobCompaniesStateMap = {}
 
 export const jobCompanySlice = createSlice({
   name: 'jobCompanies',
   initialState,
   reducers: {
-    addJobCompanies: (state, action: PayloadAction<JobCompaniesState>) => {
-      const { companyId } = action.payload;
-
-      if (!state[companyId]) {
-        state[companyId] = []
-      }
-
-      state[companyId].push(action.payload)
+    addJobCompany: (state, action: PayloadAction<JobCompany>) => {
+      state.jobCompanies.push(action.payload)
     },
 
-    removeJobCompanies: (state, action: PayloadAction<JobCompaniesState>) => {
-      const { companyId, jobId } = action.payload;
-
-      if (state[companyId]) {
-        state[companyId] = state[companyId].filter(
-          (item) => item.jobId !== jobId
-        );
-      }
+    removeJobCompany: (state, action: PayloadAction<JobCompany>) => {
+      state.jobCompanies = state.jobCompanies.filter(
+        (item) => item.companyId !== action.payload.companyId || item.jobId !== action.payload.jobId
+      );
     },
   },
 })
 
-export const { addJobCompanies, removeJobCompanies } = jobCompanySlice.actions
+export const { addJobCompany, removeJobCompany } = jobCompanySlice.actions
 
 export default jobCompanySlice.reducer

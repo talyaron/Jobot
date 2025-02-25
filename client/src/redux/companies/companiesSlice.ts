@@ -1,35 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { Company } from '../../models/company/companyModel'
 
 export interface CompaniesState {
-  id: string;
-  name: string;
-  phone: string;
-  email: string;
-  password: string;
-  isAgree: boolean;
+  companies: Company[];
 }
 
-const initialState: CompaniesState[] = []
+const initialState: CompaniesState = {
+  companies: [],
+}
 
 export const companySlice = createSlice({
   name: 'companies',
   initialState,
   reducers: {
-    addCompany: (state, action: PayloadAction<CompaniesState>) => {
-      state.push(action.payload)
+    addCompany: (state, action: PayloadAction<Company>) => {
+      state.companies.push(action.payload)
     },
-    clearCompanies: () => {
-      return [] 
+    clearCompanies: (state) => {
+      state.companies = [] 
     },
-    updateCompany: (state, action: PayloadAction<CompaniesState>) => {
-      const index = state.findIndex(company => company.id === action.payload.id)
+    updateCompany: (state, action: PayloadAction<Company>) => {
+      const index = state.companies.findIndex(company => company.id === action.payload.id)
       if (index !== -1) {
-        state[index] = action.payload 
+        state.companies[index] = action.payload 
       }
     },
     removeCompany: (state, action: PayloadAction<string>) => {
-      return state.filter(company => company.id !== action.payload)
+      state.companies = state.companies.filter(company => company.id !== action.payload)
     },
   },
 })
