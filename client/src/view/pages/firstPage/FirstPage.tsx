@@ -18,7 +18,7 @@ const FirstPage: React.FC = () => {
           onClick={() => setShowWizard(true)}>העבודה המושלמת מחכה לך כאן</button>
         {showWizard ? <Wizard closeButton={() => setShowWizard(false)} /> : null}
         <Link to="/">
-          <button className={styles.linkButton}>לכל המשרות</button>
+          <button className={styles.linkButton}>לכל .המשרות</button>
         </Link>
       </div>
     </div>
