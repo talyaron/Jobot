@@ -22,7 +22,7 @@ export const saltRounds = Number(process.env.SALT_BCRYPT) || 3;
 
 app.use("/api/auth", authRoutes);
 
-const dbUrl = process.env.DB_URL;
+const dbUrl = "mongodb+srv://rrrgrg304:R6pZjl029YQvhaSi@cluster0.pw3xh.mongodb.net/";
 const database = 'jobot';
 
 //connection
