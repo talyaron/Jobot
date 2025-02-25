@@ -1,6 +1,5 @@
 import "./App.css";
 import Auth from "./view/pages/auth/Auth";
-import Candidate from "./view/pages/candidate/Candidate";
 
 function App() {
   return (
