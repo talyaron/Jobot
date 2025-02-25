@@ -1,4 +1,4 @@
-import { employmentType, locationType, term } from "./utils/modelEnums";
+import { employmentType, location, locationType, term } from "./utils/modelEnums";
 
 export interface Job {
     _id: string;
@@ -6,7 +6,7 @@ export interface Job {
     details: string;
     address: string;
     locationType: locationType;
-    location: Location;
+    location: location;
     company: string; 
     employmentType: employmentType;
     Industry: string;
