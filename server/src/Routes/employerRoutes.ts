@@ -1,5 +1,5 @@
 import express from "express";
-import { craeteJob } from "../Controllers/Employer/job/createJob";
+import { createJob } from "../Controllers/Employer/job/createJob";
 import { getAllJobs } from "../Controllers/Employer/job/fetchJobs";
 import { deleteJob } from "../Controllers/Employer/job/deleteJob";
 import { editJob } from "../Controllers/Employer/job/editJob";
@@ -7,7 +7,7 @@ import { editJob } from "../Controllers/Employer/job/editJob";
 const router = express.Router();
 
 // Route to create a new job
-router.post(`/jobs/create`, craeteJob);
+router.post(`/jobs/create`, createJob);
 
 // Route to get all jobs
 router.get(`/jobs/get-all-jobs`, getAllJobs);

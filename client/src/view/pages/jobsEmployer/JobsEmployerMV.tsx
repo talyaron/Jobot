@@ -1,11 +1,29 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 
-interface Job {
-	_id: string;
+// Job enums
+export enum Term {
+	short = "short",
+	long = "long",
+}
+
+export enum LocationType {
+	onSite = "onSite",
+	remote = "remote",
+	hybrid = "hybrid",
+}
+
+export enum Location {
+	north = "north",
+	center = "center",
+	south = "south",
+	abroad = "abroad",
+}
+export interface Job {
+	_id?: string;
 	jobName: string;
 	details: string;
 	address: string;
-	location: string;
+	location: Location; 
 	locationType: string;
 	company: string;
 	employmentType: string;
@@ -18,20 +36,22 @@ interface Job {
 	websiteURL: string;
 }
 
+
 interface JobsEmployerMVProps {
 	jobs: Job[];
 	onCreate: (jobData: Job) => void;
 	onDelete: (id: string) => void;
-	onEdit: (job: Job) => void;
+	onEdit: (job: Job | null) => void;
 	onEditSave: (jobData: Job) => void;
 	jobToEdit: Job | null;
-}
+  }
 
 const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 	jobs,
 	onCreate,
 	onDelete,
 	onEdit,
+	onEditSave,
 	jobToEdit,
 }) => {
 	const [formData, setFormData] = useState<Job>({
@@ -39,15 +59,15 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 		jobName: '',
 		details: '',
 		address: '',
-		location: '',
-		locationType: '',
+		location: Location.north,
+		locationType: LocationType.onSite,
 		company: '',
 		employmentType: '',
 		Industry: '',
 		salary: 0,
 		housingIncluded: false,
 		type: '',
-		term: '',
+		term: Term.short, 
 		benefits: '',
 		websiteURL: '',
 	});
@@ -58,7 +78,7 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 		}
 	}, [jobToEdit]);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
@@ -68,29 +88,34 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
+		console.log(formData);
+		
 		if (jobToEdit) {
-			onEdit(formData);
+		   onEditSave(formData);
 		} else {
-			onCreate(formData);
+		   onCreate(formData);
 		}
+	
 		setFormData({
-			_id: '',
-			jobName: '',
-			details: '',
-			address: '',
-			location: '',
-			locationType: '',
-			company: '', 
-			employmentType: '',
-			Industry: '',
-			salary: 0,
-			housingIncluded: false,
-			type: '',
-			term: '',
-			benefits: '',
-			websiteURL: '',
+		   _id:  jobToEdit?._id || '',
+		   jobName: '',
+		   details: '',
+		   address: '',
+		   location: Location.north,
+		   locationType: LocationType.onSite,
+		   company: '',
+		   employmentType: '',
+		   Industry: '',
+		   salary: 0,
+		   housingIncluded: false,
+		   type: '',
+		   term: Term.short,
+		   benefits: '',
+		   websiteURL: '',
 		});
 	};
+	
+	 
 
 	return (
 		<div>
@@ -120,22 +145,28 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 					placeholder="Address"
 					required
 				/>
-				<input
-					type="text"
+				<select
 					name="location"
 					value={formData.location}
 					onChange={handleInputChange}
-					placeholder="Location"
-					required
-				/>
-				<input
-					type="text"
+				>
+					{Object.values(Location).map((location) => (
+						<option key={location} value={location}>
+							{location.charAt(0).toUpperCase() + location.slice(1)}
+						</option>
+					))}
+				</select>
+				<select
 					name="locationType"
 					value={formData.locationType}
 					onChange={handleInputChange}
-					placeholder="Location Type"
-					required
-				/>
+				>
+					{Object.values(LocationType).map((type) => (
+						<option key={type} value={type}>
+							{type.charAt(0).toUpperCase() + type.slice(1)}
+						</option>
+					))}
+				</select>
 				<input
 					type="text"
 					name="company"
@@ -188,14 +219,17 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 					placeholder="Job Type"
 					required
 				/>
-				<input
-					type="text"
+				<select
 					name="term"
 					value={formData.term}
 					onChange={handleInputChange}
-					placeholder="Term"
-					required
-				/>
+				>
+					{Object.values(Term).map((term) => (
+						<option key={term} value={term}>
+							{term.charAt(0).toUpperCase() + term.slice(1)}
+						</option>
+					))}
+				</select>
 				<input
 					type="text"
 					name="benefits"
@@ -220,7 +254,7 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 					jobs.map((job) => (
 						<div key={job._id}>
 							<h4>{job.jobName}</h4>
-							<button onClick={() => onDelete(job._id)}>Delete</button>
+							<button onClick={() => onDelete(job._id || '')}>Delete</button>
 							<button onClick={() => onEdit(job)}>Edit</button>
 						</div>
 					))}

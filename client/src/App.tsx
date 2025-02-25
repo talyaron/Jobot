@@ -10,6 +10,7 @@ function App() {
         <h1>Jobot system</h1>
         <br />
         <Candidate />
+        <JobsEmployer/>
       </div>
   )
 }

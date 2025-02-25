@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'], // Array of allowed origins
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176'], // Array of allowed origins
   credentials: true
 }));
 

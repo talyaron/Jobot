@@ -1,15 +1,17 @@
 import { JobModel } from "../../../Model/jobModel";
 
-export async function craeteJob(req: any, res: any) {
+export async function createJob(req: any, res: any) {
     try {
         const { jobName, details, address, location, locationType, company,
-            employmentType, industry, salary, housingInclouded, type, term, benefits, website } = req.body;
+            employmentType, industry, salary, housingIncluded, type, term, benefits, websiteURL, createdAt } = req.body;
 
-        // Check all fileds
-        if (!jobName || !details || !address || !location || !locationType || !company || !employmentType || !industry || !salary || !housingInclouded || !type || !term || !benefits || !website)
-            return res.status(400).json({ error: "All fileds are required." });
-
-        // Create new job by model
+        // Check if all fields are provided
+        if ([jobName, details, address, location, locationType, company, employmentType, industry, salary, housingIncluded, type, term, benefits, websiteURL, createdAt]
+            .some(field => field === undefined || field === null || field === "")) {
+            return res.status(400).json({ error: "All fields are required." });
+        }
+        console.log("idan")
+        // Create new job using the model
         const job = new JobModel({
             jobName,
             details,
@@ -18,20 +20,22 @@ export async function craeteJob(req: any, res: any) {
             location,
             company,
             employmentType,
-            Industry: industry,
+            industry,
             salary,
-            housingIncluded: housingInclouded,
+            housingIncluded,
             type,
             term,
             benefits,
-            websiteURL: website
+            websiteURL,
+            createdAt: createdAt || new Date()
         });
 
-        job.save();
-        return res.json({ message: "job created!" });
-
+        const _job = await job.save();
+        console.log(_job);
+        return res.json({ message: "job created!", job:_job });
+        
     } catch (error) {
-        console.error('Error create new job:', error);
+        console.error('Error creating new job:', error);
         return res.status(500).json({ message: 'Server error' });
     }
 }
