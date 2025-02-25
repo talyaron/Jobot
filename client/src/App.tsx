@@ -10,9 +10,9 @@ function App() {
 
   return (
     <div dir="rtl">
-        {/* <h1>Jobot system</h1>
+         <h1>Jobot system</h1>
         <br />
-        <Auth></Auth>
+        <Wizard />
       </div>
   )
 }
