@@ -1,7 +1,10 @@
-import { useWizard } from "./WizardVM";
-import styles from "./Wizard.module.scss";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { X } from "lucide-react"
+// Wizard.tsx
+import React from 'react';
+import { useWizard } from './WizardVM';
+import styles from './Wizard.module.scss';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import QuestionComponent from './QuestionComponent';
+
 
 
 interface Props {
@@ -9,125 +12,54 @@ interface Props {
 }
 function Wizard({ closeButton }: Props) {
   const {
-    currentQuestion,
     currentQuestionIndex,
     answers,
     handleNext,
     handlePrev,
     handleAnswerChange,
-    handleCompositeAnswerChange,
-    handleMultipleSelectChange,
     progressPercentage,
+    careerQuestions,
   } = useWizard();
 
+  const currentQuestion = careerQuestions[currentQuestionIndex];
+
   const isAnswerValid = () => {
-    if (currentQuestion.type === "composite") {
-      const compositeAnswer = answers[currentQuestion.id] || {};
-      return compositeAnswer.city && compositeAnswer.distance;
+    if (!currentQuestion) return false;
+
+    if (currentQuestion.answerType === 'multiple-choice') {
+      return !!answers[currentQuestion.id];
+    } else if (currentQuestion.answerType === 'text') {
+      return !!answers[currentQuestion.id];
+    } else if (currentQuestion.answerType === 'boolean') {
+      return typeof answers[currentQuestion.id] === 'boolean';
+    } else if (currentQuestion.answerType === 'rating') {
+      return typeof answers[currentQuestion.id] === 'number';
     }
-    if (currentQuestion.type === "multipleSelect") {
-      const arr = answers[currentQuestion.id] || [];
-      return Array.isArray(arr) && arr.length > 0;
-    }
-    return !!answers[currentQuestion.id];
+    return false;
   };
 
   return (
     <div className={styles.wizardPage}>
       <div className={styles.wizardContainer}>
-        <X
-          className={styles.closeButton}
-          onClick={closeButton} />
+
+        <button className={styles.closeButton}>X</button>
+
         <progress
           value={progressPercentage()}
           max={100}
-          className={styles["progress-bar"]}
+          className={styles['progress-bar']}
         />
-
-        <h2 className={styles.questionText}>{currentQuestion.text}</h2>
-
-        {currentQuestion.type === "multipleChoice" && (
-          <div className={styles.buttonGroup}>
-            {currentQuestion.options?.map((option) => (
-              <button
-                key={option}
-                onClick={() => handleAnswerChange(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {currentQuestion.type === "dropdown" && (
-          <select
-            onChange={(e) => handleAnswerChange(e.target.value)}
-            className={styles.dropdown}
-          >
-            <option value="">בחר</option>
-            {currentQuestion.options?.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        )}
-
-        {currentQuestion.type === "openText" && (
-          <textarea
-            value={answers[currentQuestion.id] || ""}
-            onChange={(e) => handleAnswerChange(e.target.value)}
-            placeholder="הקלד כאן..."
-          />
-        )}
-
-        {currentQuestion.type === "composite" && (
-          <div className={styles.compositeGroup}>
-            <label>עיר:</label>
-            <select
-              onChange={(e) => handleCompositeAnswerChange("city", e.target.value)}
-              value={(answers[currentQuestion.id]?.city) || ""}
-            >
-              <option value="">בחר עיר</option>
-              {currentQuestion.compositeOptions?.cities?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            <br />
-            <label>מרחק:</label>
-            <select
-              onChange={(e) => handleCompositeAnswerChange("distance", e.target.value)}
-              value={(answers[currentQuestion.id]?.distance) || ""}
-            >
-              <option value="">בחר מרחק</option>
-              {currentQuestion.compositeOptions?.distances?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {currentQuestion.type === "multipleSelect" && (
-          <div className={styles.checkboxGroup}>
-            {currentQuestion.options?.map((option) => {
-              const selected: string[] = answers[currentQuestion.id] || [];
-              return (
-                <label key={option}>
-                  <input
-                    type="checkbox"
-                    value={option}
-                    checked={selected.includes(option)}
-                    onChange={() => handleMultipleSelectChange(option)}
-                  />
-                  {option}
-                </label>
-              );
-            })}
-          </div>
+        {currentQuestion && (
+          <>
+            <h2 className={styles.questionText}>{currentQuestion.question}</h2>
+            <QuestionComponent
+              question={currentQuestion}
+              answer={answers[currentQuestion.id]}
+              onAnswerChange={(answer) =>
+                handleAnswerChange(currentQuestion.id, answer)
+              }
+            />
+          </>
         )}
         <div>
           <button onClick={handlePrev} disabled={currentQuestionIndex === 0}>
