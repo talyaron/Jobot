@@ -13,12 +13,8 @@ function App() {
         <br />
         <Candidate /> */}
         {/* <Wizard /> */}
-        <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FirstPage />} />
-        <Route path="/wizard" element={<Wizard />} />
-      </Routes>
-    </BrowserRouter>
+        {/* <FirstPage /> */}
+
       </div>
   )
 }
