@@ -1,0 +1,10 @@
+{
+  "fullName": "Test User",
+  "email": "testuser@example.com",
+  "password": "hashedpassword123",
+  "phoneNumber": "+972512345678",
+  "aiData": "NLP model training experience",
+  "workExperience": "5 years in software engineering",
+  "isHiring": false,
+  "isCandidate": true
+}
