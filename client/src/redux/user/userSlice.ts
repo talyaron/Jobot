@@ -1,15 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { UserState } from '../../models/user/userModel';
 
-export interface UserState {
-  fullName: string;
-  email: string;
-  password: string;
-  isAgree: boolean;
-  experienceOfWork: Record<string, any>;
-  isCandidate: boolean;
-  CV: string;
-}
+
 
 const initialState: UserState = {
   fullName: '',
