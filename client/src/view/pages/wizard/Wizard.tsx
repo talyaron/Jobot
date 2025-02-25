@@ -1,8 +1,13 @@
 import { useWizard } from "./WizardVM";
 import styles from "./Wizard.module.scss";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { X } from "lucide-react"
 
-function Wizard() {
+
+interface Props {
+  closeButton: () => void;
+}
+function Wizard({ closeButton }: Props) {
   const {
     currentQuestion,
     currentQuestionIndex,
@@ -30,8 +35,9 @@ function Wizard() {
   return (
     <div className={styles.wizardPage}>
       <div className={styles.wizardContainer}>
-        <button className={styles.closeButton}>X</button>
-
+        <X
+          className={styles.closeButton}
+          onClick={closeButton} />
         <progress
           value={progressPercentage()}
           max={100}
@@ -123,7 +129,7 @@ function Wizard() {
             })}
           </div>
         )}
-<div>
+        <div>
           <button onClick={handlePrev} disabled={currentQuestionIndex === 0}>
             <FaChevronRight size={20} />
           </button>
