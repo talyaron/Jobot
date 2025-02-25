@@ -5,7 +5,12 @@ import styles from './Wizard.module.scss';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import QuestionComponent from './QuestionComponent';
 
-function Wizard() {
+
+
+interface Props {
+  closeButton: () => void;
+}
+function Wizard({ closeButton }: Props) {
   const {
     currentQuestionIndex,
     answers,
@@ -36,7 +41,9 @@ function Wizard() {
   return (
     <div className={styles.wizardPage}>
       <div className={styles.wizardContainer}>
+
         <button className={styles.closeButton}>X</button>
+
         <progress
           value={progressPercentage()}
           max={100}
