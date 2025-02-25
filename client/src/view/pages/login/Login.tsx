@@ -1,10 +1,9 @@
-
-import Auth from '../auth/Auth'
+import React from 'react'
 
 const Login = () => {
   return (
     <div>
-      <Auth />
+      
     </div>
   )
 }
