@@ -19,7 +19,7 @@ export async function loginUser(req:any, res:any) {
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
-    console.log(user._id)
+
 
     const payload = { userId: user._id, email: user.email };
     const token = jwt.encode(payload, secretKey)
