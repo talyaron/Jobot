@@ -1,4 +1,4 @@
-import { infoValidation } from "../../Model/validatorModel";
+import { infoValidation } from "../../Model/utils/validatorModel";
 import { UserModel } from "../../Model/userModel";
 import bcrypt from "bcrypt";
 import { saltRounds } from "../../server";
