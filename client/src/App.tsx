@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Auth from './view/pages/auth/Auth'
 

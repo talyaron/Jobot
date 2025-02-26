@@ -21,7 +21,7 @@ const cvFormModel = new Schema({
         jobTitle: String,    
         jobType: String,     
         startDate: Date,    
-        endDate: { type: Date, required: false },  // פתרון נכון ✅
+        endDate: { type: Date, required: false },
         responsibility: String, 
     }],
     serviceType:[{
