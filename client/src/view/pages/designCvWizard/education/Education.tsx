@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./education.module.scss";
+import styles from "./education.module.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { addEducation, updateEducation, removeEducation } from "../../../../redux/cv/cvSlice";

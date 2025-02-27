@@ -7,6 +7,8 @@ import {
     removeServiceType 
 } from '../../../../redux/cv/cvSlice'
 
+import styles from "./serviceType.module.scss";
+
 const ServiceType: React.FC = () => {
     const dispatch = useDispatch();
     const serviceTypes = useSelector((state: RootState) => state.cvForm.serviceTypes);
@@ -25,7 +27,7 @@ const ServiceType: React.FC = () => {
     console.log(serviceTypes)
 
     return (
-        <div>
+        <div className={styles.continer}>
             <h2>סוגי שירות</h2>
             <button onClick={handleAddService}>➕ הוסף שירות</button>
 

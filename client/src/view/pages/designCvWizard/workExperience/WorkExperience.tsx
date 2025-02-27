@@ -2,13 +2,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from '../../../../redux/store'
 import { addWorkExperience, updateWorkExperience, removeWorkExperience } from '../../../../redux/cv/cvSlice'
+
+import styles from "./workExperience.module.scss"
 const WorkExperience: React.FC = () => {
     const dispatch = useDispatch();
     const workExperience = useSelector((state: RootState) => state.cvForm.workExperience);
     console.log(workExperience);
 
     return (
-        <div>
+        <div className={styles.continer}>
             <h2>ניסיון תעסוקתי</h2>
             <button onClick={() => dispatch(addWorkExperience())}>+ הוסף ניסיון תעסוקתי</button>
             
