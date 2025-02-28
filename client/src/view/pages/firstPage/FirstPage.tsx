@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router';
 import TextChanger from '../textChanger/TextChanger';
 import styles from './FirstPage.module.scss';
