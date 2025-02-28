@@ -1,10 +1,9 @@
-import React from 'react'
 
 const ApplicationStatusVM = () => {
+  
+  
   return (
-    <div>
-      
-    </div>
+<div></div>
   )
 }
 

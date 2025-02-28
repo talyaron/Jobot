@@ -8,6 +8,12 @@ export enum term{
    export enum location{
     "north", "center", "south", "abroad"
    }
+   export enum employmentType{
+    "full time",
+    "part time",
+    "shifts",
+  }
+
 //jobUserSchema  Enum
   export enum jobUserStatus {
     "pending",
@@ -20,4 +26,4 @@ export enum employerJobStatus {
     "open",
     "closed",
 }
-  
+

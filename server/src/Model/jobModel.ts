@@ -1,21 +1,15 @@
 import { Types, model, Schema } from "mongoose";
-import { location, locationType, term } from "./utils/modelsEnums";
+import { employmentType, location, locationType, term } from "./utils/modelsEnums";
 
 
 const JobSchema = new Schema({
   jobName: String,
   details: String,
   address: String,
-  locationType: {
-    type: String,
-    enum: Object.values(locationType)
-  },
-  location: {
-    type: String,
-    enum: Object.values(location)
-  },
-  company: String,
-  employmentType: String,
+  locationType:Object.values(locationType),
+  location:Object.values(location),
+  company: Types.ObjectId,
+  employmentType: Object.values(employmentType),
   Industry: String,
   salary: Number,
   housingIncluded: Boolean,
