@@ -10,7 +10,8 @@ const ProfessionalSummary = () => {
 
   const handleProfessionalSummaryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newSummary = e.target.value;
-    dispatch(updateProfessionalSummary({ summary: newSummary }));
+    console.log(newSummary)
+    dispatch(updateProfessionalSummary( newSummary ));
     console.log(professionalSummary)
   };
 
@@ -25,7 +26,7 @@ const ProfessionalSummary = () => {
           name="describeYourself"
           rows={4}
           cols={50}
-          value={professionalSummary.summary}
+          defaultValue={professionalSummary}
           onChange={handleProfessionalSummaryChange}
         />
         <br />

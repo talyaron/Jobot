@@ -14,7 +14,7 @@ const AllComponents = () => {
 
   const sendCvFormToServer = async () => { // 🔹 פונקציה אסינכרונית תקינה
     try {
-      const response = await fetch("http://localhost:3000/api/cv/addCvForm", {
+      const response = await fetch("http://localhost:3000/api/cv/updateCvForm", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
