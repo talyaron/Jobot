@@ -11,7 +11,7 @@ import styles from "./serviceType.module.scss";
 
 const ServiceType: React.FC = () => {
     const dispatch = useDispatch();
-    const serviceTypes = useSelector((state: RootState) => state.cvForm.serviceTypes);
+    const serviceTypes = useSelector((state: RootState) => state.cvForm.serviceType);
 
     const handleAddService = () => {
         dispatch(addServiceType());
