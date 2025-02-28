@@ -8,6 +8,7 @@ import Wizard from './view/pages/wizard/Wizard.tsx'
 import Login from './view/pages/login/Login.tsx'
 import Home from './view/pages/home/Home.tsx'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate.tsx'
+import EmployerWrapper from './view/pages/employerWrapper/EmployerWrapper.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/wizard" element={<Wizard />} />
         <Route path="/job-candidate" element={<JobCandidate />} />
         <Route path="*" element={<div>Not Found</div>} />
+        <Route path="employer" element={<EmployerWrapper />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -1,19 +1,23 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
-import Auth from './view/pages/auth/Auth'
+import { BrowserRouter, useRoutes } from "react-router-dom";
+import "./App.css";
+import Auth from "./view/pages/auth/Auth";
+import routes from "./routes/routes";
+
+function AppRoutes() {
+  return useRoutes(routes);
+}
 
 function App() {
-  const testUserId = "67b9edaa4e2f6b7890741ce1"; // Using a test user ID for now
-
   return (
-
-    <div dir="rtl">
-         <h1>Jobot system</h1>
-
+    <BrowserRouter>
+      <div dir="rtl">
+        <h1>Jobot System</h1>
+        <AppRoutes />
         <br />
         <Auth />
       </div>
-  )
+    </BrowserRouter>
+  );
 }
 
 export default App;
