@@ -15,21 +15,22 @@ export async function setJobApplication(req: any, res: any) {
     }
 
     const jobId = job._id;
-
+    const userId = user._id;
     const jobEmployerModel = await EmployerJobModel.findOne({ jobId });
-    
+
     if (!jobEmployerModel) {
       return res.status(400).json({ message: "invalid job" });
     }
-    console.log(message, job, user);
+    const employerId = jobEmployerModel.employerId;
 
-    const newUserJob = new JobUserModel({
-      employerId: jobEmployerModel.employerId,
-      userId: user._id,
+    const newUserJob = await JobUserModel.create({
+      userId: userId,
+      employerId: employerId,
       messageToEmployer: message,
       status: jobUserStatus.pending,
     });
-    newUserJob.validate();
+    console.log(newUserJob);
+
     return res.status(200).json({ message: "Application Registered" });
   } catch (error) {
     res.status(500).json({ message: "Error fetching matched jobs", error });

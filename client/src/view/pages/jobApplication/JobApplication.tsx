@@ -5,6 +5,8 @@ import JobInputBox from '../../components/jobInput/JobInputBox'
 
 const JobApplication = () => {
   const { job ,user} = JobApplicationVM()
+  if(!job)return;
+
   return (
     <div>
     <div className={styles.JobDetailsWrapper}>

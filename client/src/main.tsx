@@ -6,9 +6,12 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Login from './view/pages/login/Login.tsx'
 import Home from './view/pages/home/Home.tsx'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate.tsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -17,5 +20,6 @@ createRoot(document.getElementById('root')!).render(
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )
