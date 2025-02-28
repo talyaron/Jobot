@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { Job } from "../../../model/jobModel";
 import { User } from "../../../model/userModel";
 
-export default function useJobEmployer(jobId: string) {
-    const [ candidates, setCandidates ] = useState<User[]>([]);
-    const [ job, setJob ] = useState<Job>();
+interface Candidate {
+    userId: User;
+    messageToEmployer: string;
+    _id: string;
+}
 
-    async function getJob(){
+export default function useJobEmployer(jobId: string) {
+    const [candidates, setCandidates] = useState<Candidate[]>([]);
+    const [job, setJob] = useState<Job | undefined>(undefined);
+
+    async function getJob() {
         try {
             await fetch(`http://localhost:3000/api/job/${jobId}`, {
                 method: "GET",
@@ -33,8 +39,10 @@ export default function useJobEmployer(jobId: string) {
                 },
             })
                 .then((response) => response.json())
-                .then((data) => setCandidates(data as User[]))
+                .then((data) => setCandidates(data))
                 .catch((error) => console.error(error));
+
+            console.log(candidates);
         } catch (error) {
             console.error("Error fetching user details:", error);
         }

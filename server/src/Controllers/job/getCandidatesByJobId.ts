@@ -4,12 +4,7 @@ import { UserModel } from "../../Model/userModel";
 export const getCandidatesByJobId = async (req: any, res: any) => {
     try{
         const { jobId } = req.params;
-        const jobCandidates = await JobUserModel.find({ employerId: jobId });
-        const userPromises = jobCandidates.map(async (jobCandidate: any) => {
-            return await UserModel.findById(jobCandidate.userId); 
-        });
-
-        const candidates = await Promise.all(userPromises);
+        const candidates = await JobUserModel.find({ employerId: jobId }).populate("userId");
         if (!candidates) {
             return res.status(404).json({ message: "candidates not found" });
         }
