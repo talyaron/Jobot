@@ -1,7 +1,4 @@
 import  express from "express"
-import { loginUser } from "../Controllers/user/userLoginCont";
-import { registerUser } from "../Controllers/user/usrRegCont";
-import { get } from "http";
 import { getJobDetails } from "../Controllers/job/getJobDetails";
 
 

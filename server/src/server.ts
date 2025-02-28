@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
 
+
 const app = express()
 const port = 3000;
 app.use(cookieParser());

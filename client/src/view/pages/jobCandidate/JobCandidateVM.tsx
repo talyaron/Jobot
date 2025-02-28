@@ -1,8 +1,9 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { Job } from "../../../model/jobModel";
 
 export function useJobCandidateVM() {
   const [job, setJob] = useState<Job>();
+
   async function fetchJob(jobId: string) {
     try {
       fetch(`http://localhost:3000/api/jobs/job-details?jobId=${jobId}`, {

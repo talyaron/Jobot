@@ -1,5 +1,6 @@
 import './App.css'
 import Candidate from './view/pages/candidate/Candidate'
+import JobCandidate from './view/pages/jobCandidate/JobCandidate'
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
       <div>
         <h1>Jobot system</h1>
         <br />
-        <Candidate />
+        <JobCandidate />
       </div>
   )
 }
