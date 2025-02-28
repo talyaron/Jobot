@@ -9,30 +9,31 @@ const JobInputBoxVm = () => {
     if (textAreaRef.current === null) return;
     const message = textAreaRef.current.value;
     console.log("Message:", message);
-    createApplicationInDB(job, user);
+    createApplicationInDB(message, job, user);
   };
 
-  async function createApplicationInDB(job: Job, user: User) {
+  async function createApplicationInDB(message: string, job: Job, user: User) {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/jobs/${job._id}`,
+        `http://localhost:3000/api/job/setJobApplication`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            message,
             job,
             user,
           }),
         }
       );
+     const data= await response.json();
 
       if (!response.ok) {
         throw new Error("Failed to create application");
       }
-
-      return await response.json();
+      console.log(data)
     } catch (error) {
       console.error("Error creating application:", error);
     }

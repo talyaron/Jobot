@@ -44,7 +44,7 @@ const JobApplicationVM = () => {
     if(job)
     return
   
-  const response = await fetch("http://localhost:3000/api/jobs/jobSelected")
+  const response = await fetch("http://localhost:3000/api/job/jobSelected")
   if (response.ok)
   {
     console.log("")
