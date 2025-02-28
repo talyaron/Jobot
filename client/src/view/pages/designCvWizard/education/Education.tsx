@@ -12,7 +12,7 @@ const Education = () => {
   const handleChange = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateEducation({ id, data: { [e.target.name]: e.target.value } }));
   };
-
+console.log("the eduction is : " , educationList)
   return (
     <div className={styles.container}>
       <h2>השכלה</h2>

@@ -30,7 +30,7 @@ interface WorkExperienceState {
 }
 
 interface ServiceState {
-    id: number;
+    id: string;
     serviceType: string;
     organizationName: string;
     serviceYears: string;
@@ -97,6 +97,8 @@ const cvSlice = createSlice({
             if (index !== -1) {
                 state.education[index] = { ...state.education[index], ...action.payload.data };
             }
+            console.table(state.education);
+
         },
         removeEducation(state, action: PayloadAction<number>) {
             state.education = state.education.filter((edu) => edu.id !== action.payload);
@@ -128,20 +130,20 @@ const cvSlice = createSlice({
         // פונקציות עבור סוגי שירות
         addServiceType(state) {
             const newService: ServiceState = {
-                id: Date.now(),
+                id: crypto.randomUUID(),
                 serviceType: "",
                 organizationName: "",
                 serviceYears: "",
             };
             state.serviceTypes.push(newService);
         },
-        updateServiceType(state, action: PayloadAction<{ id: number, data: Partial<ServiceState> }>) {
+        updateServiceType(state, action: PayloadAction<{ id: string, data: Partial<ServiceState> }>) {
             const index = state.serviceTypes.findIndex((service) => service.id === action.payload.id);
             if (index !== -1) {
                 state.serviceTypes[index] = { ...state.serviceTypes[index], ...action.payload.data };
             }
         },
-        removeServiceType(state, action: PayloadAction<number>) {
+        removeServiceType(state, action: PayloadAction<string>) {
             state.serviceTypes = state.serviceTypes.filter((service) => service.id !== action.payload);
         },
 

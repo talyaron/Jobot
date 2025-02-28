@@ -13,14 +13,14 @@ const Skills: React.FC = () => {
     const handelAddSkills = () =>{
         dispatch(addSkills());
     }
-    const handleRemoveSkills = (id) => {
+    const handleRemoveSkills = (id: string) => {
         dispatch(removeSkills(id));
     }
 
     const handleUpdateSkills = (id: string, field: string, value: string) => {
         dispatch(updateSkills({id, data: {[field]: value } }));
     }
-    console.log(skillsData)
+    console.log("the skill component: " , skillsData)
 
     return (
         <div className={styles.continer}>

@@ -17,14 +17,14 @@ const ServiceType: React.FC = () => {
         dispatch(addServiceType());
     };
 
-    const handleUpdateService = (id: number, field: string, value: string) => {
+    const handleUpdateService = (id: string, field: string, value: string) => {
         dispatch(updateServiceType({ id, data: { [field]: value } }));
     };
 
-    const handleRemoveService = (id: number) => {
+    const handleRemoveService = (id: string) => {
         dispatch(removeServiceType(id));
     };
-    console.log(serviceTypes)
+    console.log("the servier types componnet :" , serviceTypes)
 
     return (
         <div className={styles.continer}>

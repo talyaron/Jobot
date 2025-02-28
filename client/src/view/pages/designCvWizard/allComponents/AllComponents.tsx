@@ -14,6 +14,7 @@ const AllComponents = () => {
 
   const sendCvFormToServer = async () => { // 🔹 פונקציה אסינכרונית תקינה
     try {
+      console.log("before send to the dada bate" , cvForm);
       const response = await fetch("http://localhost:3000/api/cv/updateCvForm", {
         method: "POST",
         headers: {
@@ -46,7 +47,6 @@ const AllComponents = () => {
       <p>{cvForm.personalInformation.userId}</p>
       <p>{cvForm.personalInformation?.firstName}</p>
       <p>{cvForm.personalInformation?.lastName}</p>
-      <p>{cvForm.professionalSummary.summary}</p>
       <div>
         {cvForm.skills.map((x, index) => (
           <div key={index}>
