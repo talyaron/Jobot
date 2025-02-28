@@ -3,8 +3,8 @@ import { jobUserStatus } from "../utils/modelsEnums";
 
 
 const JobUserSchema = new Schema({
-  userId: Types.ObjectId,
-  employerId: Types.ObjectId,
+  userId: { type: Types.ObjectId, ref: 'User' },
+  employerId: { type: Types.ObjectId, ref: 'Job' },
   status: Object.values(jobUserStatus),
 });
 

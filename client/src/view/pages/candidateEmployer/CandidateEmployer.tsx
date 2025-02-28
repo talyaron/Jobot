@@ -3,11 +3,12 @@ import { User } from "../../../model/userModel";
 import UserDetails from "../../components/UserDetails/UserDetails"
 import useCandidateEmployer from "./CandidateEmployerVM"
 
-const CandidateEmployer = ({ user }: { user: User }) => {
+const CandidateEmployer = ({ user, message }: { user: User, message: String }) => {
     const { onApprove, onReject } = useCandidateEmployer();
     return (
         <div className={styles["candidate-employer"]}>
             <UserDetails user={user} />
+            <h2>{message}</h2>
             {/* <Link to={route to chat}>
                 <button className="btn" type="button"> Chat </button>
             </Link> */}
