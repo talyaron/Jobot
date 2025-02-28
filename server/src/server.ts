@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from "cors"
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import jobRoutes from './Routes/jobRoutes';
 
 const app = express()
 const port = 3000;
@@ -21,6 +22,7 @@ export const saltRounds = Number(process.env.SALT_BCRYPT) || 3;
 
 
 app.use("/api/auth", authRoutes);
+app.use("/api/jobs", jobRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
@@ -34,3 +36,9 @@ mongoose.connect(`${dbUrl}${database}`).then(()=>{
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
+
+import userPreferencesRouter from "./Routes/userPreferencesRouter";
+app.use("/api", userPreferencesRouter);
+
+import jobsRouter from "./Routes/jobRoutes";
+app.use("/api", jobsRouter);
