@@ -18,6 +18,7 @@ export enum Location {
 	south = "south",
 	abroad = "abroad",
 }
+
 export interface Job {
 	_id?: string;
 	jobName: string;
@@ -36,24 +37,16 @@ export interface Job {
 	websiteURL: string;
 }
 
-
 interface JobsEmployerMVProps {
-	jobs: Job[];
-	onCreate: (jobData: Job) => void;
-	onDelete: (id: string) => void;
-	onEdit: (job: Job | null) => void;
-	onEditSave: (jobData: Job) => void;
 	jobToEdit: Job | null;
-  }
+	onEditStart: (job: Job | null) => void;
+}
 
-const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
-	jobs,
-	onCreate,
-	onDelete,
-	onEdit,
-	onEditSave,
+const JobsEmployerVM: React.FC<JobsEmployerMVProps> = ({
 	jobToEdit,
+	onEditStart,
 }) => {
+	const [jobs, setJobs] = useState<Job[]>([]);
 	const [formData, setFormData] = useState<Job>({
 		_id: '',
 		jobName: '',
@@ -72,12 +65,104 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 		websiteURL: '',
 	});
 
+	// Fetch jobs on component mount
+	useEffect(() => {
+		fetchJobs();
+	}, []);
+
+	// Update form data when jobToEdit changes
 	useEffect(() => {
 		if (jobToEdit) {
 			setFormData({ ...jobToEdit });
 		}
 	}, [jobToEdit]);
 
+	// API request to get all jobs
+	const fetchJobs = async () => {
+		try {
+			const response = await fetch('http://localhost:3000/api/employer/jobs/get-all-jobs');
+			const data: Job[] = await response.json();
+			setJobs(data);
+		} catch (error) {
+			console.error('Error fetching jobs:', error);
+		}
+	};
+
+	// API request to create a new job
+	const createJob = async (jobData: Job) => {
+		delete jobData._id;
+
+		const dataToSend = {
+			...jobData,
+			industry: jobData.Industry,
+			createdAt: new Date()
+		};
+
+		try {
+			const response = await fetch('http://localhost:3000/api/employer/jobs/create', {
+				method: 'POST',
+				body: JSON.stringify(dataToSend),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			if (!response.ok) {
+				const error = await response.json();
+				console.error('Error creating job:', error);
+				return;
+			}
+
+			fetchJobs(); // Refresh jobs list after creation
+
+		} catch (error) {
+			console.error('Error creating job:', error);
+		}
+	};
+
+	// API request to delete a job
+	const deleteJob = async (id: string) => {
+		try {
+			const response = await fetch(`http://localhost:3000/api/employer/jobs/delete/${id}`, {
+				method: 'DELETE',
+			});
+			const result = await response.json();
+			if (response.ok) {
+				setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
+			} else {
+				console.error('Error deleting job:', result.error);
+			}
+		} catch (error) {
+			console.error('Error deleting job:', error);
+		}
+	};
+
+	// API request to edit an existing job
+	const editJob = async (jobData: Job) => {
+		try {
+			const response = await fetch(`http://localhost:3000/api/employer/jobs/edit/${jobData._id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(jobData),
+			});
+
+			const result = await response.json();
+			if (response.ok) {
+				setJobs((prevJobs) =>
+					prevJobs.map((job) => (job._id === jobData._id ? result.job : job))
+				);
+				onEditStart(null); // Reset the edit state
+			} else {
+				console.error('Error updating job:', result.error);
+			}
+		} catch (error) {
+			console.error('Error updating job:', error);
+		}
+	};
+
+	// Handle form input changes
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -86,36 +171,36 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 		});
 	};
 
+	// Handle form submission
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		console.log(formData);
 		
 		if (jobToEdit) {
-		   onEditSave(formData);
+			editJob(formData);
 		} else {
-		   onCreate(formData);
+			createJob(formData);
 		}
 	
+		// Reset form data
 		setFormData({
-		   _id:  jobToEdit?._id || '',
-		   jobName: '',
-		   details: '',
-		   address: '',
-		   location: Location.north,
-		   locationType: LocationType.onSite,
-		   company: '',
-		   employmentType: '',
-		   Industry: '',
-		   salary: 0,
-		   housingIncluded: false,
-		   type: '',
-		   term: Term.short,
-		   benefits: '',
-		   websiteURL: '',
+			_id: '',
+			jobName: '',
+			details: '',
+			address: '',
+			location: Location.north,
+			locationType: LocationType.onSite,
+			company: '',
+			employmentType: '',
+			Industry: '',
+			salary: 0,
+			housingIncluded: false,
+			type: '',
+			term: Term.short,
+			benefits: '',
+			websiteURL: '',
 		});
 	};
-	
-	 
 
 	return (
 		<div>
@@ -254,8 +339,8 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 					jobs.map((job) => (
 						<div key={job._id}>
 							<h4>{job.jobName}</h4>
-							<button onClick={() => onDelete(job._id || '')}>Delete</button>
-							<button onClick={() => onEdit(job)}>Edit</button>
+							<button onClick={() => deleteJob(job._id || '')}>Delete</button>
+							<button onClick={() => onEditStart(job)}>Edit</button>
 						</div>
 					))}
 			</div>
@@ -263,4 +348,4 @@ const JobsEmployerMV: React.FC<JobsEmployerMVProps> = ({
 	);
 };
 
-export default JobsEmployerMV;
+export default JobsEmployerVM;
