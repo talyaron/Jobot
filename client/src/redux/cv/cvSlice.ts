@@ -10,9 +10,7 @@ interface PersonalInformationState {
     city: string;
 }
 
-interface ProfessionalSummaryState {
-    summary: string;
-}
+
 
 interface EducationState {
     id: number;
@@ -47,7 +45,7 @@ interface SkillsState {
 // המבנה הכללי של ה-state
 interface CvState {
     personalInformation: PersonalInformationState;
-    professionalSummary: ProfessionalSummaryState;
+    professionalSummary: string;
     education: EducationState[];
     workExperience: WorkExperienceState[];
     serviceTypes: ServiceState[];
@@ -64,7 +62,7 @@ const initialState: CvState = {
         phoneNumber: "",
         city: "",
     },
-    professionalSummary: { summary: "" },
+    professionalSummary: "",
     education: [],
     workExperience: [],
     serviceTypes: [],
@@ -80,8 +78,8 @@ const cvSlice = createSlice({
         updatePersonalInformation(state, action: PayloadAction<Partial<PersonalInformationState>>) {
             state.personalInformation = { ...state.personalInformation, ...action.payload };
         },
-        updateProfessionalSummary(state, action: PayloadAction<Partial<ProfessionalSummaryState>>) {
-            state.professionalSummary = { ...state.professionalSummary, ...action.payload };
+        updateProfessionalSummary(state, action: PayloadAction<string>) {
+            state.professionalSummary = action.payload;
         },
 
         // פונקציות עבור השכלה
@@ -147,25 +145,25 @@ const cvSlice = createSlice({
             state.serviceTypes = state.serviceTypes.filter((service) => service.id !== action.payload);
         },
 
-        addSkills(state){
+        addSkills(state) {
             const newSkills: SkillsState = {
                 id: crypto.randomUUID(),
                 technicalSkills: "",
                 spokenLanguages: "",
-            }; 
-        state.skills.push(newSkills);
-    },
-    removeSkills(state, action: PayloadAction<string>){
-        state.skills = state.skills.filter((skill) => skill.id!== action.payload);
-    },
-    updateSkills(state, action: PayloadAction<{ id: string, data: Partial<SkillsState> }>) {
-        const index = state.skills.findIndex((skill) => skill.id === action.payload.id);
-        if (index!== -1) {
-            state.skills[index] = {...state.skills[index], ...action.payload.data };
-        }
+            };
+            state.skills.push(newSkills);
+        },
+        removeSkills(state, action: PayloadAction<string>) {
+            state.skills = state.skills.filter((skill) => skill.id !== action.payload);
+        },
+        updateSkills(state, action: PayloadAction<{ id: string, data: Partial<SkillsState> }>) {
+            const index = state.skills.findIndex((skill) => skill.id === action.payload.id);
+            if (index !== -1) {
+                state.skills[index] = { ...state.skills[index], ...action.payload.data };
+            }
         },
 
-        cVstate(state){
+        cVstate(state) {
             // הפעו��ות למצב התחלתי
             state.personalInformation = initialState.personalInformation;
             state.professionalSummary = initialState.professionalSummary;
@@ -174,8 +172,8 @@ const cvSlice = createSlice({
             state.serviceTypes = initialState.serviceTypes;
             state.skills = initialState.skills;
         },
-        
-    
+
+
         // ניקוי כל הנתונים
         clearCV(state) {
             state.personalInformation = initialState.personalInformation;
@@ -189,14 +187,14 @@ const cvSlice = createSlice({
 });
 
 // ייצוא הפעולות לשימוש ברכיבים
-export const { 
+export const {
     updatePersonalInformation,
     updateProfessionalSummary,
-    addEducation,updateEducation,removeEducation, 
-    addWorkExperience,updateWorkExperience,removeWorkExperience,
-    addServiceType,updateServiceType,removeServiceType, 
-    addSkills,removeSkills,updateSkills, 
-    clearCV,cVstate,
+    addEducation, updateEducation, removeEducation,
+    addWorkExperience, updateWorkExperience, removeWorkExperience,
+    addServiceType, updateServiceType, removeServiceType,
+    addSkills, removeSkills, updateSkills,
+    clearCV, cVstate,
 } = cvSlice.actions;
 
 // ייצוא ה-reducer לשימוש ב-store
