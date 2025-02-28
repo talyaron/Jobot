@@ -5,7 +5,6 @@ import useCandidateEmployer from "./CandidateEmployerVM"
 
 const CandidateEmployer = ({ user }: { user: User }) => {
     const { onApprove, onReject } = useCandidateEmployer();
-
     return (
         <div className={styles["candidate-employer"]}>
             <UserDetails user={user} />

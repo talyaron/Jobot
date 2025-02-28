@@ -6,7 +6,7 @@ const UserDetails = ({ user }: { user: User })=> {
     <div className={styles["user-details"]}>
       <h1> {user.fullName} </h1>
       <p> {user.aiData} :אודות </p>
-      <p> {user.workExperience} :נסיון </p>
+      {/* <p> {user.workExperience} :נסיון </p> */}
       <p> {user.email} :מייל </p>
       <p> {user.phoneNumber} :טלפון </p>
     </div>
