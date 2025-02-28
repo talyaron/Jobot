@@ -46,9 +46,9 @@ interface SkillsState {
 interface CvState {
     personalInformation: PersonalInformationState;
     professionalSummary: string;
-    education: EducationState[];
+    educations: EducationState[];
     workExperience: WorkExperienceState[];
-    serviceTypes: ServiceState[];
+    serviceType: ServiceState[];
     skills: SkillsState[];
 }
 
@@ -63,9 +63,9 @@ const initialState: CvState = {
         city: "",
     },
     professionalSummary: "",
-    education: [],
+    educations: [],
     workExperience: [],
-    serviceTypes: [],
+    serviceType: [],
     skills: [],
 
 };
@@ -90,18 +90,18 @@ const cvSlice = createSlice({
                 degree: "",
                 studyYears: "",
             };
-            state.education.push(newEducation);
+            state.educations.push(newEducation);
         },
         updateEducation(state, action: PayloadAction<{ id: number, data: Partial<EducationState> }>) {
-            const index = state.education.findIndex((edu) => edu.id === action.payload.id);
+            const index = state.educations.findIndex((edu) => edu.id === action.payload.id);
             if (index !== -1) {
-                state.education[index] = { ...state.education[index], ...action.payload.data };
+                state.educations[index] = { ...state.educations[index], ...action.payload.data };
             }
-            console.table(state.education);
+            console.table(state.educations);
 
         },
         removeEducation(state, action: PayloadAction<number>) {
-            state.education = state.education.filter((edu) => edu.id !== action.payload);
+            state.educations = state.educations.filter((edu) => edu.id !== action.payload);
         },
 
         // פונקציות עבור ניסיון תעסוקתי
@@ -135,16 +135,16 @@ const cvSlice = createSlice({
                 organizationName: "",
                 serviceYears: "",
             };
-            state.serviceTypes.push(newService);
+            state.serviceType.push(newService);
         },
         updateServiceType(state, action: PayloadAction<{ id: string, data: Partial<ServiceState> }>) {
-            const index = state.serviceTypes.findIndex((service) => service.id === action.payload.id);
+            const index = state.serviceType.findIndex((service) => service.id === action.payload.id);
             if (index !== -1) {
-                state.serviceTypes[index] = { ...state.serviceTypes[index], ...action.payload.data };
+                state.serviceType[index] = { ...state.serviceType[index], ...action.payload.data };
             }
         },
         removeServiceType(state, action: PayloadAction<string>) {
-            state.serviceTypes = state.serviceTypes.filter((service) => service.id !== action.payload);
+            state.serviceType = state.serviceType.filter((service) => service.id !== action.payload);
         },
 
         addSkills(state) {
@@ -169,9 +169,9 @@ const cvSlice = createSlice({
             // הפעו��ות למצב התחלתי
             state.personalInformation = initialState.personalInformation;
             state.professionalSummary = initialState.professionalSummary;
-            state.education = initialState.education;
+            state.educations = initialState.educations;
             state.workExperience = initialState.workExperience;
-            state.serviceTypes = initialState.serviceTypes;
+            state.serviceType = initialState.serviceType;
             state.skills = initialState.skills;
         },
 
@@ -180,9 +180,9 @@ const cvSlice = createSlice({
         clearCV(state) {
             state.personalInformation = initialState.personalInformation;
             state.professionalSummary = initialState.professionalSummary;
-            state.education = [];
+            state.educations = [];
             state.workExperience = [];
-            state.serviceTypes = [];
+            state.serviceType = [];
             state.skills = [];
         },
     }

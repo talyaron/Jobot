@@ -6,7 +6,7 @@ import { addEducation, updateEducation, removeEducation } from "../../../../redu
 
 const Education = () => {
   const dispatch = useDispatch();
-  const educationList = useSelector((state: RootState) => state.cvForm.education);
+  const educationList = useSelector((state: RootState) => state.cvForm.educations);
   console.log(educationList);
 
   const handleChange = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
