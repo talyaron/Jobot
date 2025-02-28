@@ -46,7 +46,7 @@ interface SkillsState {
 interface CvState {
     personalInformation: PersonalInformationState;
     professionalSummary: string;
-    education: EducationState[];
+    educations: EducationState[];
     workExperience: WorkExperienceState[];
     serviceTypes: ServiceState[];
     skills: SkillsState[];
@@ -63,7 +63,7 @@ const initialState: CvState = {
         city: "",
     },
     professionalSummary: "",
-    education: [],
+    educations: [],
     workExperience: [],
     serviceTypes: [],
     skills: [],
@@ -90,18 +90,18 @@ const cvSlice = createSlice({
                 degree: "",
                 studyYears: "",
             };
-            state.education.push(newEducation);
+            state.educations.push(newEducation);
         },
         updateEducation(state, action: PayloadAction<{ id: number, data: Partial<EducationState> }>) {
-            const index = state.education.findIndex((edu) => edu.id === action.payload.id);
+            const index = state.educations.findIndex((edu) => edu.id === action.payload.id);
             if (index !== -1) {
-                state.education[index] = { ...state.education[index], ...action.payload.data };
+                state.educations[index] = { ...state.educations[index], ...action.payload.data };
             }
-            console.table(state.education);
+            console.table(state.educations);
 
         },
         removeEducation(state, action: PayloadAction<number>) {
-            state.education = state.education.filter((edu) => edu.id !== action.payload);
+            state.educations = state.educations.filter((edu) => edu.id !== action.payload);
         },
 
         // פונקציות עבור ניסיון תעסוקתי
@@ -169,7 +169,7 @@ const cvSlice = createSlice({
             // הפעו��ות למצב התחלתי
             state.personalInformation = initialState.personalInformation;
             state.professionalSummary = initialState.professionalSummary;
-            state.education = initialState.education;
+            state.educations = initialState.educations;
             state.workExperience = initialState.workExperience;
             state.serviceTypes = initialState.serviceTypes;
             state.skills = initialState.skills;
@@ -180,7 +180,7 @@ const cvSlice = createSlice({
         clearCV(state) {
             state.personalInformation = initialState.personalInformation;
             state.professionalSummary = initialState.professionalSummary;
-            state.education = [];
+            state.educations = [];
             state.workExperience = [];
             state.serviceTypes = [];
             state.skills = [];

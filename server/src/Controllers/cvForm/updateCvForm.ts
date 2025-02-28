@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
 import { CvFormModel } from "../../Model/cvFormModel";
-import { ok } from "assert";
+
 
 export const updateCvForm = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log("Request Body:", JSON.stringify(req.body, null, 2));
+       
         const { userId, ...formData } = req.body;
+        console.log("Request Body:", JSON.stringify(req.body, null, 2));
 
         // if (!userId) {
         //     res.status(400).json({ error: "User ID is required" });
         // }
 
         const existingCvForm = await CvFormModel.findOne({ userId });
-        console.log("Existing CV Before Update:", JSON.stringify(existingCvForm, null, 2));
+        if(existingCvForm) console.log("Existing CV Before Update:", JSON.stringify(existingCvForm.educations, null, 2));
 
         if (existingCvForm) {
             await CvFormModel.findOneAndUpdate(

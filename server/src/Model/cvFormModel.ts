@@ -9,9 +9,7 @@ const cvFormModel = new Schema({
         phoneNumber: String,
         city: String,
     }],
-    professionalSummary:[{
-        professionalSummary: String,
-    }],
+    professionalSummary: String,
     educations: [{
         institution: String,
         degree: String,
