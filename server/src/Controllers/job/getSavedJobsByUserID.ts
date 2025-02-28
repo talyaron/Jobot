@@ -2,7 +2,8 @@ import { SavedJobsModel } from "../../Model/joinTables/savedJobsJoinTable";
 
 export async function getSavedJobsByUserID(req: any, res: any) {
   try {
-    const userId = req.userId; // Extract userId from middleware
+
+    const userId = req.body.userId || req.userId; // Extract userId from middleware
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -30,8 +31,9 @@ export async function getSavedJobsByUserID(req: any, res: any) {
 // Remove a saved job by userId and jobId
 export async function removeSavedJob(req: any, res: any) {
   try {
-    const userId = req.userId; // Extract userId from middleware
-    const jobId = req.params.jobId; // Extract jobId from request parameters
+
+    const userId = req.body.userId || req.userId; // Extract userId from middleware
+    const jobId = req.params.jobId || req.body.jobId; // Extract jobId from params or body
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -43,6 +45,7 @@ export async function removeSavedJob(req: any, res: any) {
 
     // Delete the saved job for the given user
     const deletedJob = await SavedJobsModel.findOneAndDelete({ userId, jobId });
+
 
     if (!deletedJob) {
       return res

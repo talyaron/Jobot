@@ -12,23 +12,23 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies?.user;
+      const token = req.cookies?.token;
+      console.log("Received token:", token);
     if (!token) {
       return res
         .status(401)
         .json({ message: "Unauthorized: No token provided" });
     }
-    console.log(
-        "Received Authorization header:",
-        req.headers.authorization
-    );
+    
       const decoded = jwt.decode(token, secretKey);
-      console.log("Decoded user ID:", decoded.userId);
+      console.log("decoded ID", decoded.userId);
+    
     if (!decoded.userId) {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
 
-    req.body.userId = decoded.userId; // Add userId to the request body
+      req.body.userId = decoded.userId; // Add userId to the request body
+      console.log("Assigned UserID:", req.body.userId);
     next(); // Continue to the next middleware
   } catch (error) {
     console.error("JWT decode error:", error);

@@ -1,7 +1,9 @@
+
 .myJobsContainer {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
 .title {
@@ -17,13 +19,17 @@
 }
 
 .jobItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background: #f9f9f9;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .deleteButton {

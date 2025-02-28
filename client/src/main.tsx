@@ -7,7 +7,8 @@ import "./index.css";
 import Login from "./view/pages/login/Login.tsx";
 import Home from "./view/pages/home/Home.tsx";
 import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
-import { MyJobs }  from "./view/pages/myJobs/MyJobs.tsx"; // Добавляем импорт MyJobs
+import { MyJobs }  from "./view/pages/myJobs/MyJobs.tsx"; 
+import Results from "./view/pages/results/Results.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,7 +18,8 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<Home />} />
         {/* <Route path="/wizard" element={<Wizard />} /> */}
         <Route path="/job-candidate" element={<JobCandidate />} />
-        <Route path="/myjobs" element={<MyJobs />} /> {/* Добавляем роут */}
+        <Route path="/myjobs" element={<MyJobs />} /> 
+        <Route path="/results" element={<Results />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </BrowserRouter>
