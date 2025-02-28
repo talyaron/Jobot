@@ -9,7 +9,28 @@ import Education from "../education/Education";
 import ServiceType from "../serviceType/ServiceType";
 
 const AllComponents = () => {
-  const cvForm = useSelector((state: RootState) => state.cvForm); // ✅ עכשיו Redux עובד בלי תקיעות!
+  const cvForm = useSelector((state: RootState) => state.cvForm); 
+  console.log(cvForm)
+
+  const sendCvFormToServer = async () => { // 🔹 פונקציה אסינכרונית תקינה
+    try {
+      const response = await fetch("http://localhost:3000/api/cv/addCvForm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cvForm),
+      });
+
+      if (response.ok) {
+        alert("קורות החיים נשלחו בהצלחה!");
+      } else {
+        alert("שגיאה בשליחה");
+      }
+    } catch (error) {
+      console.error("שגיאה:", error);
+    }
+  };
 
   return (
     <div>
@@ -21,15 +42,18 @@ const AllComponents = () => {
       <ServiceType />
       <Skills />
       <br />
-      <button>שלח קורות חיים</button>
+      <button onClick={sendCvFormToServer}>שלח קורות חיים</button>
+      <p>{cvForm.personalInformation.userId}</p>
       <p>{cvForm.personalInformation?.firstName}</p>
       <p>{cvForm.personalInformation?.lastName}</p>
       <p>{cvForm.professionalSummary.summary}</p>
-      <div>{cvForm.skills.map((x) => (
-        <div key={x}>
-          <p>{x.spokenLanguages}</p>
-          <p>{x.technicalSkills}</p>
-        </div>))}
+      <div>
+        {cvForm.skills.map((x, index) => (
+          <div key={index}>
+            <p>{x.spokenLanguages}</p>
+            <p>{x.technicalSkills}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

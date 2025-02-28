@@ -5,6 +5,7 @@ import cors from "cors"
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
+import cvRoutes from "./Routes/cvFormRoutes"
 
 const app = express()
 const port = 3000;
@@ -23,6 +24,7 @@ export const saltRounds = Number(process.env.SALT_BCRYPT) || 3;
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
+app.use("/api/cv", cvRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';

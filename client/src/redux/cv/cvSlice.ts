@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // ממשקי הנתונים
 interface PersonalInformationState {
+    userId: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -56,6 +57,7 @@ interface CvState {
 // מצב התחלתי
 const initialState: CvState = {
     personalInformation: {
+        userId: crypto.randomUUID(),
         firstName: "",
         lastName: "",
         email: "",

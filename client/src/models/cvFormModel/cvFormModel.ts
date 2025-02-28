@@ -1,6 +1,4 @@
-import { Types, model, Schema } from "mongoose";
-
-const cvFormModel = new Schema({
+export interface cvFormModel {
     personalInformation:[{
         userId: String,
         firstName: String,
@@ -35,6 +33,4 @@ const cvFormModel = new Schema({
         spokenLanguages: String,
     }],
 
-});
-
-export const CvFormModel = model("CVForm", cvFormModel);
+};
