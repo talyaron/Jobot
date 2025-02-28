@@ -1,11 +1,22 @@
-import React from 'react'
+import { useJobs } from "./ResultsVM";
+import JobCard from "../../components/jobCard/JobCard";
+import styles from "./Results.module.scss";
 
-const Results = () => {
+const Results = ({ userId }: { userId: string }) => {
+  const { jobIds, loading, error } = useJobs(userId);
+  
+  if (loading) return <p className={styles.loading}>Loading jobs...</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
+
   return (
-    <div>
-      
+    <div className={styles.resultsContainer}>
+      {jobIds.length === 0 ? (
+        <p>No jobs found.</p>
+      ) : (
+        jobIds.map((jobId) => <JobCard key={jobId} jobId={jobId} />)
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Results
+export default Results;

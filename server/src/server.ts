@@ -37,3 +37,9 @@ mongoose.connect(`${dbUrl}${database}`).then(()=>{
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
+
+import userPreferencesRouter from "./Routes/userPreferencesRouter";
+app.use("/api", userPreferencesRouter);
+
+import jobsRouter from "./Routes/jobRoutes";
+app.use("/api", jobsRouter);
