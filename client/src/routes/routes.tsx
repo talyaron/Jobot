@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from "react-route";
 import JobsEmployer from "../view/pages/jobsEmployer/JobsEmployer";
 import JobApplication from "../view/pages/jobApplication/JobApplication";
 import ApplicationStatus from "../view/pages/applicationstatus/ApplicationStatus";
