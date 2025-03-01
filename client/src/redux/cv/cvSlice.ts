@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // ממשקי הנתונים
 interface PersonalInformationState {
-    userId: string;
+    userId: string,
     firstName: string;
     lastName: string;
     email: string;
