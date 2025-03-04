@@ -6,7 +6,7 @@ import { getCandidatesByJobId } from "../Controllers/job/getCandidatesByJobId";
 
 const router = express.Router();
 
-router.get("/:jobId", getJobById);
+router.get("/get-job-by-id/:jobId", getJobById);
 router.get("/get-all-jobs", getAllJobs);
 router.get("/get-candidates/:jobId", getCandidatesByJobId);
 
