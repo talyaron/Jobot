@@ -14,3 +14,17 @@ export const getJobById = async (req: any, res: any) => {
     res.status(500).json({ message: "Error fetching job", error });
   }
 };
+
+export const getAllJobs = async (req: any, res: any) => {
+  try {
+   
+    const jobs = await JobModel.find( {} );
+
+
+    res.status(200).json({jobs});
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching job", error });
+  }
+};
+
+
