@@ -11,13 +11,19 @@
   },
   "dependencies": {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "@reduxjs/toolkit": "^2.6.0",
 =======
+=======
+>>>>>>> Stashed changes
 <<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
 =======
     "@reduxjs/toolkit": "^2.6.0",
 >>>>>>> upstream/dev
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
