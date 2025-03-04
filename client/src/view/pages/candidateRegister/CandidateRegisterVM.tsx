@@ -2,6 +2,7 @@ export interface CandidateRegisterData {
     fullName: string;
     email: string;
     password: string;
+    rePassword:string
     phoneNumber: string;
 }
 
@@ -31,10 +32,10 @@ export async function RegisterCandidate(registerData: CandidateRegisterData): Pr
     }
 
     try {
-        const response = await fetch("/api/auth/register", {
+        const response = await fetch("http://localhost:3000/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(registerData),
+            body: JSON.stringify({...registerData}),
             credentials: "include",
         });
 
