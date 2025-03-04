@@ -8,7 +8,7 @@ const JobSchema = new Schema({
   address: String,
   locationType:Object.values(locationType),
   location:Object.values(location),
-  company: Types.ObjectId,
+  company: String,
   employmentType: Object.values(employmentType),
   Industry: String,
   salary: Number,
