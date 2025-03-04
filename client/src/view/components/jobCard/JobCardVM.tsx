@@ -14,8 +14,13 @@ export const useJobCard = (jobId: string) => {
 
         const data = await response.json();
         setJob(data);
+
       } catch (err) {
-        setError("Failed to fetch job");
+        if (err instanceof Error) {
+          setError(`Failed to fetch job: ${err.message}`);
+        } else {
+          setError("Failed to fetch job");
+        }
       } finally {
         setLoading(false);
       }
