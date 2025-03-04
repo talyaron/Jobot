@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Job } from "../../../model/jobModel";
 import { useParams } from "react-router";
@@ -16,6 +17,7 @@ export function useJobCandidateVM() {
   }, [jobId])
 
   async function fetchJob(jobId: string | undefined) {
+
     try {
       fetch(`http://localhost:3000/api/jobs/job/${jobId}`, {
         method: "GET",

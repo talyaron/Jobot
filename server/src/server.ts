@@ -8,6 +8,7 @@ import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
 
+
 const app = express()
 const port = 3000;
 app.use(cookieParser());

@@ -20,6 +20,7 @@ export async function registerUser(req: any, res: any) {
     //   password
     // );
 
+
     // if (
     //   invalidUsername ||
     //   invalidEmail ||
@@ -34,6 +35,7 @@ export async function registerUser(req: any, res: any) {
     //       invalidRePassword
     //   );
     // }
+
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
