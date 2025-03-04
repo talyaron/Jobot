@@ -1,5 +1,6 @@
 // WizardVM.tsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type AnswerType = "multiple-choice" | "text" | "rating" | "boolean";
 
@@ -36,6 +37,7 @@ const careerQuestions: CareerQuestion[] = [
 export function useWizard() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, any>>({});
+  const navigate = useNavigate();
 
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
@@ -47,7 +49,7 @@ export function useWizard() {
     if (currentQuestionIndex < careerQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      alert("סיימת את השאלון!");
+      navigate('/candidate');
     }
   };
 
