@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+
 
 export const useJobs = (userId?: string) => {
   const [jobIds, setJobIds] = useState<string[]>([]);
@@ -7,8 +7,6 @@ export const useJobs = (userId?: string) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const token = Cookies.get("token"); // Get authentication token from cookies
-  console.log(token);
 
   useEffect(() => {
     const fetchJobIds = async () => {
