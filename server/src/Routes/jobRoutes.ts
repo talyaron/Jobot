@@ -6,9 +6,12 @@ const router = express.Router();
 router.get(`/job-details/:id`, getJobDetails);
 
 import { getJobById } from "../Controllers/job/getJobByID";
+import { getCandidatesByJobId } from "../Controllers/job/getCandidatesByJobID";
 import { setJobApplication } from "../Controllers/job/setJobApplication";
 
 router.get("/job/:jobId", getJobById);
+router.get("/job/getCandidates/:jobId", getCandidatesByJobId);
 router.post("/job/setJobApplication", setJobApplication);
+
 
 export default router;
