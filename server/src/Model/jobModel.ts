@@ -14,7 +14,10 @@ const JobSchema = new Schema({
   salary: Number,
   housingIncluded: Boolean,
   type: String,
-  term: Object.values(term),
+  term: {
+    type: String,
+    enum: Object.values(term)
+  },
   benefits: String,
   websiteURL: {
     type: String,
