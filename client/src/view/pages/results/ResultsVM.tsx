@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-export const useJobs = () => {
+export const useJobs = (userId?: string) => {
   const [jobIds, setJobIds] = useState<string[]>([]);
   const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -12,22 +12,18 @@ export const useJobs = () => {
 
   useEffect(() => {
     const fetchJobIds = async () => {
+      const fetchUrl = userId
+        ? `http://localhost:3000/api/matched-jobs/${userId}`
+        : "http://localhost:3000/api/get-all-jobs";
       try {
-        if (!token) throw new Error("No authentication token found");
-
-        const response = await fetch("http://localhost:3000/api/matched-jobs", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
-
+        const response = await fetch(
+          fetchUrl
+        );
         if (!response.ok) throw new Error("Failed to fetch job IDs");
 
         const data = await response.json();
-        console.log("Fetched jobs:", data);
-        setJobIds(data); // Get job IDs from response
+        console.log(data)
+        setJobIds(data.jobs.map((job: any) => job._id)); // Get job IDs only
       } catch (err) {
         setError("Failed to fetch job IDs");
       } finally {
