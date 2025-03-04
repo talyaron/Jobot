@@ -6,9 +6,6 @@ import "./index.css";
 // import Wizard from "./view/pages/wizard/Wizard.tsx";
 
 
-import EmployerWrapper from './view/pages/employerWrapper/EmployerWrapper.tsx'
-import JobsEmployer from './view/pages/jobsEmployer/JobsEmployer.tsx'
-import Chat from './view/pages/chat/Chat.tsx'
 import JobEmployer from './view/pages/jobEmployer/JobEmployer.tsx'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
