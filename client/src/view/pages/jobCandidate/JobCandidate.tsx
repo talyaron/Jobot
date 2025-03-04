@@ -5,7 +5,7 @@ import { useJobCandidateVM } from './JobCandidateVM';
 
 const JobCandidate = () => {
     
-  const { job,fetchJob } = useJobCandidateVM();
+  const { job } = useJobCandidateVM();
   return (
     <div>
       {job && <JobDetails job={job} />}

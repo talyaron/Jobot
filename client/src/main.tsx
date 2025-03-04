@@ -31,7 +31,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/job-candidate" element={<JobCandidate />} />
           <Route path="candidate" element={<Candidate />}>
             <Route index element={<Results />} />
-            <Route path=":userId" element={<Results />} />
+            <Route path="results/:userId" element={<Results />} />
+            <Route path="job/:jobId" element={<JobCandidate />} />
+            <Route path="chat" element={<Chat />} />
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
