@@ -7,13 +7,18 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Login from './view/pages/login/Login.tsx'
 import Home from './view/pages/home/Home.tsx'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate.tsx'
+
 import EmployerWrapper from './view/pages/employerWrapper/EmployerWrapper.tsx'
 import JobsEmployer from './view/pages/jobsEmployer/JobsEmployer.tsx'
 import Chat from './view/pages/chat/Chat.tsx'
 import JobEmployer from './view/pages/jobEmployer/JobEmployer.tsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.ts'
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
       
         <Routes>
@@ -29,5 +34,6 @@ createRoot(document.getElementById('root')!).render(
         </Routes>
      
     </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )
