@@ -21,6 +21,7 @@ const [showWizard, setShowWizard] = useState(false);
       </div>
     </BrowserRouter>
   );
+  return <div>Welcome to Jobot!</div>; 
 }
 
 export default App;
