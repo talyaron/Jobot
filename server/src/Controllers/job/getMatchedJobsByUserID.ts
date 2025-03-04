@@ -4,7 +4,8 @@ import { JobModel } from "../../Model/jobModel";
 // Fetch jobs dynamically based on user preferences
 export const getMatchedJobs = async (req: any, res: any) => {
   try {
-    const { userId } = req.params;
+    const userId = req.body.userId || req.userId;
+    console.log(userId);
 
     const userPreferences = await UserJobPreferencesModel.findOne({
       userId,
@@ -29,9 +30,10 @@ export const getMatchedJobs = async (req: any, res: any) => {
     console.log("Filters for job search:", filters);
 
     // Find only job IDs that match the user's preferences
-    const matchedJobs = await JobModel.find(filters).select("_id");
+    const matchedJobs = ((await JobModel.find(filters).select("_id")));
+    const jobIdsAsString = matchedJobs.map((job) => job._id.toString());
 
-    res.status(200).json(matchedJobs);
+    res.status(200).json(jobIdsAsString);
   } catch (error) {
     res.status(500).json({ message: "Error fetching matched jobs", error });
   }

@@ -30,7 +30,7 @@ const Home: React.FC = () => {
       <div className={styles.buttonGroup}>
         <button onClick={handleOpenWizard} className={styles.button}>העבודה המושלמת מחכה לך כאן</button>
 
-        <Link to="/">
+        <Link to="/candidate">
           <button className={styles.linkButton}>לכל המשרות</button>
         </Link>
       </div>

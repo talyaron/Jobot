@@ -44,3 +44,6 @@ app.use("/api", userPreferencesRouter);
 
 import jobsRouter from "./Routes/jobRoutes";
 app.use("/api", jobsRouter);
+
+import userJobsRouter from "./Routes/userJobsRouter";
+app.use("/api", userJobsRouter);

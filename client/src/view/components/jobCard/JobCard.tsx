@@ -1,5 +1,6 @@
 import { useJobCard } from "./JobCardVM";
 import styles from "./JobCard.module.scss";
+import { Link } from "react-router";
 
 interface JobCardProps {
   jobId: string;
@@ -13,9 +14,9 @@ const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
   if (!job) return <p>No job found.</p>;
 
   return (
-    <div
+    <Link
+      to={`/job/${jobId}`}
       className={styles.card}
-      onClick={() => (window.location.href = `/job/${jobId}`)}
     >
       <h3 className={styles.jobTitle}>{job.jobName}</h3>
       <p className={styles.details}>
@@ -33,7 +34,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
       <p>
         <strong>Salary:</strong> ${job.salary}
       </p>
-    </div>
+    </Link>
   );
 };
 
