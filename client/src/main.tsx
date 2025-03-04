@@ -28,12 +28,11 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/job-candidate" element={<JobCandidate />} />
-          <Route path="candidate" element={<Candidate />}>
+
+          <Route path="/candidate" element={<Candidate />}>
             <Route index element={<Results />} />
-            <Route path="results/:userId" element={<Results />} />
-            <Route path="job/:jobId" element={<JobCandidate />} />
-            <Route path="chat" element={<Chat />} />
+            <Route path="job-candidate/:jobId" element={<JobCandidate />} />
+            <Route path=":userId" element={<Results />} />
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
