@@ -21,8 +21,9 @@ export const useJobs = (userId?: string) => {
 
         const data = await response.json();
         console.log(data)
-        setJobIds(data.jobs.map((job: any) => job._id)); // Get job IDs only
+        setJobIds(data.jobs.map((job: { _id: string }) => job._id)); // Get job IDs only
       } catch (err) {
+        console.error(err);
         setError("Failed to fetch job IDs");
       } finally {
         setLoading(false);
@@ -34,13 +35,11 @@ export const useJobs = (userId?: string) => {
 
   const saveJob = async (jobId: string) => {
     try {
-      if (!token) throw new Error("No authentication token found");
-
+    
       const response = await fetch("http://localhost:3000/api/saved-jobs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ jobId }),
         credentials: "include",
