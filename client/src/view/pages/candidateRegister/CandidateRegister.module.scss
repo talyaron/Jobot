@@ -1,4 +1,4 @@
-.CandidateLoginPage {
+.CandidateRegisterPage {
     position: absolute;
     top: 4rem; 
     left: 1rem;
@@ -14,7 +14,7 @@
     z-index: 100;
 }
 
-.closeLoginBtn {
+.closeRegisterBtn {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -23,7 +23,7 @@
     color: #333;
 }
 
-.loginText {
+.RegisterText {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
@@ -42,7 +42,7 @@
     color: #333;
 }
 
-.loginBtn {
+.RegisterBtn {
     width: 100%;
     background-color: #007bff;
     color: #fff;
