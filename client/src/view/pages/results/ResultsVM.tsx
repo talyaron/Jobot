@@ -11,8 +11,8 @@ export const useJobs = (userId?: string) => {
   useEffect(() => {
     const fetchJobIds = async () => {
       const fetchUrl = userId
-        ? `http://localhost:3000/api/matched-jobs/${userId}`
-        : "http://localhost:3000/api/get-all-jobs";
+        ? `http://localhost:3000/api/jobs/matched-jobs/${userId}`
+        : "http://localhost:3000/api/jobs/get-all-jobs";
       try {
         const response = await fetch(
           fetchUrl
