@@ -7,7 +7,8 @@ import { useJobApplyVM } from "../../components/jobApply/JobApplyVM";
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
 
 const JobCandidate = () => {
-  const { job, fetchJob } = useJobCandidateVM();
+
+  const { job } = useJobCandidateVM();
   const [isOpen, setIsOpen] = useState(false);
   const { checkIfLoggedIn } = useJobApplyVM();
   const [showLogIn, setShowLogIn] = useState(true);
@@ -17,6 +18,7 @@ const JobCandidate = () => {
       setIsLoggedIn(isLoggedIn);
     });
   }, []);
+
   return (
     //when press on job to show, it will pass jobId to fetchJob function
     //and then it will show the job details

@@ -14,7 +14,7 @@ export default function useJobEmployer(jobId: string) {
 
     async function getJob() {
         try {
-            await fetch(`http://localhost:3000/api/job/${jobId}`, {
+            await fetch(`http://localhost:3000/api/jobs/${jobId}`, {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -31,7 +31,7 @@ export default function useJobEmployer(jobId: string) {
 
     async function getCandidates() {
         try {
-            await fetch(`http://localhost:3000/api/job/getCandidates/${jobId}`, {
+            await fetch(`http://localhost:3000/api/jobs/get-candidates/${jobId}`, {
                 method: "GET",
                 credentials: "include",
                 headers: {

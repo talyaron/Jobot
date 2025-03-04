@@ -10,14 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-    "jsonwebtoken": "^9.0.2",
-=======
     "@reduxjs/toolkit": "^2.6.0",
->>>>>>> upstream/dev
-=======
->>>>>>> Stashed changes
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -29,10 +22,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/jsonwebtoken": "^9.0.9",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.19.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",

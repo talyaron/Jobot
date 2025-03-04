@@ -2,7 +2,7 @@ import { JobModel } from "../../Model/jobModel";
 
 export async function getJobDetails(req: any, res: any) {
   try {
-    const jobId = req.params.id;
+    const jobId = req.params.jobId;
     const job = await JobModel.findById(jobId);
 
     if (!job) {

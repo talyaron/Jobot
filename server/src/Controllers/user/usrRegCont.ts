@@ -19,25 +19,23 @@ export async function registerUser(req: any, res: any) {
     //   rePassword,
     //   password
     // );
-    const invalidUsername = false;
-    const invalidEmail =false;
-    const invalidPassword = false;
-    const invalidRePassword = false;
 
-    if (
-      invalidUsername ||
-      invalidEmail ||
-      invalidPassword ||
-      invalidRePassword
-    ) {
-      throw new Error(
-        "not valid" +
-          invalidUsername +
-          invalidEmail +
-          invalidPassword +
-          invalidRePassword
-      );
-    }
+
+    // if (
+    //   invalidUsername ||
+    //   invalidEmail ||
+    //   invalidPassword ||
+    //   invalidRePassword
+    // ) {
+    //   throw new Error(
+    //     "not valid" +
+    //       invalidUsername +
+    //       invalidEmail +
+    //       invalidPassword +
+    //       invalidRePassword
+    //   );
+    // }
+
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
