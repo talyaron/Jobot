@@ -18,7 +18,7 @@ const JobInputBoxVm = () => {
     try {
 
       const response = await fetch(
-        `http://localhost:3000/api/job/setJobApplication`,
+        `http://localhost:3000/api/jobs/set-job-application`,
         {
           method: "POST",
           headers: {
