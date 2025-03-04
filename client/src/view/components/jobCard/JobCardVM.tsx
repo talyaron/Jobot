@@ -9,7 +9,7 @@ export const useJobCard = (jobId: string) => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`);
+        const response = await fetch(`http://localhost:3000/api/jobs/get-job-by-id/${jobId}`);
         if (!response.ok) throw new Error("Failed to fetch job");
 
         const data = await response.json();

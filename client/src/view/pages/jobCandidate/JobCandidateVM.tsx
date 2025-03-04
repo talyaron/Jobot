@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 export function useJobCandidateVM() {
   const { jobId } = useParams();
   const [job, setJob] = useState<Job>();
-  const { jobId } = useParams();
+
   console.log(jobId);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function useJobCandidateVM() {
 
   async function fetchJob(jobId: string | undefined) {
     try {
-      fetch(`http://localhost:3000/api/jobs/job/${jobId}`, {
+      fetch(`http://localhost:3000/api/jobs/get-job-by-id/${jobId}`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -37,19 +37,7 @@ export function useJobCandidateVM() {
     }
   }
 
-  fetch(`http://localhost:3000/api/jobs/job-details?jobId=${jobId}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
-      setJob(data.job)
-    })
-    .catch((error) => console.error(error));
+ 
 
 
   return {
