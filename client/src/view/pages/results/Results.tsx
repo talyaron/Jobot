@@ -1,8 +1,10 @@
 import { useJobs } from "./ResultsVM";
 import JobCard from "../../components/jobCard/JobCard";
 import styles from "./Results.module.scss";
+import { useParams } from "react-router";
 
-const Results = ({ userId }: { userId: string }) => {
+const Results = () => {
+  const { userId } = useParams();
   const { jobIds, loading, error } = useJobs(userId);
   
   if (loading) return <p className={styles.loading}>Loading jobs...</p>;
