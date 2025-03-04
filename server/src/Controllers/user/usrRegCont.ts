@@ -12,13 +12,17 @@ export async function registerUser(req: any, res: any) {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    const invalidUsername = infoValidation.isNameValid(userName);
-    const invalidEmail = await infoValidation.isEmailValid(email);
-    const invalidPassword = infoValidation.isPasswordValid(password);
-    const invalidRePassword = infoValidation.isRePasswordValid(
-      rePassword,
-      password
-    );
+    // const invalidUsername = infoValidation.isNameValid(userName);
+    // const invalidEmail = await infoValidation.isEmailValid(email);
+    // const invalidPassword = infoValidation.isPasswordValid(password);
+    // const invalidRePassword = infoValidation.isRePasswordValid(
+    //   rePassword,
+    //   password
+    // );
+    const invalidUsername = false;
+    const invalidEmail =false;
+    const invalidPassword = false;
+    const invalidRePassword = false;
 
     if (
       invalidUsername ||

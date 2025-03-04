@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import './App.css'
-import Candidate from './view/pages/candidate/Candidate'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate'
 
 function App() {

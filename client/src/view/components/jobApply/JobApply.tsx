@@ -2,7 +2,7 @@ import React from "react";
 import { useJobApplyVM } from "./JobApplyVM";
 
 const JobApply: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const { handelApply } = useJobApplyVM();
+  const { handelApply,checkIfLoggedIn } = useJobApplyVM();
   return (
     <div>
       <div className="modal-overlay">

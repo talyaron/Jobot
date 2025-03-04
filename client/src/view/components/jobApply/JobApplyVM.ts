@@ -35,8 +35,26 @@ export function useJobApplyVM() {
       console.error("Error fetching user details:", error);
     }
   }
+  async function checkIfLoggedIn(): Promise<boolean> {
+    try {
+      const response = await fetch("/check-auth", { credentials: "include" });
+      const data = await response.json();
+
+      if (data.isLoggedIn) {
+        console.log("User is logged in:", data.user);
+        return true;
+      } else {
+        console.log("User is not logged in");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error checking login status:", error);
+      return false;
+    }
+  }
 
   return {
     handelApply,
+    checkIfLoggedIn,
   };
 }
