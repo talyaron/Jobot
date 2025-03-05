@@ -16,6 +16,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
 import Candidate from './view/pages/candidate/Candidate.tsx'
 import Results from './view/pages/results/Results.tsx'
+import JobApplication from './view/pages/jobApplication/JobApplication.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')!).render(
             <Route index element={<Results />} />
             <Route path="job-candidate/:jobId" element={<JobCandidate />} />
             <Route path=":userId" element={<Results />} />
+            <Route path="job-application/:user-jobId" element={<JobApplication />} />
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
