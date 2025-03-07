@@ -19,14 +19,19 @@ const Results = () => {
           <JobCard jobId={jobId} />
           {!savedJobIds.includes(jobId) && (
             <>
-            <button
-              className={styles.saveButton}
-              onClick={() => saveJob(jobId)}
-            >
-              Save
-            </button>
-            <button><Link to="cv" style={{color:"white"}}>{isCvFill? "Update CV" : "Add CV"}</Link></button>
-            {/* <button><Link to="cv" style={{color:"white"}}>1223</Link></button> */}
+              <button
+                className={styles.saveButton}
+                onClick={() => saveJob(jobId)}
+              >
+                Save
+              </button>
+              {/* <div>
+    {jobIds.map((jobId) => (
+      <p key={jobId}>{jobId}</p>
+    ))}
+</div> */}
+
+            <button><Link to="cv" style={{color:"white"}}>{isCvFill? "Update CV" : "Add CV"}</Link></button>  
             </>
                 
           )
