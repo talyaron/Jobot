@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './Wizard.module.scss';
 type AnswerType = "multiple-choice" | "text" | "rating" | "boolean";
 
 interface CareerQuestion {
@@ -13,9 +13,19 @@ interface QuestionComponentProps {
   question: CareerQuestion;
   answer: any;
   onAnswerChange: (answer: any) => void;
+  inputClassName?: string;
+  selectClassName?: string;
+  checkClassName?: string;
 }
 
-const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer, onAnswerChange }) => {
+const QuestionComponent: React.FC<QuestionComponentProps> = ({
+  question,
+  answer,
+  onAnswerChange,
+  inputClassName,
+  selectClassName,
+  checkClassName,
+}) => {
   switch (question.answerType) {
     case 'text':
       return (
@@ -23,6 +33,7 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
           type="text"
           value={answer || ''}
           onChange={(e) => onAnswerChange(e.target.value)}
+          className={inputClassName}
         />
       );
     case 'multiple-choice':
@@ -30,6 +41,7 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
         <select
           value={answer || ''}
           onChange={(e) => onAnswerChange(e.target.value)}
+          className={selectClassName}
         >
           <option value="">בחר תשובה</option>
           {question.options?.map((option) => (
@@ -41,16 +53,16 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
       );
     case 'boolean':
       return (
-        <div>
+        <div className={checkClassName}>
           <button
             onClick={() => onAnswerChange(true)}
-            className={answer === true ? 'selected' : ''}
+            className={answer === true ? styles.selected : ''}
           >
             כן
           </button>
           <button
             onClick={() => onAnswerChange(false)}
-            className={answer === false ? 'selected' : ''}
+            className={answer === false ? styles.selected : ''}
           >
             לא
           </button>
@@ -58,12 +70,12 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
       );
     case 'rating':
       return (
-        <div>
+        <div className={checkClassName}>
           {[1, 2, 3, 4, 5].map((rating) => (
             <button
               key={rating}
               onClick={() => onAnswerChange(rating)}
-              className={answer === rating ? 'selected' : ''}
+              className={answer === rating ? styles.selected : ''}
             >
               {rating}
             </button>

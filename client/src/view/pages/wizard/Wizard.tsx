@@ -1,15 +1,13 @@
-// Wizard.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useWizard } from './WizardVM';
 import styles from './Wizard.module.scss';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import QuestionComponent from './QuestionComponent';
 
-
-
 interface Props {
   closeButton: () => void;
 }
+
 function Wizard({ closeButton }: Props) {
   const {
     currentQuestionIndex,
@@ -21,52 +19,73 @@ function Wizard({ closeButton }: Props) {
     careerQuestions,
   } = useWizard();
 
+  const [isNextClicked, setIsNextClicked] = useState(false);
+  const [isPrevClicked, setIsPrevClicked] = useState(false);
+
   const currentQuestion = careerQuestions[currentQuestionIndex];
 
   const isAnswerValid = () => {
     if (!currentQuestion) return false;
 
-    if (currentQuestion.answerType === 'multiple-choice') {
-      return !!answers[currentQuestion.id];
-    } else if (currentQuestion.answerType === 'text') {
-      return !!answers[currentQuestion.id];
-    } else if (currentQuestion.answerType === 'boolean') {
-      return typeof answers[currentQuestion.id] === 'boolean';
-    } else if (currentQuestion.answerType === 'rating') {
-      return typeof answers[currentQuestion.id] === 'number';
+    switch (currentQuestion.answerType) {
+      case 'multiple-choice':
+      case 'text':
+        return !!answers[currentQuestion.id];
+      case 'boolean':
+        return typeof answers[currentQuestion.id] === 'boolean';
+      case 'rating':
+        return typeof answers[currentQuestion.id] === 'number';
+      default:
+        return false;
     }
-    return false;
   };
 
   return (
     <div className={styles.wizardPage}>
       <div className={styles.wizardContainer}>
+        <button className={styles.closeButton} onClick={closeButton}>X</button>
 
-        <button className={styles.closeButton}>X</button>
+        {/* ✅ Progress bar is always rendered */}
+        <div className={styles.progressBarContainer}>
+          <progress value={progressPercentage()} max={100} className={styles.progressBar} />
+        </div>
 
-        <progress
-          value={progressPercentage()}
-          max={100}
-          className={styles['progress-bar']}
-        />
-        {currentQuestion && (
+        {currentQuestion ? (
           <>
             <h2 className={styles.questionText}>{currentQuestion.question}</h2>
             <QuestionComponent
               question={currentQuestion}
               answer={answers[currentQuestion.id]}
-              onAnswerChange={(answer) =>
-                handleAnswerChange(currentQuestion.id, answer)
-              }
+              onAnswerChange={(answer) => handleAnswerChange(currentQuestion.id, answer)}
+              inputClassName={styles.textInput} 
+              selectClassName={styles.selectInput}
+              checkClassName={styles.checks}
             />
           </>
+        ) : (
+          <p>Loading question...</p>
         )}
-        <div>
-          <button onClick={handlePrev} disabled={currentQuestionIndex === 0}>
-            <FaChevronRight size={20} />
+
+        <div className={styles.prevNextButtonsContainer}>
+          <button
+            className={`${styles.ArrowLeft} ${isPrevClicked ? styles.clicked : ''}`}
+            onClick={() => {
+              handlePrev();
+              setIsPrevClicked(true);
+            }}
+            disabled={currentQuestionIndex === 0}
+          >
+            <FaChevronRight size={40} />
           </button>
-          <button onClick={handleNext} disabled={!isAnswerValid()}>
-            <FaChevronLeft size={20} />
+          <button
+            className={`${styles.ArrowRight} ${isNextClicked ? styles.clicked : ''}`}
+            onClick={() => {
+              handleNext();
+              setIsNextClicked(true);
+            }}
+            disabled={!isAnswerValid()}
+          >
+            <FaChevronLeft size={40} />
           </button>
         </div>
       </div>
