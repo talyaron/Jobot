@@ -6,11 +6,12 @@ import { secretKey } from "../../server";
 export async function loginUser(req:any, res:any) {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
     
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Wrong email' });
     }
     if(!user.password) throw new Error("Password of the user not found.")
 
