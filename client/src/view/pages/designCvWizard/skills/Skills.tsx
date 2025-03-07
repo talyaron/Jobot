@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./skills.module.scss";
-import { useSkillsVM } from "./skills.VM";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../../redux/store'
-import { useWorkExperienceVM } from "../workExperience/workExperienceVM";
 import { addSkills,updateSkills,removeSkills } from "../../../../redux/cv/cvSlice";
 
 const Skills: React.FC = () => {
