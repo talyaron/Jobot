@@ -1,15 +1,16 @@
-import  express from "express"
-import { loginUser } from "../Controllers/user/userLoginCont";
-import { registerUser } from "../Controllers/user/usrRegCont";
-import { getJobDetails } from "../Controllers/job/getJobDetails";
-
-const router = express.Router()
-
-router.get(`/job-details/:id`, getJobDetails);
-
-import { getJobById } from "../Controllers/job/getJobByID";
+import express from "express";
+import { getAllJobs, getJobById } from "../Controllers/job/getJobs";
+import { setJobApplication } from "../Controllers/job/setJobApplication";
+import { getCandidatesByJobId } from "../Controllers/job/getCandidatesByJobId";
 
 
-router.get("/job/:jobId", getJobById);
+const router = express.Router();
+
+router.get("/get-job-by-id/:jobId", getJobById);
+router.get("/get-all-jobs", getAllJobs);
+router.get("/get-candidates/:jobId", getCandidatesByJobId);
+
+router.post("/set-job-application", setJobApplication);
+
 
 export default router;
