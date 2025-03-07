@@ -8,8 +8,9 @@ const initialState: UserState = {
   fullName: '',
   email: '',
   password: '',
-  isAgree: false,
+  phoneNumber: '',
   experienceOfWork: {},
+  isHiring: false,
   isCandidate: false,
   CV: '',
 }
@@ -22,8 +23,9 @@ export const userSlice = createSlice({
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.isAgree = action.payload.isAgree;
+      state.phoneNumber = action.payload.phoneNumber;
       state.experienceOfWork = action.payload.experienceOfWork;
+      state.isHiring = action.payload.isHiring;
       state.isCandidate = action.payload.isCandidate;
       state.CV = action.payload.CV;
     },
@@ -31,9 +33,10 @@ export const userSlice = createSlice({
       state.fullName = '';
       state.email = '';
       state.password = '';
-      state.isAgree = false;
-      state.experienceOfWork = {};
+      state.phoneNumber = '';
+      state.isHiring = false;
       state.isCandidate = false;
+      state.experienceOfWork = {};
       state.CV = '';
     },
   },
