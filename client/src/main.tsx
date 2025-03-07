@@ -23,6 +23,8 @@ import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 
 
 
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
@@ -36,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
             <Route index element={<Results />} />
             <Route path="job-candidate/:jobId" element={<JobCandidate />} />
             <Route path=":userId" element={<Results />} />
+            <Route path="job-application/:user-jobId" element={<JobApplication />} />
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
