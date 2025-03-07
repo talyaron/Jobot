@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { WorkExperienceSchema } from "./workExperience"; 
 
 const UserSchema = new Schema({
-  fullName: String,
+  userName: String,
   email: {
     type: String,
     unique: true,
