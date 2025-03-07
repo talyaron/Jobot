@@ -1,0 +1,56 @@
+
+.myJobsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.jobsList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.jobItem {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.deleteButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #d9363e;
+    }
+}
+
+.loading,
+.error,
+.noJobs {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}

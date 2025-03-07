@@ -1,15 +1,25 @@
+import { useState } from 'react';
 import './App.css'
-import Auth from './view/pages/auth/Auth'
+import JobCandidate from './view/pages/jobCandidate/JobCandidate'
 
-function App() {
-
-  return (
-      <div>
-        <h1>Jobot system</h1>
-        <br />
-        <Auth></Auth>
-      </div>
-  )
+function AppRoutes() {
+  return useRoutes(routes);
 }
 
-export default App
+function App() {
+  const testUserId = "67b9edaa4e2f6b7890741ce1"; // Using a test user ID for now
+const [showWizard, setShowWizard] = useState(false);
+
+  return (
+    <BrowserRouter>
+      <div dir="rtl">
+        <h1>Jobot System</h1>
+        <AppRoutes />
+        <br />
+        <JobCandidate />
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
