@@ -43,7 +43,8 @@ const AllComponents = () => {
       <Skills />
       <br />
       <button onClick={sendCvFormToServer}>שלח קורות חיים</button>
-      <p>{cvForm.personalInformation.userId}</p>
+      <p>job id is: {cvForm.personalInformation.jobId}</p>
+      <p>user id is: {cvForm.personalInformation.userId}</p>
       <p>{cvForm.personalInformation?.firstName}</p>
       <p>{cvForm.personalInformation?.lastName}</p>
       <div>
