@@ -32,7 +32,7 @@ const dbUrl = process.env.DB_URL;
 const database = 'jobot';
 
 //connection
-mongoose.connect(`${dbUrl}${database}`).then(()=>{
+mongoose.connect(`${dbUrl}/${database}`).then(()=>{
     console.info("DB connected")
 }).catch((err)=>{
     console.error(err)
