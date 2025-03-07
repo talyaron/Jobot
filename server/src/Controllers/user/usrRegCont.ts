@@ -5,7 +5,7 @@ import { saltRounds } from "../../server";
 
 export async function registerUser(req: any, res: any) {
   try {
-    const { userName, email, password, rePassword ,phoneNumber } = req.body;
+    const { userName, email, password,phoneNumber } = req.body;
 
     const existingUser = await UserModel.findOne({ email });   // to check if email already exists
     if (existingUser) {
@@ -36,7 +36,7 @@ export async function registerUser(req: any, res: any) {
     //   );
     // }
 
-
+    console.log("password", userName, email, password, phoneNumber )
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const user = new UserModel({

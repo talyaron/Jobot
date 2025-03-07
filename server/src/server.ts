@@ -33,6 +33,8 @@ app.use("/api/cv", cvRoutes);
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
 
+console.log(`${dbUrl}/${database}`)
+
 //connection
 mongoose.connect(`${dbUrl}/${database}`).then(()=>{
     console.info("DB connected")
