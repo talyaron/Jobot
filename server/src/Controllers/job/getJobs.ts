@@ -1,5 +1,6 @@
 import { JobModel } from "../../Model/jobModel";
 
+
 export const getJobById = async (req: any, res: any) => {
   try {
     const { jobId } = req.params;
@@ -18,11 +19,9 @@ export const getJobById = async (req: any, res: any) => {
 
 export const getAllJobs = async (req: any, res: any) => {
   try {
-   
-    const jobs = await JobModel.find( {} );
+    const jobs = await JobModel.find({});
 
-
-    res.status(200).json({jobs});
+    res.status(200).json({ jobs });
   } catch (error) {
     res.status(500).json({ message: "Error fetching job", error });
   }

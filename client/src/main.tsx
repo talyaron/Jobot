@@ -6,12 +6,14 @@ import "./index.css";
 // import Wizard from "./view/pages/wizard/Wizard.tsx";
 
 
-import EmployerWrapper from './view/pages/employerWrapper/EmployerWrapper.tsx'
-import JobsEmployer from './view/pages/jobsEmployer/JobsEmployer.tsx'
-import Chat from './view/pages/chat/Chat.tsx'
 import JobEmployer from './view/pages/jobEmployer/JobEmployer.tsx'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
+import EmployerWrapper from './view/pages/employerWrapper/EmployerWrapper.tsx'
+import JobsEmployer from './view/pages/jobsEmployer/JobsEmployer.tsx'
+import JobApplication from './view/pages/jobApplication/JobApplication.tsx'
+import ApplicationStatus from './view/pages/applicationstatus/ApplicationStatus.tsx'
+import Chat from './view/pages/chat/Chat.tsx'
 import Candidate from './view/pages/candidate/Candidate.tsx'
 import Home from "./view/pages/home/Home.tsx";
 import Login from "./view/pages/login/Login.tsx";
@@ -38,7 +40,9 @@ createRoot(document.getElementById('root')!).render(
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
-            <Route path="candidates" element={<JobEmployer jobId={"67c186bb3696a02a49bb0def"} />} />
+            <Route path="candidates" element={<JobCandidate/>} />
+            <Route path="applications" element={<JobApplication />} />
+            <Route path="applications/status" element={<ApplicationStatus />} />
             <Route path="chat" element={<Chat />} />
           </Route>
           <Route path="*" element={<div>Not Found</div>} />
