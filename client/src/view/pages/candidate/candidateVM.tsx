@@ -1,11 +1,49 @@
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/user/userSlice";
 
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+
+export async function fetchUserProfile() {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/profile", {
+      method: "GET",
+      credentials: "include", 
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user profile");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error; 
+  }
+}
+
 
 export function useCandidateVM() {
-  const isCandidate = useSelector((state: RootState) => state.user.isCandidate);
-  const [showLogin, setShowLogin] = useState(!isCandidate);
+  const [showLogin, setShowLogin] = useState(false);
+  const dispatch = useDispatch();
 
-  return { isCandidate, showLogin, setShowLogin}
+  useEffect(() => {
+    const userCookie = Cookies.get("user");
+
+    if (userCookie) {
+      fetchUserProfile()
+        .then((data) => {
+          dispatch(setUser(data));
+          setShowLogin(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    } else {
+      setShowLogin(true);
+    }
+  }, [dispatch]); 
+
+  return { showLogin, setShowLogin };
 }
