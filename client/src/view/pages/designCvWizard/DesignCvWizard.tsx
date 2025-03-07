@@ -1,24 +1,13 @@
-import React from 'react'
-import PersonalInformation from './personalInformation/PersonalInformation'
-import WorkExperience from './workExperience/WorkExperience'
-import ProfessionalSummary from './professionalSummary/ProfessionalSummary'
-import Skills from './skills/Skills.'
-import Education from './education/Education'
-import ServiceType from './serviceType/ServiceType'
+import { Provider } from "react-redux";
+import { store } from "../../../redux/store";
+import AllComponents from "./allComponents/AllComponents";
 
 const DesignCvWizard = () => {
   return (
-    <div>
-      <h1>אשף קורות חיים</h1>
-      <PersonalInformation />
-      <br />
-      <ProfessionalSummary />
-      <Education />
-      <WorkExperience />
-      <ServiceType />
-      <Skills />
-    </div>
-  )
-}
+    <Provider store={store}>
+      <AllComponents /> 
+    </Provider>
+  );
+};
 
-export default DesignCvWizard
+export default DesignCvWizard;

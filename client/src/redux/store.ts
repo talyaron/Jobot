@@ -4,6 +4,7 @@ import companiesReducer from "./companies/companiesSlice"
 import jobsReducer from "./jobs/jobsSlice"
 import jobCompaniesReducer from "./jobCompanies/jobCompaniesSlice"
 import jobCandidatesReducer from "./jobCandidates/jobCandidatesSlice"
+import cvFormReducer from "./cv/cvSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,7 @@ export const store = configureStore({
     jobCompanies: jobCompaniesReducer,
     jobCandidates: jobCandidatesReducer,
     jobs: jobsReducer,
-
+    cvForm: cvFormReducer,
   },
 })
 
