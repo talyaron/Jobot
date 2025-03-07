@@ -19,7 +19,9 @@ import Home from "./view/pages/home/Home.tsx";
 import Login from "./view/pages/login/Login.tsx";
 import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
 import Results from "./view/pages/results/Results.tsx";
-import JobApplication from './view/pages/jobApplication/JobApplication.tsx'
+import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
+
+
 
 
 
@@ -45,6 +47,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="applications/status" element={<ApplicationStatus />} />
             <Route path="chat" element={<Chat />} />
           </Route>
+          <Route path="/myjobs" element={<MyJobs />} />
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
