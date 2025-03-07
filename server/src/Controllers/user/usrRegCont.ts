@@ -5,7 +5,7 @@ import { saltRounds } from "../../server";
 
 export async function registerUser(req: any, res: any) {
   try {
-    const { userName, email, password,phoneNumber } = req.body;
+    const { userName, email, password, rePassword ,phoneNumber ,isHiring} = req.body;
 
     const existingUser = await UserModel.findOne({ email });   // to check if email already exists
     if (existingUser) {
@@ -43,12 +43,13 @@ export async function registerUser(req: any, res: any) {
       userName: userName,
       email: email,
       password: hashedPassword,
-      phone:phoneNumber,
+      phoneNumber:phoneNumber,
+      isHiring:isHiring
     });
     await user.validate();
 
     user.save();
-
+    console.log(user)
     return res.json({ message: "user registered!" });
 
   } catch (error: any) {
