@@ -10,7 +10,6 @@ import ServiceType from "../serviceType/ServiceType";
 
 const AllComponents = () => {
   const cvForm = useSelector((state: RootState) => state.cvForm); 
-  console.log(cvForm)
 
   const sendCvFormToServer = async () => { // 🔹 פונקציה אסינכרונית תקינה
     try {

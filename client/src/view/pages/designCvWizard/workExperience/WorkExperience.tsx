@@ -7,7 +7,6 @@ import styles from "./workExperience.module.scss"
 const WorkExperience: React.FC = () => {
     const dispatch = useDispatch();
     const workExperience = useSelector((state: RootState) => state.cvForm.workExperience);
-    console.log(workExperience);
 
     return (
         <div className={styles.continer}>

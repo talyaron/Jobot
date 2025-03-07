@@ -7,7 +7,6 @@ import { updatePersonalInformation } from '../../../../redux/cv/cvSlice'
 const PersonalInformation = () => {
   const dispatch = useDispatch()
   const personalInformation = useSelector((state: RootState) => state.cvForm.personalInformation)
-  console.log(personalInformation)
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

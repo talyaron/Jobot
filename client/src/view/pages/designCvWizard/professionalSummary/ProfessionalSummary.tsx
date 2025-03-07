@@ -10,9 +10,7 @@ const ProfessionalSummary = () => {
 
   const handleProfessionalSummaryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newSummary = e.target.value;
-    console.log(newSummary)
     dispatch(updateProfessionalSummary( newSummary ));
-    console.log(professionalSummary)
   };
 
   return (

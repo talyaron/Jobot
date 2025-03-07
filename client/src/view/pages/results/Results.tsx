@@ -2,9 +2,11 @@ import { useJobs } from "./ResultsVM";
 import JobCard from "../../components/jobCard/JobCard";
 import styles from "./Results.module.scss";
 import { Link, useParams } from "react-router";
+import { useAllComponentsVM} from "../../pages/designCvWizard/allComponents/AllComponentsVM"
 
 const Results = () => {
   const { jobIds, savedJobIds, loading, error, saveJob } = useJobs();
+  const { isCvFill } = useAllComponentsVM();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -23,8 +25,8 @@ const Results = () => {
             >
               Save
             </button>
-            
-            <button><Link to="cv" style={{color:"white"}}>Add CV</Link></button>
+            <button><Link to="cv" style={{color:"white"}}>{isCvFill? "Update CV" : "Add CV"}</Link></button>
+            {/* <button><Link to="cv" style={{color:"white"}}>1223</Link></button> */}
             </>
                 
           )

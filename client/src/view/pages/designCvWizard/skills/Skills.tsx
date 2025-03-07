@@ -20,7 +20,6 @@ const Skills: React.FC = () => {
     const handleUpdateSkills = (id: string, field: string, value: string) => {
         dispatch(updateSkills({id, data: {[field]: value } }));
     }
-    console.log("the skill component: " , skillsData)
 
     return (
         <div className={styles.continer}>

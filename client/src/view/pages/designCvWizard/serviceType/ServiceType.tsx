@@ -24,7 +24,6 @@ const ServiceType: React.FC = () => {
     const handleRemoveService = (id: string) => {
         dispatch(removeServiceType(id));
     };
-    console.log("the servier types componnet :" , serviceTypes)
 
     return (
         <div className={styles.continer}>
