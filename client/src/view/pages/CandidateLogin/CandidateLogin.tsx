@@ -1,8 +1,9 @@
+import { useDispatch } from "react-redux";
+import { loginCandidate } from "./CandidateLoginVM";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./CandidateLogin.module.scss";
 import { X } from "lucide-react";
-import { loginCandidate } from "./CandidateLoginVM";
 import CandidateRegister from "../candidateRegister/CandidateRegister";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 function CandidateLogin({ closeLoginBtn }: Props) {
+    const dispatch = useDispatch();
     const navigate = useNavigate(); 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,7 +23,7 @@ function CandidateLogin({ closeLoginBtn }: Props) {
         setError(null);
         setLoading(true);
 
-        const response = await loginCandidate({ email, password });
+        const response = await loginCandidate({ email, password }, dispatch);
 
         if (!response.success) {
             setError(response.message);

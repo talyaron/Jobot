@@ -1,3 +1,6 @@
+import { setUser } from "../../../redux/user/userSlice";
+import { Dispatch } from "@reduxjs/toolkit";
+
 export interface CandidateLogin {
     email: string;
     password: string;
@@ -16,7 +19,7 @@ export function validateLoginInput(loginData: CandidateLogin): string | null {
     return null;
 }
 
-export async function loginCandidate(loginData: CandidateLogin): Promise<{ success: boolean; message: string }> {
+export async function loginCandidate(loginData: CandidateLogin, dispatch: Dispatch): Promise<{ success: boolean; message: string }> {
     const validationError = validateLoginInput(loginData);
     if (validationError) {
         return { success: false, message: validationError };
@@ -34,6 +37,18 @@ export async function loginCandidate(loginData: CandidateLogin): Promise<{ succe
         if (!response.ok) {
             throw new Error(data.message || "Login failed");
         }
+
+        dispatch(
+            setUser({
+                fullName: data.fullName || "",
+                email: data.email,
+                password: "",
+                isAgree: true,
+                experienceOfWork: data.experienceOfWork || {},
+                isCandidate: true,
+                CV: data.CV || "",
+            })
+        );
 
         return { success: true, message: "Login successful" };
     } catch (error) {
