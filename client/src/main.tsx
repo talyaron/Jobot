@@ -20,7 +20,6 @@ import Home from "./view/pages/home/Home.tsx";
 import Login from "./view/pages/login/Login.tsx";
 import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
 import Results from "./view/pages/results/Results.tsx";
-import JobApplication from './view/pages/jobApplication/JobApplication.tsx'
 
 
 
@@ -32,12 +31,15 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          
 
           <Route path="/candidate" element={<Candidate />}>
             <Route index element={<Results />} />
             <Route path="job-candidate/:jobId" element={<JobCandidate />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
+            <Route path="cv" element={<DesignCvWizard />} />
+            
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
@@ -51,6 +53,6 @@ createRoot(document.getElementById('root')!).render(
 
       </BrowserRouter>
     </Provider>
-        <Route path="/cv" element={<DesignCvWizard />} />
+
   </StrictMode>,
 )
