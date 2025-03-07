@@ -32,7 +32,6 @@ export function useJobCandidateVM() {
           setJob(data)
         })
         .catch((error) => console.error(error));
-      // const data = data.json();
       console.log('job', job)
     } catch (error) {
       console.error("Error fetching user details:", error);
