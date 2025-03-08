@@ -3,11 +3,13 @@ import { Types, model, Schema } from "mongoose";
 const cvFormModel = new Schema({
     personalInformation:[{
         userId: String,
+        jobId: String,
         firstName: String,
         lastName: String,
         email: String,
         phoneNumber: String,
         city: String,
+        
     }],
     professionalSummary:{
         professionalSummary: String,
