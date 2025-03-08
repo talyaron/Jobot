@@ -14,14 +14,15 @@ export const useJobs = (userId?: string) => {
         ? `http://localhost:3000/api/jobs/matched-jobs/${userId}`
         : "http://localhost:3000/api/jobs/get-all-jobs";
       try {
-        const response = await fetch(
-          fetchUrl
+        const response = await fetch(fetchUrl
         );
         if (!response.ok) throw new Error("Failed to fetch job IDs");
 
         const data = await response.json();
         console.log(data)
         setJobIds(data.jobs.map((job: { _id: string }) => job._id)); // Get job IDs only
+        
+        
       } catch (err) {
         console.error(err);
         setError("Failed to fetch job IDs");
