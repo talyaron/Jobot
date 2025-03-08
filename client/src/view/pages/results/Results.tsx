@@ -4,25 +4,19 @@ import styles from "./Results.module.scss";
 import { Link, useParams } from "react-router";
 import { useAllComponentsVM } from "../../pages/designCvWizard/allComponents/AllComponentsVM";
 import { updatePersonalInformation } from "../../../redux/cv/cvSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { useDispatch } from "react-redux";
 
 const Results = () => {
   const { jobIds, savedJobIds, loading, error, saveJob } = useJobs();
   const { isCvFill } = useAllComponentsVM();
   const dispatch = useDispatch();
-  const personalInformation = useSelector(
-    (state: RootState) => state.cvForm.personalInformation
-  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (jobIds.length === 0) return <p>No jobs found.</p>;
 
   function setIdJobInCvForm(jobId: string) {
-    dispatch(
-      updatePersonalInformation({ ...personalInformation, [jobId]: jobId })
-    );
+    dispatch(updatePersonalInformation({jobId}));
   }
 
   return (
@@ -38,11 +32,6 @@ const Results = () => {
               >
                 Save
               </button>
-              {/* <div>
-    {jobIds.map((jobId) => (
-      <p key={jobId}>{jobId}</p>
-    ))}
-</div> */}
 
               <button onClick={() => setIdJobInCvForm(jobId)}>
                 <Link to="cv" style={{ color: "white" }}>
