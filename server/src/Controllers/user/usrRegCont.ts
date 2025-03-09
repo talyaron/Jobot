@@ -5,48 +5,51 @@ import { saltRounds } from "../../server";
 
 export async function registerUser(req: any, res: any) {
   try {
-    const { userName, email, password, rePassword ,phoneNumber } = req.body;
+    const { userName, email, password, rePassword ,phoneNumber ,isHiring} = req.body;
 
     const existingUser = await UserModel.findOne({ email });   // to check if email already exists
     if (existingUser) {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    const invalidUsername = infoValidation.isNameValid(userName);
-    const invalidEmail = await infoValidation.isEmailValid(email);
-    const invalidPassword = infoValidation.isPasswordValid(password);
-    const invalidRePassword = infoValidation.isRePasswordValid(
-      rePassword,
-      password
-    );
+    // const invalidUsername = infoValidation.isNameValid(userName);
+    // const invalidEmail = await infoValidation.isEmailValid(email);
+    // const invalidPassword = infoValidation.isPasswordValid(password);
+    // const invalidRePassword = infoValidation.isRePasswordValid(
+    //   rePassword,
+    //   password
+    // );
 
-    if (
-      invalidUsername ||
-      invalidEmail ||
-      invalidPassword ||
-      invalidRePassword
-    ) {
-      throw new Error(
-        "not valid" +
-          invalidUsername +
-          invalidEmail +
-          invalidPassword +
-          invalidRePassword
-      );
-    }
 
+    // if (
+    //   invalidUsername ||
+    //   invalidEmail ||
+    //   invalidPassword ||
+    //   invalidRePassword
+    // ) {
+    //   throw new Error(
+    //     "not valid" +
+    //       invalidUsername +
+    //       invalidEmail +
+    //       invalidPassword +
+    //       invalidRePassword
+    //   );
+    // }
+
+    console.log("password", userName, email, password, phoneNumber )
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const user = new UserModel({
       userName: userName,
       email: email,
       password: hashedPassword,
-      phone:phoneNumber,
+      phoneNumber:phoneNumber,
+      isHiring:isHiring
     });
     await user.validate();
 
     user.save();
-
+    console.log(user)
     return res.json({ message: "user registered!" });
 
   } catch (error: any) {
