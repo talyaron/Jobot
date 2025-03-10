@@ -21,6 +21,9 @@ import Results from "./view/pages/results/Results.tsx";
 import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 import EmployerLogin from "./view/pages/employerLogin/EmployerLogin.tsx";
 
+
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>

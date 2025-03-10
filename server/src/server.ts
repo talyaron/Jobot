@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
-
+import userJobRoutes from "./Routes/userJobRoutes";
 
 const app = express()
 const port = 3000;
@@ -27,6 +27,7 @@ app.use("/api/user", userPreferencesRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
+app.use("/api/userJobRoutes", userJobRoutes)
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
