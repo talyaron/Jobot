@@ -7,6 +7,7 @@ const EmployerWrapper: React.FC = () => {
       <nav>
         <ul>
           <li><Link to="/employer">Jobs</Link></li>
+          <li><Link to="/employer/login">Login</Link></li>
           <li><Link to="/employer/candidates">Candidates</Link></li>
           <li><Link to="/employer/chat">Chat</Link></li>
         </ul>

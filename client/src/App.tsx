@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate'
+import { BrowserRouter, useRoutes } from 'react-router';
+import routes from './routes/routes';
 
 function AppRoutes() {
   return useRoutes(routes);

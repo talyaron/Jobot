@@ -13,7 +13,7 @@ export const getUserProfile = async (req: any, res: any) => {
     }
 
     const decoded = jwt.decode(token, secretKey); 
-    const user = await UserModel.findById(decoded.userId).select("fullName email phoneNumber");
+    const user = await UserModel.findById(decoded.userId).select("-password");
 
     if (!user) return res.status(404).json({ message: "User not found" });
 
