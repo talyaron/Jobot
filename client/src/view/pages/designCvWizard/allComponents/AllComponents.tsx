@@ -35,9 +35,8 @@ const AllComponents = () => {
   return (
     <div>
       <h1>אשף קורות חיים</h1>
-      <p>אתה שולח קורות חיים לעבודה עם מזהה מס</p>
-      <p>{cvForm.personalInformation.jobId}</p>
-      <p>user id from ctypto is: {cvForm.personalInformation.userId}</p>
+      <p>אתה שולח קורות חיים לעבודה</p>
+      <p>{cvForm.personalInformation.jobName}</p>
       <PersonalInformation />
       <ProfessionalSummary />
       <Education />
@@ -46,6 +45,7 @@ const AllComponents = () => {
       <Skills />
       <br />
       <button onClick={sendCvFormToServer}>שלח קורות חיים</button>
+      <p>user id from ctypto is: {cvForm.personalInformation.userId}</p>
       <p>{cvForm.personalInformation?.firstName}</p>
       <p>{cvForm.personalInformation?.lastName}</p>
       <div>

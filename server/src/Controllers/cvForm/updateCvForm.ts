@@ -6,6 +6,8 @@ export const updateCvForm = async (req: Request, res: Response): Promise<void> =
         console.log("Request Body:", JSON.stringify(req.body, null, 2));
         const { ...formData } = req.body;
         const userId = req.body.personalInformation?.userId;
+        const jobId = req.body.personalInformation?.jobId;
+        console.log("the job id is: " +jobId)
 
         if (!userId) {
             res.status(400).json({ error: "User ID is required" });

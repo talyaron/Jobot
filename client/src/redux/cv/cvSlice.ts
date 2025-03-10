@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface PersonalInformationState {
     userId: string;
     jobId: string;
+    jobName: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -58,6 +59,7 @@ const initialState: CvState = {
     personalInformation: {
         userId: crypto.randomUUID(),
         jobId: "",
+        jobName: "",
         firstName: "",
         lastName: "",
         email: "",
