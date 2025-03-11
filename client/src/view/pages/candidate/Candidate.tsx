@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store"
 import styles from "./candidate.module.scss";
 import { Link, Outlet } from "react-router";
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
 import { useCandidateVM } from "./candidateVM";
+import { userSelector } from "../../../redux/user/userSlice";
 
 const Candidate = () => {
-  const { showLogin, setShowLogin } = useCandidateVM()
+  const user = useSelector(userSelector);
+  const showLogin = user._id === "";
   return (
     <div>
       {showLogin ? (
-        <CandidateLogin closeLoginBtn={() => setShowLogin(false)} />
+        <CandidateLogin />
       ) : (
         <>
           <h1 className={styles.main}>Initialize Candidate</h1>
@@ -26,6 +27,13 @@ const Candidate = () => {
               <button>All Jobs</button>
             </Link>
           </div>
+          <form>
+            <input type="date" name="" id="" />
+            <input type="text" name="" id="" />
+            <input type="text" name="" id="" />
+            <button>ADD</button>
+            <div className="btn">Hi</div>
+          </form>
           <Outlet />
         </>
       )}
