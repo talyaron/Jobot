@@ -11,18 +11,14 @@ export async function getUserJobs(req: any, res: any) {
     }
 
     // Find all saved jobs by userId
-    const savedJobs = await SavedJobsModel.find({ userId }).select("jobId");
+    const savedJobs = await SavedJobsModel.find({ userId })
 
     if (!savedJobs.length) {
       return res.status(200).json({ message: "No saved jobs found" });
     }
 
-    // Extract jobIds and convert them to string
-    const jobIds = savedJobs
-      .map((job) => (job.jobId ? job.jobId.toString() : null))
-      .filter((id) => id !== null);
 
-    return res.status(200).json(jobIds);
+    return res.status(200).json(savedJobs);
   } catch (error) {
     console.error("Error fetching saved jobs:", error);
     return res.status(500).json({ message: "Server error" });
