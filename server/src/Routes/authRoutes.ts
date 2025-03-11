@@ -5,9 +5,6 @@ import { checkAuthStatus } from "../Controllers/user/checkAuthStatus"; // Ensure
 
 
 const router = express.Router()
-
-
-
 router.post(`/register`,registerUser );
 router.post(`/login`,loginUser);
 router.get(`/check-auth`, checkAuthStatus);

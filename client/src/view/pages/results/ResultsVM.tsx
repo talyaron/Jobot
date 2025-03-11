@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
+import { Job } from "../jobsEmployer/types";
+
 
 export const useJobs = (userId?: string) => {
-  const [jobIds, setJobIds] = useState<string[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
+ 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchJobIds = async () => {
       const fetchUrl = userId
-        ? `http://localhost:3000/api/matched-jobs/${userId}`
-        : "http://localhost:3000/api/get-all-jobs";
+        ? `http://localhost:3000/api/jobs/matched-jobs/${userId}`
+        : "http://localhost:3000/api/jobs/get-all-jobs";
       try {
         const response = await fetch(
           fetchUrl
@@ -18,8 +22,9 @@ export const useJobs = (userId?: string) => {
 
         const data = await response.json();
         console.log(data)
-        setJobIds(data.jobs.map((job: any) => job._id)); // Get job IDs only
+        setJobs(data.jobs); // Get job IDs only
       } catch (err) {
+        console.error(err);
         setError("Failed to fetch job IDs");
       } finally {
         setLoading(false);
@@ -27,7 +32,8 @@ export const useJobs = (userId?: string) => {
     };
 
     fetchJobIds();
-  }, [userId]);
+  }, []);
 
-  return { jobIds, loading, error };
+
+  return { jobs, loading, error };
 };

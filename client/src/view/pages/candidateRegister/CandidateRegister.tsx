@@ -10,6 +10,8 @@ interface Props {
 function CandidateRegister({ closeRegisterBtn }: Props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rePassword, setRePassword] = useState("");
+
     const [fullName, setFullName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -19,7 +21,7 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
         setError(null);
         setLoading(true);
 
-        const response = await RegisterCandidate({ fullName, email, password, phoneNumber });
+        const response = await RegisterCandidate({ fullName, email, password, rePassword,phoneNumber });
 
         if (!response.success) {
             setError(response.message);
@@ -68,7 +70,13 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-
+   <input
+                type="password"
+                placeholder="Re Password"
+                className={styles.inputField}
+                value={rePassword}
+                onChange={(e) => setRePassword(e.target.value)}
+            />
             {error && <p className={styles.error}>{error}</p>}
 
             <button className={styles.loginBtn} onClick={handleSubmit} disabled={loading}>
