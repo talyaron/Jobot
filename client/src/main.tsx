@@ -1,9 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router"; 
-import "./index.css";
-
-// import Wizard from "./view/pages/wizard/Wizard.tsx";
+import "./view/styles/style.scss";
 
 
 import { Provider } from 'react-redux'
