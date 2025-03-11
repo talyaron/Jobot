@@ -1,3 +1,10 @@
 input, textarea, select{
     background-color: var(--background-secondary);
+    border-radius: 3px;
+    padding: .3rem;
+}
+form{
+    background-color: rgba(255, 99, 71, 0.321);
+    display: flex;
+    flex-direction: column;
 }

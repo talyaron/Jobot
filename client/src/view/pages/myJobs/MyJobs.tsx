@@ -22,7 +22,7 @@ export const MyJobs: React.FC = () => {
         <div className={styles.jobsList}>
           {jobIds.map((jobId) => (
             <div key={jobId} className={styles.jobItem}>
-              <JobCard jobId={jobId} />
+              <JobCard job={job} />
               <button
                 className={styles.deleteButton}
                 onClick={() => removeJob(jobId)}

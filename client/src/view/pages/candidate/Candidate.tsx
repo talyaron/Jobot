@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store"
 import styles from "./candidate.module.scss";
 import { Link, Outlet } from "react-router";
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
@@ -26,6 +25,13 @@ const Candidate = () => {
               <button>All Jobs</button>
             </Link>
           </div>
+          <form>
+            <input type="date" name="" id="" />
+            <input type="text" name="" id="" />
+            <input type="text" name="" id="" />
+            <button>ADD</button>
+            <div className="btn">Hi</div>
+          </form>
           <Outlet />
         </>
       )}

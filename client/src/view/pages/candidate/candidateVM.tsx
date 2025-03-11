@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, userSelector } from "../../../redux/user/userSlice";
 
 
 export async function fetchUserProfile() {
@@ -27,13 +26,17 @@ export async function fetchUserProfile() {
 
 
 export function useCandidateVM() {
+  const user = useSelector(userSelector);
   const [showLogin, setShowLogin] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const userCookie = Cookies.get("user");
 
-    if (userCookie) {
+  //fetch all user saved jobs -> set them to redux
+
+  useEffect(() => {
+
+
+    if (user._id !== "") {
       fetchUserProfile()
       .then((data) => {
         console.log(data)
@@ -56,7 +59,7 @@ export function useCandidateVM() {
     } else {
       setShowLogin(true);
     }
-  }, [dispatch]); 
+  }, [dispatch, user._id]); 
 
   return { showLogin, setShowLogin };
 }
