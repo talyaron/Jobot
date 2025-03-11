@@ -6,41 +6,39 @@
 
 :root {
     /* Primary colors */
-    --primary: #3498db;
-    --primary-light: #5dade2;
-    --primary-dark: #2980b9;
+    --primary: #b5c8e9;
+    --primary-light: #c1d2ef;
+    --primary-dark: #4a86c5;     
 
     /* Secondary colors */
-    --secondary: #2ecc71;
-    --secondary-light: #58d68d;
-    --secondary-dark: #27ae60;
+    --secondary: #a1cb97;
+    --secondary-light: #b4daab;
+    --secondary-dark: #439d6d; 
 
     /* Accent colors */
-    --accent: #e74c3c;
-    --accent-light: #ec7063;
-    --accent-dark: #c0392b;
+    --accent: #d6c8c3;
+    --accent-light: #ddd2ce;
+    --accent-dark: #b55242;
 
     /* Neutral colors */
     --white: #ffffff;
-    --light-gray: #f5f5f5;
-    --gray: #95a5a6;
-    --dark-gray: #34495e;
-    --black: #2c3e50;
+    --light-gray:#f6f9fc;
+    --dark-gray: #191e24;
+ 
 
     /* Semantic colors */
-    --success: #27ae60;
-    --warning: #f39c12;
-    --error: #e74c3c;
-    --info: #3498db;
+    --success:  #439d6d;
+    --warning: #e3b36b;
+    --error:  #b55242;
+    --info: #4a86c5;
 
     /* Background colors */
     --background-primary: #ffffff;
-    --background-secondary: #f5f5f5;
+    --background-secondary: #f6f9fc5;
 
     /* Text colors */
-    --text-primary: #2c3e50;
-    --text-secondary: #7f8c8d;
-    --text-light: #bdc3c7;
+    --text-primary: #191e24;
+    --text-light: #ffffff;
 }
 
 

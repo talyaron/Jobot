@@ -2,6 +2,7 @@ import React from "react";
 import { useMyJobs } from "./MyJobsVM";
 import styles from "./MyJobs.module.scss";
 import JobCard from "../../components/jobCard/JobCard";
+import { Link } from "react-router";
 
 export const MyJobs: React.FC = () => {
   const { jobIds, loading, error, removeJob } = useMyJobs();
@@ -34,6 +35,13 @@ export const MyJobs: React.FC = () => {
       ) : (
         <p className={styles.noJobs}>No saved jobs found.</p>
       )}
+      <div className="btns">
+        <Link to="/">
+          <button className="btn">
+            Find Jobs
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
