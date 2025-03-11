@@ -4,13 +4,14 @@ import styles from "./CandidateLogin.module.scss";
 import { X } from "lucide-react";
 import { loginCandidate } from "./CandidateLoginVM";
 import CandidateRegister from "../candidateRegister/CandidateRegister";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/user/userSlice";
 
-interface Props {
-    closeLoginBtn: () => void;
-}
 
-function CandidateLogin({ closeLoginBtn }: Props) {
+
+function CandidateLogin() {
     const navigate = useNavigate(); 
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -21,12 +22,13 @@ function CandidateLogin({ closeLoginBtn }: Props) {
         setError(null);
         setLoading(true);
 
-        const response = await loginCandidate({ email, password });
+        const {success,message, user} = await loginCandidate({ email, password });
 
-        if (!response.success) {
-            setError(response.message);
+        if (!success) {
+            setError(message);
         } else {
-            navigate("/myjobs");
+            dispatch(setUser(user));
+            navigate("/candidate/my-jobs");
         }
 
         setLoading(false);
@@ -34,8 +36,7 @@ function CandidateLogin({ closeLoginBtn }: Props) {
 
     return (
         <div className={styles.CandidateLoginPage}>
-            <X className={styles.closeLoginBtn} onClick={closeLoginBtn} />
-
+            
             {isRegister ? (
                 <CandidateRegister closeRegisterBtn={() => setIsRegister(false)} />
             ) : (

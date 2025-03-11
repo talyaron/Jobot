@@ -6,14 +6,14 @@ dotenv.config();
 
 const secretKey = process.env.SECRET_JWT as string;
 
-export const authMiddleware = (
+export const userIdMiddleware = (
   req: any,
   res: any,
   next: NextFunction
 ) => {
   try {
-      const token = req.cookies?.token;
-      console.log("Received token:", token);
+      const token = req.cookies?.user;
+
     if (!token) {
       return res
         .status(401)
@@ -21,14 +21,13 @@ export const authMiddleware = (
     }
     
       const decoded = jwt.decode(token, secretKey);
-      console.log("decoded ID", decoded.userId);
     
     if (!decoded.userId) {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
 
-      req.body.userId = decoded.userId; // Add userId to the request body
-      console.log("Assigned UserID:", req.body.userId);
+      req.userId = decoded.userId; // Add userId to the request body
+
     next(); // Continue to the next middleware
   } catch (error) {
     console.error("JWT decode error:", error);

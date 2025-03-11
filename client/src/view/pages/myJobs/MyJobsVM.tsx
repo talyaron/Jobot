@@ -1,53 +1,31 @@
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { userSelector } from "../../../redux/user/userSlice";
+import { useSelector } from "react-redux";
+import { Job } from "../jobsEmployer/types";
+
 
 export const useMyJobs = () => {
-  const [jobIds, setJobIds] = useState<string[]>([]);
+
+  const user = useSelector(userSelector);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-      
-    const fetchSavedJobs = async () => {
-      try {
-        const token = Cookies.get("token"); // Get authentication token
-        if (!token) {
-          setError("No authentication token found");
-          setLoading(false);
-          return;
-        }
 
-        const response = await fetch("http://localhost:3000/api/saved-jobs", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
-          },
-          credentials: "include",
-        });
+  useEffect(() => {
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch saved jobs");
-        }
 
-          const jobIds: string[] = await response.json();
-         console.log(jobIds); 
-        setJobIds(jobIds);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSavedJobs();
-  }, []);
+    if (user._id !== "") {
+ 
+      fetchSavedJobs();
+    }
+  }, [user]);
 
   // Function to remove a job from saved jobs
   const removeJob = async (jobId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/saved-jobs/${jobId}`, 
+        `http://localhost:3000/api/jobs/user-jobs/${jobId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -60,11 +38,44 @@ export const useMyJobs = () => {
       }
 
       // Delete job from state
-      setJobIds((prevJobs) => prevJobs.filter((id) => id !== jobId));
+   
     } catch (err) {
       setError((err as Error).message);
     }
   };
+ 
 
-  return { jobIds, loading, error, removeJob };
+  const fetchSavedJobs = async () => {
+    try {
+
+      const response = await fetch("http://localhost:3000/api/jobs/user-jobs", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch saved jobs");
+      }
+
+      const {jobs} = await response.json();
+      console.log(jobs)
+      if(!jobs) {
+        setJobs([]);
+        console.log("No jobs found");
+      } else {
+        setJobs(jobs);
+      }
+     
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  return { jobs, loading, error, removeJob };
 };
+
+

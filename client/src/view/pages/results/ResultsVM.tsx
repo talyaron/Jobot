@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { Job } from "../jobsEmployer/types";
 
 
 export const useJobs = (userId?: string) => {
-  const [jobIds, setJobIds] = useState<string[]>([]);
-  const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
+ 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,9 +21,7 @@ export const useJobs = (userId?: string) => {
 
         const data = await response.json();
         console.log(data)
-        setJobIds(data.jobs.map((job: { _id: string }) => job._id)); // Get job IDs only
-        
-        
+        setJobs(data.jobs); // Get job IDs only
       } catch (err) {
         console.error(err);
         setError("Failed to fetch job IDs");
@@ -34,27 +33,6 @@ export const useJobs = (userId?: string) => {
     fetchJobIds();
   }, []);
 
-  const saveJob = async (jobId: string) => {
-    try {
-    
-      const response = await fetch("http://localhost:3000/api/saved-jobs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ jobId }),
-        credentials: "include",
-      });
 
-      if (!response.ok) throw new Error("Failed to save job");
-
-      setSavedJobIds((prev) => [...prev, jobId]);
-      return true;
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
-  };
-
-  return { jobIds, savedJobIds, loading, error, saveJob };
+  return { jobs, loading, error };
 };

@@ -1,0 +1,15 @@
+.btn, button{
+    background-color: var(--accent);
+    padding: 1rem;
+    border-radius: 2rem;
+    color: var(--white);
+    &--danger{
+        background-color: var(--error);
+    }
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    
+}

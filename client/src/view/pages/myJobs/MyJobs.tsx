@@ -2,9 +2,10 @@ import React from "react";
 import { useMyJobs } from "./MyJobsVM";
 import styles from "./MyJobs.module.scss";
 import JobCard from "../../components/jobCard/JobCard";
+import { Link } from "react-router";
 
 export const MyJobs: React.FC = () => {
-  const { jobIds, loading, error, removeJob } = useMyJobs();
+  const { jobs, loading, error, removeJob } = useMyJobs();
 
   if (loading) {
     return <p className={styles.loading}>Loading saved jobs...</p>;
@@ -17,14 +18,14 @@ export const MyJobs: React.FC = () => {
   return (
     <div className={styles.myJobsContainer}>
       <h1 className={styles.title}>My Saved Jobs</h1>
-      {jobIds.length > 0 ? (
+      {jobs.length > 0 ? (
         <div className={styles.jobsList}>
-          {jobIds.map((jobId) => (
-            <div key={jobId} className={styles.jobItem}>
-              <JobCard jobId={jobId} />
+          {jobs.map((job) => (
+            <div key={job._id} className={styles.jobItem}>
+              <JobCard job={job} />
               <button
                 className={styles.deleteButton}
-                onClick={() => removeJob(jobId)}
+                onClick={() => removeJob(job._id || "")}
               >
                 Delete
               </button>
@@ -34,6 +35,13 @@ export const MyJobs: React.FC = () => {
       ) : (
         <p className={styles.noJobs}>No saved jobs found.</p>
       )}
+      <div className="btns">
+        <Link to="/">
+          <button className="btn">
+            Find Jobs
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

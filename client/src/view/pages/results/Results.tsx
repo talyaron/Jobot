@@ -8,13 +8,14 @@ import { useDispatch } from "react-redux";
 
 
 const Results = () => {
+  const { jobs, loading, error } = useJobs();
   const { jobIds, savedJobIds, loading, error, saveJob } = useJobs();
   const { isCvFill } = useAllComponentsVM();
   const dispatch = useDispatch();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (jobIds.length === 0) return <p>No jobs found.</p>;
+  if (jobs.length === 0) return <p>No jobs found.</p>;
 
   function setIdJobInCvForm(jobId: string) {
     dispatch(updatePersonalInformation({jobId}));
@@ -52,26 +53,8 @@ const Results = () => {
 
   return (
     <div className={styles.resultsContainer}>
-      {jobIds.map((jobId) => (
-        <div key={jobId} className={styles.jobCardContainer}>
-          <JobCard jobId={jobId} />
-          {!savedJobIds.includes(jobId) && (
-            <>
-              <button
-                className={styles.saveButton}
-                onClick={() => saveJob(jobId)}
-              >
-                Save
-              </button>
-
-              <button onClick={() => setIdJobInCvForm(jobId)}>
-                <Link to="cv" style={{ color: "white" }}>
-                  {isCvFill ? "Update CV" : "Add CV"}
-                </Link>
-              </button>
-            </>
-          )}
-        </div>
+      {jobs.map((job) => (
+          <JobCard key={job._id} job={job} />
       ))}
     </div>
   );
