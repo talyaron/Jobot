@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import styles from "./CandidateLogin.module.scss";
 import { X } from "lucide-react";
 import { loginCandidate } from "./CandidateLoginVM";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function CandidateLogin({ closeLoginBtn }: Props) {
+    const navigate = useNavigate(); 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -24,8 +26,7 @@ function CandidateLogin({ closeLoginBtn }: Props) {
         if (!response.success) {
             setError(response.message);
         } else {
-            alert("Login successful!");
-            closeLoginBtn();
+            navigate("/myjobs");
         }
 
         setLoading(false);
