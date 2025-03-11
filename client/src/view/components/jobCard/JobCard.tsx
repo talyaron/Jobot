@@ -10,7 +10,7 @@ interface JobCardProps {
   job: Job;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job }) => {
+const   JobCard: React.FC<JobCardProps> = ({ job }) => {
  
 
   const [jobAdded, setJobAdded] = useState<boolean>(false);
