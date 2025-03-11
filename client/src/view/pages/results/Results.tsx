@@ -1,7 +1,7 @@
 import { useJobs } from "./ResultsVM";
 import JobCard from "../../components/jobCard/JobCard";
 import styles from "./Results.module.scss";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import { useAllComponentsVM } from "../../pages/designCvWizard/allComponents/AllComponentsVM";
 import { updatePersonalInformation } from "../../../redux/cv/cvSlice";
 import { useDispatch } from "react-redux";

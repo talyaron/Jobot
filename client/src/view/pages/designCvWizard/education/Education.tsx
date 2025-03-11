@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./education.module.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { addEducation, updateEducation, removeEducation } from "../../../../redux/cv/cvSlice";
@@ -12,10 +11,10 @@ const Education = () => {
     dispatch(updateEducation({ id, data: { [e.target.name]: e.target.value } }));
   };
   return (
-    <div className={styles.container}>
+    <div>
       <h2>השכלה</h2>
       {educationList.map((edu) => (
-        <div key={edu.id} className={styles.educationItem}>
+        <div key={edu.id}>
           <label>שם מוסד לימודים:</label>
           <input
             type="text"

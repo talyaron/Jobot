@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./professionalSummary.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { updateProfessionalSummary } from "../../../../redux/cv/cvSlice";
@@ -14,7 +13,7 @@ const ProfessionalSummary = () => {
   };
 
   return (
-    <div className={styles.continer}>
+    <div>
       <form>
         <h2>סיכום מקצועי:</h2>
         <label htmlFor="describeYourself">תאר את עצמך:</label>

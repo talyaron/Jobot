@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./skills.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../../redux/store'
 import { addSkills,updateSkills,removeSkills } from "../../../../redux/cv/cvSlice";
@@ -20,7 +19,7 @@ const Skills: React.FC = () => {
     }
 
     return (
-        <div className={styles.continer}>
+        <div>
             <h2>כישורים</h2>
             <button onClick={handelAddSkills}>➕ הוספת כישורים</button>
             {skillsData.map((skills) => (
