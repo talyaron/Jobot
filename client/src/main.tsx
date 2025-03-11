@@ -35,9 +35,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
           </Route>
+          <Route path="employer/login" element={<EmployerLogin/>} />
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
-            <Route path="login" element={<EmployerLogin/>} />
             <Route path="candidates" element={<JobCandidate/>} />
             <Route path="applications" element={<JobApplication />} />
             <Route path="applications/status" element={<ApplicationStatus />} />
