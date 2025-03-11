@@ -21,14 +21,13 @@ export const userIdMiddleware = (
     }
     
       const decoded = jwt.decode(token, secretKey);
-      console.log("decoded ID", decoded.userId);
     
     if (!decoded.userId) {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
 
       req.userId = decoded.userId; // Add userId to the request body
-       console.log("userId", req.userId);
+
     next(); // Continue to the next middleware
   } catch (error) {
     console.error("JWT decode error:", error);
