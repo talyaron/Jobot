@@ -3,7 +3,8 @@ import styles from "./JobCard.module.scss";
 import { Link } from "react-router-dom";
 import { saveJob } from "../../../db/jobs/setJobs";
 import { useState } from "react";
-import { Job } from "../../../model/jobModel";
+import { Job } from "../../pages/jobsEmployer/types";
+
 
 interface JobCardProps {
   job: Job;

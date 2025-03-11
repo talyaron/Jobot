@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+
 import styles from "./candidate.module.scss";
 import { Link, Outlet } from "react-router";
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
 import { useCandidateVM } from "./candidateVM";
-import { userSelector } from "../../../redux/user/userSlice";
 
 const Candidate = () => {
-  const user = useSelector(userSelector);
-  const showLogin = user._id === "";
+ 
+  const { isLoggedIn } = useCandidateVM();
+ 
+  
   return (
     <div>
-      {showLogin ? (
+      {!isLoggedIn ? (
         <CandidateLogin />
       ) : (
         <>
