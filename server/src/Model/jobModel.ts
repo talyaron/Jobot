@@ -8,13 +8,16 @@ const JobSchema = new Schema({
   address: String,
   locationType:Object.values(locationType),
   location:Object.values(location),
-  company: Types.ObjectId,
+  company: String,
   employmentType: Object.values(employmentType),
   Industry: String,
   salary: Number,
   housingIncluded: Boolean,
   type: String,
-  term: Object.values(term),
+  term: {
+    type: String,
+    enum: Object.values(term)
+  },
   benefits: String,
   websiteURL: {
     type: String,

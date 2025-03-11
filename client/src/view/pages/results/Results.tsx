@@ -1,6 +1,7 @@
 import { useJobs } from "./ResultsVM";
 import JobCard from "../../components/jobCard/JobCard";
 import styles from "./Results.module.scss";
+import { useParams } from "react-router";
 
 const Results = () => {
   const { jobIds, savedJobIds, loading, error, saveJob } = useJobs();

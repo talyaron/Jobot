@@ -1,7 +1,8 @@
-import './App.css'
-import Auth from './view/pages/auth/Auth'
-import Wizard from './view/pages/wizard/Wizard';
 import { useState } from 'react';
+import './App.css'
+import JobCandidate from './view/pages/jobCandidate/JobCandidate'
+import { BrowserRouter, useRoutes } from 'react-router';
+import routes from './routes/routes';
 
 function AppRoutes() {
   return useRoutes(routes);
@@ -17,11 +18,10 @@ const [showWizard, setShowWizard] = useState(false);
         <h1>Jobot System</h1>
         <AppRoutes />
         <br />
-      {showWizard && <Wizard closeButton={() => setShowWizard(false)} />}
+        <JobCandidate />
       </div>
     </BrowserRouter>
   );
-  return <div>Welcome to Jobot!</div>; 
 }
 
 export default App;
