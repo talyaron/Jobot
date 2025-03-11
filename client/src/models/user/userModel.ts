@@ -1,4 +1,5 @@
 export interface UserState {
+  _id: string;
   fullName: string;
   email: string;
   password: string;

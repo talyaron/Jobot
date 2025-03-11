@@ -27,4 +27,3 @@ export const getAllJobs = async (req: any, res: any) => {
   }
 };
 
-
