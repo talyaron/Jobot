@@ -1,3 +1,9 @@
+@use "buttons";
+@use "forms";
+@use "cards";
+@use "wrappers";
+@use "chips";
+
 :root {
     /* Primary colors */
     --primary: #3498db;
@@ -37,8 +43,4 @@
     --text-light: #bdc3c7;
 }
 
-@use "buttons";
-@use "forms";
-@use "cards";
-@use "wrappers";
-@use "chips";
+
