@@ -6,8 +6,6 @@ export async function getUserJobs(req: any, res: any) {
    
     const userId = req.userId; // Extract userId from middleware
 
-    console.log("getUserJobs", userId);
-
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
