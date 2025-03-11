@@ -1,9 +1,12 @@
 import { SavedJobsModel } from "../../Model/joinTables/savedJobsJoinTable";
 
-export async function getSavedJobsByUserID(req: any, res: any) {
+export async function getUserJobs(req: any, res: any) {
   try {
 
-    const userId = req.body.userId || req.userId; // Extract userId from middleware
+   
+    const userId = req.userId; // Extract userId from middleware
+
+    console.log("getUserJobs", userId);
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -13,7 +16,7 @@ export async function getSavedJobsByUserID(req: any, res: any) {
     const savedJobs = await SavedJobsModel.find({ userId }).select("jobId");
 
     if (!savedJobs.length) {
-      return res.status(404).json({ message: "No saved jobs found" });
+      return res.status(200).json({ message: "No saved jobs found" });
     }
 
     // Extract jobIds and convert them to string

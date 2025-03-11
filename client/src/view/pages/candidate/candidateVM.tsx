@@ -6,6 +6,7 @@ import { setUser } from "../../../redux/user/userSlice";
 
 export async function fetchUserProfile() {
   try {
+    console.log("fetchUserProfile", fetchUserProfile)
     const response = await fetch("http://localhost:3000/api/user/profile", {
       method: "GET",
       credentials: "include", 
@@ -34,13 +35,24 @@ export function useCandidateVM() {
 
     if (userCookie) {
       fetchUserProfile()
-        .then((data) => {
-          dispatch(setUser(data));
-          setShowLogin(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+      .then((data) => {
+        console.log(data)
+        dispatch(setUser({
+          _id: data._id,
+          fullName: data.userName,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          password: '',
+          isHiring: data.isHiring,
+          isCandidate: data.isCandidate,
+          CV: data.CV,
+          experienceOfWork: data.experienceOfWork,
+        }));
+        setShowLogin(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
     } else {
       setShowLogin(true);
     }

@@ -1,6 +1,7 @@
 import { useJobCard } from "./JobCardVM";
 import styles from "./JobCard.module.scss";
 import { Link } from "react-router-dom";
+import { useJobs } from "../../pages/results/ResultsVM";
 
 interface JobCardProps {
   jobId: string;
@@ -8,6 +9,7 @@ interface JobCardProps {
 
 const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
   const { job, loading, error } = useJobCard(jobId);
+  const {saveJob} = useJobs();
 
   if (loading) return <p>Loading job details...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -35,6 +37,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
           <strong>Salary:</strong> ${job.salary}
         </p>
       </Link>
+      <button onClick={()=>saveJob(job._id)}>Save</button>
     </div>
   );
 };

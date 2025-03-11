@@ -26,7 +26,7 @@ function CandidateLogin({ closeLoginBtn }: Props) {
         if (!response.success) {
             setError(response.message);
         } else {
-            navigate("/myjobs");
+            navigate("/candidate/my-jobs");
         }
 
         setLoading(false);

@@ -1,9 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router"; 
-import "./index.css";
-
-// import Wizard from "./view/pages/wizard/Wizard.tsx";
+import "./view/styles/style.scss";
 
 
 import { Provider } from 'react-redux'
@@ -36,6 +34,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/candidate" element={<Candidate />}>
             <Route index element={<Results />} />
             <Route path="job-candidate/:jobId" element={<JobCandidate />} />
+            <Route path="my-jobs" element={<MyJobs />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
           </Route>
@@ -46,8 +45,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="applications" element={<JobApplication />} />
             <Route path="applications/status" element={<ApplicationStatus />} />
             <Route path="chat" element={<Chat />} />
-          </Route>
-          <Route path="/myjobs" element={<MyJobs />} />
+          </Route>        
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
