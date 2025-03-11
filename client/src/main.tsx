@@ -18,6 +18,7 @@ import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
 import Results from "./view/pages/results/Results.tsx";
 import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 import EmployerLogin from "./view/pages/employerLogin/EmployerLogin.tsx";
+import DesignCvWizard from "./view/pages/designCvWizard/DesignCvWizard.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="my-jobs" element={<MyJobs />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
+            <Route path="cv" element={<DesignCvWizard />} />
           </Route>
           <Route path="employer" element={<EmployerWrapper />}>
             <Route index element={<JobsEmployer />} />
