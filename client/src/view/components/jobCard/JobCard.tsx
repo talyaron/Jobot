@@ -1,29 +1,23 @@
-
+import { useJobCard } from "./JobCardVM";
 import styles from "./JobCard.module.scss";
 import { Link } from "react-router-dom";
-import { saveJob } from "../../../db/jobs/setJobs";
-import { useState } from "react";
-import { Job } from "../../pages/jobsEmployer/types";
-
 
 interface JobCardProps {
-  job: Job;
+  jobId: string;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job }) => {
- 
+const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
+  const { job, loading, error } = useJobCard(jobId);
 
-  const [jobAdded, setJobAdded] = useState<boolean>(false);
-
-
-  function handleSaveJob() {
-    saveJob(job._id);
-    setJobAdded(true);
-  }
+  if (loading) return <p>Loading job details...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!job) return <p>No Job Found</p>;
 
   return (
-    <div className={styles.card} style={{ border: jobAdded ? "2px solid green" : "none" }}>
-      <Link to={`job-candidate/${job._id}`}>
+    <div className={styles.card}>
+      <Link to={`job-candidate/${jobId}`}
+
+      >
         <h3 className={styles.jobTitle}>{job.jobName}</h3>
         <p className={styles.details}>
           <strong>Company:</strong> {job.company}
@@ -41,7 +35,6 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           <strong>Salary:</strong> ${job.salary}
         </p>
       </Link>
-      <button onClick={handleSaveJob}>Save</button>
     </div>
   );
 };
