@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, } from "react-redux";
 import { useNavigate } from "react-router";
+import { setUser, } from "../../../redux/user/userSlice";
 
 export const EmployerLoginVM = () => {
  const [isLogin, setIsLogin] = useState(true);
@@ -14,7 +16,7 @@ export const EmployerLoginVM = () => {
       isHiring:true
     });
     const navigate = useNavigate(); // Initialize the navigate function
-
+    const dispatch = useDispatch();
   // Use useEffect to navigate when showLogin is true
   useEffect(() => {
     if (userLoggedIn) {
@@ -38,9 +40,13 @@ export const EmployerLoginVM = () => {
           credentials: "include",
           body: JSON.stringify(data),
         });
-        if(isLogin)
-        setUserLoggedIn(true)
+
         const result = await response.json();
+        if(isLogin){
+          setUserLoggedIn(true)
+          dispatch(setUser(result.user));
+        }
+        
         if (!response.ok) throw new Error(result.message || "An error occurred");
         alert(result.message);
       } catch (error: unknown) {
