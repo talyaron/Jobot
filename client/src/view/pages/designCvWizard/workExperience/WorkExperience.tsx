@@ -85,7 +85,7 @@ const WorkExperience = () => {
   };
 
   return (
-    <div className={styles.continer}>
+    <div>
       <form onSubmit={handleWorkExperienceChange}>
         <h2>ניסיון תעסוקתי</h2>
         <label htmlFor="companyName">שם חברה:</label>

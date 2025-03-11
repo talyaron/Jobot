@@ -20,7 +20,7 @@ const ProfessionalSummary = () => {
   };
 
   return (
-    <div className={styles.continer}>
+    <div>
       <form onSubmit={handleProfessionalSummaryChange}>
         <br />
         <h2>סיכום מקצועי:</h2>
