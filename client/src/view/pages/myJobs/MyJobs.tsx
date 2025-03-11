@@ -2,6 +2,7 @@ import React from "react";
 import { useMyJobs } from "./MyJobsVM";
 import styles from "./MyJobs.module.scss";
 import JobCard from "../../components/jobCard/JobCard";
+import { Link } from "react-router";
 
 export const MyJobs: React.FC = () => {
   const { jobIds, loading, error, removeJob } = useMyJobs();
@@ -21,7 +22,7 @@ export const MyJobs: React.FC = () => {
         <div className={styles.jobsList}>
           {jobIds.map((jobId) => (
             <div key={jobId} className={styles.jobItem}>
-              <JobCard jobId={jobId} />
+              <JobCard job={job} />
               <button
                 className={styles.deleteButton}
                 onClick={() => removeJob(jobId)}
@@ -34,6 +35,13 @@ export const MyJobs: React.FC = () => {
       ) : (
         <p className={styles.noJobs}>No saved jobs found.</p>
       )}
+      <div className="btns">
+        <Link to="/">
+          <button className="btn">
+            Find Jobs
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
