@@ -5,6 +5,7 @@ import { UserState } from '../../models/user/userModel';
 
 
 const initialState: UserState = {
+  _id: '',
   fullName: '',
   email: '',
   password: '',
@@ -20,6 +21,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
+      state._id = action.payload._id;
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
       state.password = action.payload.password;
@@ -30,6 +32,7 @@ export const userSlice = createSlice({
       state.CV = action.payload.CV;
     },
     clearUser: (state) => {
+      state._id = '';
       state.fullName = '';
       state.email = '';
       state.password = '';
@@ -42,6 +45,8 @@ export const userSlice = createSlice({
   },
 })
 
-export const { setUser, clearUser } = userSlice.actions
+export const { setUser, clearUser } = userSlice.actions;
+
+export const userSelector = (state: { user: UserState }) => state.user;
 
 export default userSlice.reducer
