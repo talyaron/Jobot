@@ -5,8 +5,7 @@ export const getJobById = async (req: any, res: any) => {
   try {
     const { jobId } = req.params;
     const job = await JobModel.findById(jobId);
-    console.log("server", job);
-
+  
     if (!job) {
       return res.status(404).json({ message: "Job not found" });
     }
