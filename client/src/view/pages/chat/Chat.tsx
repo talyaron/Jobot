@@ -1,8 +1,16 @@
-import React from 'react'
+import { ChatMV } from './ChatVM';
 
-const Chat = () => {
+
+function Chat() {
+
+  const { job, sender } = ChatMV();
+
   return (
-    <div>Chat</div>
+    <>
+      <div>Chat</div>
+      {job && <div>{job.jobName}</div>}
+      {sender && <div>{sender.email}</div>}
+    </>
   )
 }
 
