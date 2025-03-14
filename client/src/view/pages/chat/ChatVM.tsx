@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { Job } from "../../../model/jobModel";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../../redux/user/userSlice";
+import { Chat } from "../../../model/ChatModel";
 
 
 export function ChatMV() {
@@ -11,14 +11,19 @@ export function ChatMV() {
   const { jobId } = useParams();
 
   const [job, setJob] = useState<Job>();
+  const [chats, setChats] = useState<Chat[]>();
+  console.log("k", typeof (sender._id))
 
-  // console.log(jobId);
 
   useEffect(() => {
     if (jobId) {
       fetchJob(jobId);
     }
-  }, [jobId])
+    if (sender) {
+      fetchAllChats(sender._id);
+    }
+  }, []);
+
 
   async function fetchJob(jobId: string | undefined) {
 
@@ -43,10 +48,28 @@ export function ChatMV() {
   }
 
 
+  async function fetchAllChats(sender: string) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/chat/get-chats`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sender }),
+      })
+      const data = await response.json();
+      console.log("data", data);
+      setChats(data);
+    } catch (error) {
+      console.error("Error fetching chats:", error);
+    }
+  }
 
 
   return {
     job,
     sender,
+    chats,
   };
 }

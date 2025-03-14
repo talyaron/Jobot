@@ -4,7 +4,7 @@ import { sendMessage } from "../Controllers/chat/sendMessage";
 
 const router = express.Router();
 
-router.get("/get-chats", getChats);
+router.post("/get-chats", getChats);
 router.get("/get-one-chat", getOneChat);
 router.get("/send-message", sendMessage);
 

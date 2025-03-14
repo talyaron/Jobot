@@ -3,8 +3,13 @@ import { ChatModel } from "../../Model/messageModel";
 export async function getChats(req: any, res: any) {
     try {
         const { userId } = req.body;
-        ChatModel.find({ user: userId }).populate("job");
-       
+        const chats = ChatModel.find({ user: userId }).populate("job");
+
+        if (!chats) {
+            return res.status(200).json({ message: "No chats found", chats: [] });
+        } else {
+            return res.status(200).json(chats);
+        }
 
     } catch (error) {
         console.error("Error deleting job:", error);
