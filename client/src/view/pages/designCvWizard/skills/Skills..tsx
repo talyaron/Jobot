@@ -76,7 +76,7 @@ const Skills = () => {
     };
 
     return (
-        <div>
+        <div className="form-wrapper">
             <form onSubmit={handleSkillsChange}>
                 <h2>כישורים</h2>
                 <label htmlFor="technicalSkills">כישורים טכניים:</label>

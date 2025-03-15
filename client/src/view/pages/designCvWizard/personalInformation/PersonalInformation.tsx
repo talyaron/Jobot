@@ -18,7 +18,7 @@ const PersonalInformation = () => {
   };
 
   return (
-    <div  >
+    <div className="form-wrapper">
       <form onSubmit={handleSubmit}>
         <h2>מידע אישי</h2>
         <label htmlFor="firstName">שם פרטי:</label>

@@ -74,7 +74,7 @@ const Education = () => {
     };
 
     return (
-        <div>
+        <div className="form-wrapper">
             <form onSubmit={handleEducationChange}>
                 <h2>השכלה</h2>
                 <label htmlFor="institutionName">שם המוסד:</label>

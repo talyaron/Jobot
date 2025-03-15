@@ -58,7 +58,7 @@ const ServiceType = () => {
     };
 
     return (
-        <div>
+        <div className="form-wrapper">
             <form onSubmit={handleServiceChange}>
                 <h2>סוגי שירות</h2>
                 <label htmlFor="serviceType">סוג שירות:</label>
