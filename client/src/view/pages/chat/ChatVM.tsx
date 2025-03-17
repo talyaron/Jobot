@@ -7,48 +7,43 @@ import { Chat } from "../../../model/ChatModel";
 
 
 export function ChatMV() {
-  const sender = useSelector(userSelector);
+  const user = useSelector(userSelector);
+  console.log("user::", user, typeof (user))
   const { jobId } = useParams();
 
   const [job, setJob] = useState<Job>();
   const [chats, setChats] = useState<Chat[]>();
-  console.log("k", typeof (sender._id))
-
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (jobId) {
-      fetchJob(jobId);
-    }
-    if (sender) {
-      fetchAllChats(sender._id);
-    }
-  }, []);
+    const fetchData = async () => {
+      if (jobId) await fetchJob(jobId);
+      if (user?._id) await fetchAllChats(user._id);
+      setLoading(false);
+    };
+    fetchData();
+  }, [jobId, user]);
 
 
   async function fetchJob(jobId: string | undefined) {
-
     try {
-      fetch(`http://localhost:3000/api/jobs/get-job-by-id/${jobId}`, {
+      const response = await fetch(`http://localhost:3000/api/jobs/get-job-by-id/${jobId}`, {
         method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("data", data)
-          setJob(data)
-        })
-        .catch((error) => console.error(error));
-      console.log('job', job)
+      });
+      const data = await response.json();
+      console.log("Fetched Job:", data);
+      setJob(data);
     } catch (error) {
-      console.error("Error fetching user details:", error);
+      console.error("Error fetching job:", error);
     }
   }
 
 
-  async function fetchAllChats(sender: string) {
+  async function fetchAllChats(user: string) {
     try {
       const response = await fetch(`http://localhost:3000/api/chat/get-chats`, {
         method: "POST",
@@ -56,11 +51,12 @@ export function ChatMV() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ sender }),
+        body: JSON.stringify({ userId: user }),
       })
       const data = await response.json();
-      console.log("data", data);
       setChats(data);
+      console.log("CCC", data)
+      console.log("Fetched chats:", data, Array.isArray(data));
     } catch (error) {
       console.error("Error fetching chats:", error);
     }
@@ -69,7 +65,8 @@ export function ChatMV() {
 
   return {
     job,
-    sender,
+    user,
     chats,
+    loading,
   };
 }

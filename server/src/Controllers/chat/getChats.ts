@@ -1,11 +1,15 @@
+
+import { Types } from "mongoose";
 import { ChatModel } from "../../Model/messageModel";
 
 export async function getChats(req: any, res: any) {
     try {
         const { userId } = req.body;
-        const chats = ChatModel.find({ user: userId }).populate("job");
 
-        if (!chats) {
+        const chats = await ChatModel.find({ user: userId });
+
+
+        if (!chats || chats.length === 0) {
             return res.status(200).json({ message: "No chats found", chats: [] });
         } else {
             return res.status(200).json(chats);

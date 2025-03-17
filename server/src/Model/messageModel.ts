@@ -8,10 +8,10 @@ const MessageSchema = new Schema({
 });
 
 const ChatSchema = new Schema({
-    job: { type: Types.ObjectId, ref: "Job", required: true },
+    job: { type: Types.ObjectId, ref: "Job", required: false },
     user: { type: Types.ObjectId, ref: "User", required: true },
   messages: [MessageSchema], 
-  lastUpdated: { type: Date, default: Date.now }, 
+  lastUpdated: { type: Date, default: Date.now, required: false}, 
 });
 
 export const ChatModel = model("Chat", ChatSchema);

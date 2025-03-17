@@ -1,9 +1,12 @@
+import { Job } from "./jobModel";
 import { Message } from "./messageModel";
+import { User } from "./userModel";
 
 export interface Chat {
-    currentUserId: string,
-    otherUserId: string,
-    messages: Message[], 
-    lastUpdated: Date,
+    _id: string,
+    job: Job,
+    user: User,
+  messages: Message[], 
+  lastUpdated: Date
 }
 
