@@ -3,23 +3,23 @@ import './App.css'
 import JobCandidate from './view/pages/jobCandidate/JobCandidate'
 
 function AppRoutes() {
-  return useRoutes(routes);
+ // return useRoutes(routes);
 }
 
 function App() {
   const testUserId = "67b9edaa4e2f6b7890741ce1"; // Using a test user ID for now
 const [showWizard, setShowWizard] = useState(false);
 
-  return (
-    <BrowserRouter>
+  {/*return (
+   // <BrowserRouter>
       <div dir="rtl">
         <h1>Jobot System</h1>
         <AppRoutes />
         <br />
-        <JobCandidate />
+        JobCandidate />
       </div>
-    </BrowserRouter>
-  );
+    //</BrowserRouter>
+  );*/}
 }
 
 export default App;

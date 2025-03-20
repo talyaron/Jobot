@@ -1,3 +1,6 @@
+
+
+
 .container {
   direction: rtl;
   display: flex;
@@ -11,12 +14,13 @@
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
+
 .header {
   font-size: 4rem;
   font-weight: bold;
-  color: #333;
+  color: var(--secondary);
   margin-bottom: 2rem;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  //text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .buttonGroup {
@@ -27,8 +31,8 @@
 }
 
 .button {
-  background-color: #007bff;
-  color: #fff;
+  //background-color: $header-footer-main-button;
+  //color: $header-button-text-color;
   border: none;
   border-radius: 4px;
   padding: 0.75rem 1.5rem;
@@ -37,7 +41,7 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: var(--secondary);
   transform: translateY(-3px);
 }
 
@@ -45,14 +49,14 @@
   font-size: 0.9rem;
   background: none;
   border: none;
-  color: #007bff;
+  color: var(--secondary);
   text-decoration: underline;
   padding: 0.25rem;
   cursor: pointer;
 }
 
 .linkButton:hover {
-  color: #0056b3;
+  color: var(--primary);
   background-color: none;
 }
 
@@ -61,7 +65,7 @@
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background-color: #007bff;
+  background-color: var(--primary);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -70,6 +74,6 @@
   cursor: pointer;
 
 .LoginButton:hover {
-  background-color: #0056b3;
+  background-color: var(--primary);
 }
 }

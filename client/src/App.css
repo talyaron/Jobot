@@ -1,42 +1,36 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+:root {
+  /* Primary colors */
+  --primary: #b5c8e9;
+  --primary-light: #c1d2ef;
+  --primary-dark: #4a86c5;     
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+  /* Secondary colors */
+  --secondary: #a1cb97;
+  --secondary-light: #b4daab;
+  --secondary-dark: #439d6d; 
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  /* Accent colors */
+  --accent: #d6c8c3;
+  --accent-light: #ddd2ce;
+  --accent-dark: #b55242;
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+  /* Neutral colors */
+  --white: #ffffff;
+  --light-gray:#f6f9fc;
+  --dark-gray: #191e24;
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
+  /* Semantic colors */
+  --success:  #439d6d;
+  --warning: #e3b36b;
+  --error:  #b55242;
+  --info: #4a86c5;
+
+  /* Background colors */
+  --background-primary: #ffffff;
+  --background-secondary: #f6f9fc5;
+
+  /* Text colors */
+  --text-primary: #191e24;
+  --text-light: #ffffff;
 }
