@@ -26,6 +26,7 @@ export async function getOneChat(req: any, res: any) {
     try {
         const { userId, jobId } = req.body;
         const chat = ChatModel.findOne({ user: userId, job: jobId });
+        console.log(chat);
 
         if (!chat) {
             // chat = await ChatModel.create({ user: userId, job: jobId, messages: [] });

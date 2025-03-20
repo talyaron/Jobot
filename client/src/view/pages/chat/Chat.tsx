@@ -112,7 +112,7 @@ function Chat() {
                       msg.content === user._id ? styles.sentMessage : styles.receivedMessage
                     }
                   >
-                    {/* {msg.messages} */}
+                    {msg.content}
                   </div>
                 ))}
               </div>
