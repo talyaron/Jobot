@@ -5,23 +5,24 @@ export async function getUserJobs(req: any, res: any) {
 
    
     const userId = req.userId; // Extract userId from middleware
+    console.log('user ID', userId);
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
 
     // Find all saved jobs by userId
-    const savedJobs = await SavedJobsModel.find({ userId }).populate("jobId");
+    const savedJobsDB = await SavedJobsModel.find({ userId }).populate("jobId");
+    console.log('saved jobs', savedJobsDB);
+    const savedJobs = savedJobsDB.map((job) => job.jobId);
 
-    const jobs = savedJobs.map((job) => job.jobId);
 
     if (!savedJobs.length) {
       return res.status(200).json({ message: "No saved jobs found" });
     }
 
-    // Extract jobIds and convert them to string
 
-    return res.status(200).json({jobs});
+    return res.status(200).json(savedJobs);
   } catch (error) {
     console.error("Error fetching saved jobs:", error);
     return res.status(500).json({ message: "Server error" });
