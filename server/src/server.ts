@@ -8,6 +8,9 @@ import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
 import chatRoutes from './Routes/chatRoutes'
+import http from 'http';
+import { Server } from 'socket.io';
+import setupChatSocket from './sockets/chatSocket';
 
 
 const app = express()
@@ -17,8 +20,9 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176'], // Array of allowed origins
-  credentials: true
+  credentials: true,
 }));
+const server = http.createServer(app);
 
 
 export const secretKey = String(process.env.SECRET_JWT) || "1234";
@@ -32,6 +36,20 @@ app.use("/api/chat", chatRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
+
+//socket connection
+
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('Socket connected:', socket.id);
+  setupChatSocket(socket, io);
+});
 
 
 //connection

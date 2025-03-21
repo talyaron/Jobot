@@ -6,7 +6,7 @@ export async function getChats(req: any, res: any) {
     try {
         const { userId } = req.body;
 
-        const chats = await ChatModel.find({ user: userId });
+        const chats = await ChatModel.find({ user: userId }).populate('job');
 
 
         if (!chats || chats.length === 0) {
