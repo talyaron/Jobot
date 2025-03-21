@@ -54,7 +54,10 @@ export async function fetchUserProfile() {
     });
 
     if (!response.ok) {
+      const {error} = await response.json();
+      console.error("Error fetching user data:", error);
       throw new Error("Failed to fetch user profile");
+      
     }
 
     const data = await response.json();
