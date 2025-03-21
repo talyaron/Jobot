@@ -1,7 +1,7 @@
 
 import styles from "./candidate.module.scss";
 import { Link, Outlet } from "react-router";
-import CandidateLogin from "../CandidateLogin/CandidateLogin";
+import CandidateLogin from "../../components/CandidateLogin/CandidateLogin";
 import { useCandidateVM } from "./candidateVM";
 
 const Candidate = () => {
