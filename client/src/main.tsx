@@ -18,11 +18,13 @@ import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
 import Results from "./view/pages/results/Results.tsx";
 import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 import EmployerLogin from "./view/pages/employerLogin/EmployerLogin.tsx";
+import CheckComp from "./view/styles/CheckComp.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <CheckComp/>
+      {/* <BrowserRouter>
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -46,7 +48,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
-      </BrowserRouter>
+      </BrowserRouter> */}
     </Provider>
   </StrictMode>,
 )

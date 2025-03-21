@@ -1,15 +1,27 @@
-.btn, button{
-    background-color: var(--accent);
-    padding: 1rem;
-    border-radius: 2rem;
-    color: var(--white);
-    &--danger{
-        background-color: var(--error);
-    }
+.btn {
+  outline: none;
+  background: none;
+  box-shadow: none;
+  border-radius: 0.313rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--white);
+  background-color: rgba(171, 200, 154, 1); //need to be a variable
+  border: none;
+  margin:  0.5rem;
 }
 
-.btns{
-    display: flex;
-    justify-content: space-between;
-    
+.smallBtn {
+  width: 12rem;
+  height: 2rem;
+}
+
+.bigBtn {
+  height: 2.5rem;
+  width: 25rem;
+}
+.roundedBtn {
+  border-radius: 2.5rem;
+  height: 3rem;
+  width: 10rem;
 }
