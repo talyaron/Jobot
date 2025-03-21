@@ -24,7 +24,7 @@ export async function loginUser(req:any, res:any) {
 
     const payload = { userId: user._id, email: user.email };
     const token = jwt.encode(payload, secretKey)
-    res.cookie("authToken", token, {
+    res.cookie("user", token, {
       httpOnly: true,
       secure: false,
       sameSite: "lax",

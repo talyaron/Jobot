@@ -21,7 +21,7 @@ export const MyJobs: React.FC = () => {
       {jobs.length > 0 ? (
         <div className={styles.jobsList}>
           {jobs.map((job) => (
-            <div className={styles.jobItem}>
+            <div className={styles.jobItem} key={job._id}>
               <JobCard job={job} key={job._id} />
               <button
                 className={styles.deleteButton}

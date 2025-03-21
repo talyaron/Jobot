@@ -12,8 +12,9 @@ export async function getUserJobs(req: any, res: any) {
     }
 
     // Find all saved jobs by userId
-    const savedJobs = await SavedJobsModel.find({ userId })
-    console.log('saved jobs', savedJobs);
+    const savedJobsDB = await SavedJobsModel.find({ userId }).populate("jobId");
+    console.log('saved jobs', savedJobsDB);
+    const savedJobs = savedJobsDB.map((job) => job.jobId);
 
 
     if (!savedJobs.length) {

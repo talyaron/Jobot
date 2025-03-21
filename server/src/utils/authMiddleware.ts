@@ -8,23 +8,21 @@ const secretKey = process.env.SECRET_JWT as string;
 
 export const userIdMiddleware = (req: any, res: any, next: NextFunction) => {
   try {
-    const token =
-      req.cookies?.authToken || req.headers["authorization"]?.split(" ")[1];
 
-      console.log("🔥 Token from headers:", req.headers["authorization"]);
-  
-    if (!token) {
+
+    const userEncoded = req.cookies.user;
+
+    if (!userEncoded) {
       return res.status(401).json({ message: "Authorization token missing" });
     }
 
-    const decoded = jwt.verify(token, secretKey) as { userId: string };
+    const decoded = jwt.verify(userEncoded, secretKey) as { userId: string };
 
     if (!decoded.userId) {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
 
     req.userId = decoded.userId; // Add userId to the request body
-    console.log("Decoded userId:", req.userId);
 
     next(); // Continue to the next middleware
   } catch (error) {

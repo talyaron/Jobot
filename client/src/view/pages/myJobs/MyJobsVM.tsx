@@ -56,7 +56,7 @@ export const useMyJobs = () => {
       }
 
       const jobs: Job[] = await response.json();
-      console.log(jobs);
+   
       setJobs(jobs);
     } catch (err) {
       setError((err as Error).message);
