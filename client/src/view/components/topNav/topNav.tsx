@@ -11,15 +11,15 @@ const TopNav = () => {
 
     return (
         <div className={styles.main}>
-            <img src={jobot} />
             <div className={styles.navButtons}>
-                <Link to="/">בית</Link>
-                <Link to="/about">מי אנחנו</Link>
-                <Link to="/maasik">מעסיקים</Link>
-                <Link to="/contact">צור קשר</Link>
                 { !isRegistered && <button onClick={() => setOpenCandidateLogin(true)}>התחברות</button>}
                 { openCandidateLogin && <CandidateLogin/> }
+                <Link to="/contact">צור קשר</Link>
+                <Link to="/employer">מעסיקים</Link>
+                <Link to="/about">מי אנחנו</Link>
+                <Link to="/">בית</Link>
             </div>
+            <img src={jobot} />
         </div>
     )
 }

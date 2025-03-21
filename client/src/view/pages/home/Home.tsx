@@ -14,23 +14,25 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       <TopNav/>
-      <JobApplication></JobApplication>
-        
-      <h1 className={styles.header}>ג'ובוט</h1>
-      <TextChanger />
+      <div className={styles.container}>
+        <JobApplication/>
+          
+        <h1 className={styles.header}>ג'ובוט</h1>
+        <TextChanger />
 
-      <div className={styles.buttonGroup}>
-        <button onClick={handleOpenWizard} className={styles.button}>העבודה המושלמת מחכה לך כאן</button>
+        <div className={styles.buttonGroup}>
+          <button onClick={handleOpenWizard} className={styles.button}>העבודה המושלמת מחכה לך כאן</button>
 
-        <Link to="/candidate">
-          <button className={styles.linkButton}>לכל המשרות</button>
-        </Link>
+          <Link to="/candidate">
+            <button className={styles.linkButton}>לכל המשרות</button>
+          </Link>
+        </div>
+
+        {openWizard && <Wizard closeButton={() => setOpenWizard(false)} />}
       </div>
-
-      {openWizard && <Wizard closeButton={() => setOpenWizard(false)} />}
-    </div>
+    </>
   );
 };
 
