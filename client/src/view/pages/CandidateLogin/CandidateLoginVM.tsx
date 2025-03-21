@@ -1,3 +1,5 @@
+import { User } from "../../../model/userModel";
+
 export interface CandidateLogin {
     email: string;
     password: string;
@@ -16,7 +18,8 @@ export function validateLoginInput(loginData: CandidateLogin): string | null {
     return null;
 }
 
-export async function loginCandidate(loginData: CandidateLogin): Promise<{ success: boolean; message: string }> {
+export async function loginCandidate(loginData: CandidateLogin): Promise<{ success: boolean; message: string, user:User|null }> {
+
     const validationError = validateLoginInput(loginData);
     if (validationError) {
         return { success: false, message: validationError };
@@ -35,8 +38,10 @@ export async function loginCandidate(loginData: CandidateLogin): Promise<{ succe
             throw new Error(data.message || "Login failed");
         }
 
-        return { success: true, message: "Login successful" };
+        console.log(data)
+
+        return { user:data.user, success: true, message: "Login successful" };
     } catch (error) {
-        return { success: false, message: error instanceof Error ? error.message : "An unexpected error occurred" };
+        return {user:null, success: false, message: error instanceof Error ? error.message : "An unexpected error occurred" };
     }
 }

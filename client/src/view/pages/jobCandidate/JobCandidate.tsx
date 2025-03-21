@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import JobDetails from "../../components/jobDetails/JobDetails";
 import { useJobCandidateVM } from "./JobCandidateVM";
 import JobApply from "../../components/jobApply/JobApply";
 import "./JobCandidate.nodule.scss";
-import { useJobApplyVM } from "../../components/jobApply/JobApplyVM";
+import { MessageSquareText } from 'lucide-react';
+
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../../redux/user/userSlice";
+import { Link } from "react-router";
 
 const JobCandidate = () => {
 
   const { job } = useJobCandidateVM();
   const [isOpen, setIsOpen] = useState(false);
-  const { checkIfLoggedIn } = useJobApplyVM();
-  const [showLogIn, setShowLogIn] = useState(true);
-  const[isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    checkIfLoggedIn().then((isLoggedIn) => {
-      setIsLoggedIn(isLoggedIn);
-    });
-  }, []);
+  const user = useSelector(userSelector);
+
+  const isLoggedIn = user._id !== "";
+
 
   return (
     //when press on job to show, it will pass jobId to fetchJob function
@@ -25,13 +25,16 @@ const JobCandidate = () => {
     <div className="app-container">
       {job && <JobDetails job={job} />}
       {isLoggedIn ? (
-        <button className="open-button" onClick={() => setIsOpen(true)}>
-          Apply to job
-        </button>
+        <>
+          <button className="open-button" onClick={() => setIsOpen(true)}>
+            Apply to job
+          </button>
+          <Link to={`/candidate/chat/${job?._id}`}>
+            <MessageSquareText />
+          </Link>
+        </>
       ) : (
-        showLogIn && <CandidateLogin
-          closeLoginBtn={()=>setShowLogIn(false)}
-        /> 
+        <CandidateLogin />
       )}
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">

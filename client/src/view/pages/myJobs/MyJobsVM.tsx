@@ -3,7 +3,9 @@ import { userSelector } from "../../../redux/user/userSlice";
 import { useSelector } from "react-redux";
 import { Job } from "../../../model/jobModel";
 
+
 export const useMyJobs = () => {
+
   const user = useSelector(userSelector);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
