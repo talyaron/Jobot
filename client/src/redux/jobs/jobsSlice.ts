@@ -5,10 +5,12 @@ import { Job } from '../../models/jobs/jobsModel';
 
 export interface JobsState {
   jobs: Job[];
+  userJobs: Job[];
 }
 
 const initialJobState: JobsState = {
   jobs: [],
+  userJobs: [],
 }
 
 export const jobsSlice = createSlice({

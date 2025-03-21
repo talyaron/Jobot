@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export const EmployerLoginVM = () => {
  const [isLogin, setIsLogin] = useState(true);
+ const [userLoggedIn, setUserLoggedIn] = useState(false);
+
     const [formData, setFormData] = useState({
       userName: "",
       email: "",
@@ -10,7 +13,14 @@ export const EmployerLoginVM = () => {
       phoneNumber: "",
       isHiring:true
     });
-  
+    const navigate = useNavigate(); // Initialize the navigate function
+
+  // Use useEffect to navigate when showLogin is true
+  useEffect(() => {
+    if (userLoggedIn) {
+      navigate('/employer/');
+    }
+  }, [userLoggedIn, navigate]); 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -28,7 +38,8 @@ export const EmployerLoginVM = () => {
           credentials: "include",
           body: JSON.stringify(data),
         });
-        
+        if(isLogin)
+        setUserLoggedIn(true)
         const result = await response.json();
         if (!response.ok) throw new Error(result.message || "An error occurred");
         alert(result.message);

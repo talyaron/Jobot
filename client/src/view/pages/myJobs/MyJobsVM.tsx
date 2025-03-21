@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { userSelector } from "../../../redux/user/userSlice";
 import { useSelector } from "react-redux";
+import { Job } from "../jobsEmployer/types";
+
 
 export const useMyJobs = () => {
+
   const user = useSelector(userSelector);
-  const [jobIds, setJobIds] = useState<string[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
 
   useEffect(() => {
-  
 
-    if (user._id !== '')fetchSavedJobs();
+
+    if (user._id !== "") {
+ 
+      fetchSavedJobs();
+    }
   }, [user]);
 
   // Function to remove a job from saved jobs
@@ -32,7 +38,7 @@ export const useMyJobs = () => {
       }
 
       // Delete job from state
-      setJobIds((prevJobs) => prevJobs.filter((id) => id !== jobId));
+   
     } catch (err) {
       setError((err as Error).message);
     }
@@ -54,16 +60,22 @@ export const useMyJobs = () => {
         throw new Error("Failed to fetch saved jobs");
       }
 
-      const jobIds: string[] = await response.json();
-      console.log(jobIds);
-      setJobIds(jobIds);
+      const {jobs} = await response.json();
+      console.log(jobs)
+      if(!jobs) {
+        setJobs([]);
+        console.log("No jobs found");
+      } else {
+        setJobs(jobs);
+      }
+     
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setLoading(false);
     }
   };
-  return { jobIds, loading, error, removeJob };
+  return { jobs, loading, error, removeJob };
 };
 
 
