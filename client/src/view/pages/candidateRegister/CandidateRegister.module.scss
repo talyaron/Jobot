@@ -1,75 +1,70 @@
-.CandidateRegisterPage {
-    position: absolute;
-    top: 4rem; 
-    left: 1rem;
-    width: 320px; 
-    background: #fff;
-    padding: 1.5rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+@use '../../styles/style.scss';
+
+.CandidateLoginPage {
+    background-color: var(--background-primary);
+    border-radius: 30%;
+    padding: 50px 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
+    justify-content: start;
+    font-family: Tahoma, sans-serif;
 
-.closeRegisterBtn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: #333;
-}
-
-.RegisterText {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.inputField {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    text-align: right;
-    background-color: #d7e3f0 ;
-    color: #333;
-}
-
-.RegisterBtn {
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #0056b3;
+    .closeLoginBtn {
+        border: none;
+        color: var(--text-primary); 
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        left: 320px;
+        top: 13px;
     }
-}
 
-.forgotPassword, .register {
-    font-size: 0.9rem;
-    color: #007bff;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-top: 0.5rem;
-
-    &:hover {
-        color: #0056b3;
+    .RegisterText {
+        font-size: 30px;
+        color: var(--secondary);
+        margin-top: -70px;
     }
-}
-.error{
-    color: rgb(153, 153, 153);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
+
+    .inputField {
+        width: 240px;
+        height: 35px;
+        border-radius: 20px;
+        border: 0.5px solid var(--text-primary); 
+        margin-top: 10px;
+        padding-left: 10px;
+        text-align: center;
+        background-color: var(--background-light); 
+        font-weight: 800;
+        font-size: 17px;
+        font-family: Tahoma, sans-serif;
+        color: var(--text-primary); 
+    }
+
+    .inputField::placeholder {
+        color: var(--text-primary); 
+        font-weight: 500;
+    }
+
+    .loginBtn {
+        width: 240px;
+        padding: 10px 0;
+        border-radius: 20px;
+        border: none;
+        background-color: var(--text-primary); 
+        color: var(--text-light);
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 30px;
+        cursor: pointer;
+        font-family: Tahoma, sans-serif;
+    }
+
+    .register {
+        font-size: 20px;
+        color: var(--text-primary); 
+        margin-top: 20px;
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }

@@ -35,13 +35,13 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
 
     return (
         <div className={styles.CandidateLoginPage}>
+            <div className={styles.CandidateTitle}>
             <X className={styles.closeLoginBtn} onClick={closeRegisterBtn} />
-
-            <h2 className={styles.RegisterText}>הרשמה</h2>
-
+            <h2 className={styles.RegisterText}>יצירת משתמש</h2>
+            </div>
             <input
                 type="text"
-                placeholder="Full Name"
+                placeholder="שם מלא"
                 className={styles.inputField}
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -49,7 +49,7 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
 
             <input
                 type="tel"
-                placeholder="Phone Number"
+                placeholder="מס' טלפון"
                 className={styles.inputField}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -57,7 +57,7 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
 
             <input
                 type="email"
-                placeholder="Email"
+                placeholder="אימייל"
                 className={styles.inputField}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -65,14 +65,14 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
 
             <input
                 type="password"
-                placeholder="Password"
+                placeholder="סיסמה"
                 className={styles.inputField}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
    <input
                 type="password"
-                placeholder="Re Password"
+                placeholder="סיסמה פעם נוספת"
                 className={styles.inputField}
                 value={rePassword}
                 onChange={(e) => setRePassword(e.target.value)}
