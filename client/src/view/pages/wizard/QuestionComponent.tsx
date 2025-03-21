@@ -19,6 +19,7 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
   switch (question.answerType) {
     case 'multiple-choice':
       return (
+<<<<<<< Updated upstream
         <div>
           <p>{question.question}</p>
           <div>
@@ -34,6 +35,12 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
     case 'dropdown':
       return (
         <select value={answer || ''} onChange={(e) => onAnswerChange(e.target.value)}>
+=======
+        <select 
+          value={answer || ''}
+          onChange={(e) => onAnswerChange(e.target.value)}
+        >
+>>>>>>> Stashed changes
           <option value="">בחר תשובה</option>
           {question.options?.map((option) => (
             <option key={option} value={option}>
