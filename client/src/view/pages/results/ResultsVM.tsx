@@ -4,7 +4,7 @@ import { Job } from "../../../model/jobModel";
 
 export const useJobs = (userId?: string) => {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
+  const [savedJobs, setSavedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +33,7 @@ export const useJobs = (userId?: string) => {
     fetchJobIds();
   }, []);
 
-  const saveJob = async (jobId: string) => {
+  const saveJob = async (job: Job) => {
     try {
     
       const response = await fetch("http://localhost:3000/api/saved-jobs", {
@@ -41,13 +41,13 @@ export const useJobs = (userId?: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ jobId }),
+        body: JSON.stringify({jobId: job._id }),
         credentials: "include",
       });
 
       if (!response.ok) throw new Error("Failed to save job");
 
-      setSavedJobIds((prev) => [...prev, jobId]);
+      setSavedJobs((prev) => [...prev, job]);
       return true;
     } catch (err) {
       console.error(err);
@@ -55,5 +55,5 @@ export const useJobs = (userId?: string) => {
     }
   };
 
-  return { jobs, savedJobIds, loading, error, saveJob };
+  return { jobs, savedJobs, loading, error, saveJob };
 };

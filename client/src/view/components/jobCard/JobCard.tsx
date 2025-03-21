@@ -1,23 +1,19 @@
-import { useJobCard } from "./JobCardVM";
 import styles from "./JobCard.module.scss";
 import { Link } from "react-router-dom";
+import { Job } from "../../../model/jobModel";
 
 interface JobCardProps {
-  jobId: string;
+  job: Job;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ jobId }) => {
-  const { job, loading, error } = useJobCard(jobId);
+const JobCard: React.FC<JobCardProps> = ({ job }) => {
+ 
 
-  if (loading) return <p>Loading job details...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
   if (!job) return <p>No Job Found</p>;
 
   return (
     <div className={styles.card}>
-      <Link to={`job-candidate/${jobId}`}
-
-      >
+      <Link to={`job-candidate/${job._id}`} className={styles.link}>
         <h3 className={styles.jobTitle}>{job.jobName}</h3>
         <p className={styles.details}>
           <strong>Company:</strong> {job.company}
