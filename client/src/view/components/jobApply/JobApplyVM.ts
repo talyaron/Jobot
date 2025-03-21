@@ -37,7 +37,7 @@ export function useJobApplyVM() {
   }
   async function checkIfLoggedIn(): Promise<boolean> {
     try {
-      const response = await fetch("/check-auth", { credentials: "include" });
+      const response = await fetch("http://localhost:3000/api/auth/check-auth", { credentials: "include" });
       const data = await response.json();
 
       if (data.isLoggedIn) {

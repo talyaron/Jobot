@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, } from "react-redux";
+import { useNavigate } from "react-router";
+import { setUser, } from "../../../redux/user/userSlice";
 
 export const EmployerLoginVM = () => {
  const [isLogin, setIsLogin] = useState(true);
+ const [userLoggedIn, setUserLoggedIn] = useState(false);
+
     const [formData, setFormData] = useState({
       userName: "",
       email: "",
@@ -10,7 +15,14 @@ export const EmployerLoginVM = () => {
       phoneNumber: "",
       isHiring:true
     });
-  
+    const navigate = useNavigate(); // Initialize the navigate function
+    const dispatch = useDispatch();
+  // Use useEffect to navigate when showLogin is true
+  useEffect(() => {
+    if (userLoggedIn) {
+      navigate('/employer/');
+    }
+  }, [userLoggedIn, navigate]); 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -28,8 +40,13 @@ export const EmployerLoginVM = () => {
           credentials: "include",
           body: JSON.stringify(data),
         });
-        
+
         const result = await response.json();
+        if(isLogin){
+          setUserLoggedIn(true)
+          dispatch(setUser(result.user));
+        }
+        
         if (!response.ok) throw new Error(result.message || "An error occurred");
         alert(result.message);
       } catch (error: unknown) {
