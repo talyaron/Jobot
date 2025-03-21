@@ -8,7 +8,7 @@ export function useJobCandidateVM() {
   const { jobId } = useParams();
   const [job, setJob] = useState<Job>();
 
-  console.log(jobId);
+
 
   useEffect(() => {
     if (jobId) {
@@ -32,13 +32,12 @@ export function useJobCandidateVM() {
           setJob(data)
         })
         .catch((error) => console.error(error));
-      console.log('job', job)
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
   }
 
- 
+
 
 
   return {
