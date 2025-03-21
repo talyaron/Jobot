@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Job } from "../../../model/jobModel";
 
->>>>>>> talyaron/dev
-
 
 export const useJobs = (userId?: string) => {
-  const [jobIds, setJobIds] = useState<string[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -57,5 +55,5 @@ export const useJobs = (userId?: string) => {
     }
   };
 
-  return { jobIds, savedJobIds, loading, error, saveJob };
+  return { jobs, savedJobIds, loading, error, saveJob };
 };
