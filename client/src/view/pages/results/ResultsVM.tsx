@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import { Job } from "../../../model/jobModel";
+
+>>>>>>> talyaron/dev
 
 
 export const useJobs = (userId?: string) => {
@@ -20,9 +25,13 @@ export const useJobs = (userId?: string) => {
 
         const data = await response.json();
         console.log(data)
+<<<<<<< HEAD
         setJobIds(data.jobs.map((job: { _id: string }) => job._id)); // Get job IDs only
         
         
+=======
+        setJobs(data.jobs); 
+>>>>>>> talyaron/dev
       } catch (err) {
         console.error(err);
         setError("Failed to fetch job IDs");
