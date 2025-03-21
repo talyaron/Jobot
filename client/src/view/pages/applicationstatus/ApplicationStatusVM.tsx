@@ -24,7 +24,7 @@ export function useApplicationStatusViewModel() {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      const response = await fetch(`/api/userJobRoutes/status${jobId}`);
+      const response = await fetch(`http://localhost:3000/api/userJobRoutes/status${jobId}`);
       
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
