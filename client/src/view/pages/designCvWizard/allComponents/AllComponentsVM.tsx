@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../../redux/store";
+import { fetchCvForm } from "../../../../redux/cv/cvSlice"; // ייבוא הפעולה
 
 export const useAllComponentsVM = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [isCvFill, setIsCvFill] = useState(false);
   const cvForm = useSelector((state: RootState) => state.cvForm);
+
+  useEffect(() => {
+    dispatch(fetchCvForm()); // שליחת בקשה לשרת כדי למשוך את הנתונים
+  }, [dispatch]); // מופעל פעם אחת כשהקומפוננטה עולה
 
   useEffect(() => {
     foundIfCvFill();

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 // ממשקי הנתונים
 interface PersonalInformationState {
@@ -11,8 +12,6 @@ interface PersonalInformationState {
     phoneNumber: string;
     city: string;
 }
-
-
 
 interface EducationState {
     id: number;
@@ -52,6 +51,8 @@ interface CvState {
     workExperience: WorkExperienceState[];
     serviceType: ServiceState[];
     skills: SkillsState[];
+    loading: boolean;
+    error: string | null;
 }
 
 // מצב התחלתי
@@ -71,8 +72,20 @@ const initialState: CvState = {
     workExperience: [],
     serviceType: [],
     skills: [],
-
+    loading: false,
+    error: null,
 };
+
+// פעולה אסינכרונית למשיכת קורות חיים מהשרת
+export const fetchCvForm = createAsyncThunk("cvForm/fetchCvForm", async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get("/api/cv/getCvForm", { withCredentials: true }); // 🔹 עדכון הנתיב
+        return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.response?.data || "Error fetching CV form");
+    }
+});
+
 
 // יצירת הסלייס
 const cvSlice = createSlice({
@@ -85,8 +98,6 @@ const cvSlice = createSlice({
         updateProfessionalSummary(state, action: PayloadAction<string>) {
             state.professionalSummary = action.payload;
         },
-
-        // פונקציות עבור השכלה
         addEducation(state) {
             const newEducation: EducationState = {
                 id: Date.now(),
@@ -101,14 +112,10 @@ const cvSlice = createSlice({
             if (index !== -1) {
                 state.educations[index] = { ...state.educations[index], ...action.payload.data };
             }
-            console.table(state.educations);
-
         },
         removeEducation(state, action: PayloadAction<number>) {
             state.educations = state.educations.filter((edu) => edu.id !== action.payload);
         },
-
-        // פונקציות עבור ניסיון תעסוקתי
         addWorkExperience(state) {
             const newExperience: WorkExperienceState = {
                 id: Date.now(),
@@ -130,8 +137,6 @@ const cvSlice = createSlice({
         removeWorkExperience(state, action: PayloadAction<number>) {
             state.workExperience = state.workExperience.filter((exp) => exp.id !== action.payload);
         },
-
-        // פונקציות עבור סוגי שירות
         addServiceType(state) {
             const newService: ServiceState = {
                 id: crypto.randomUUID(),
@@ -150,7 +155,6 @@ const cvSlice = createSlice({
         removeServiceType(state, action: PayloadAction<string>) {
             state.serviceType = state.serviceType.filter((service) => service.id !== action.payload);
         },
-
         addSkills(state) {
             const newSkills: SkillsState = {
                 id: crypto.randomUUID(),
@@ -168,31 +172,26 @@ const cvSlice = createSlice({
                 state.skills[index] = { ...state.skills[index], ...action.payload.data };
             }
         },
-
-        cVstate(state) {
-            // הפעו��ות למצב התחלתי
-            state.personalInformation = initialState.personalInformation;
-            state.professionalSummary = initialState.professionalSummary;
-            state.educations = initialState.educations;
-            state.workExperience = initialState.workExperience;
-            state.serviceType = initialState.serviceType;
-            state.skills = initialState.skills;
-        },
-
-
-        // ניקוי כל הנתונים
         clearCV(state) {
-            state.personalInformation = initialState.personalInformation;
-            state.professionalSummary = initialState.professionalSummary;
-            state.educations = [];
-            state.workExperience = [];
-            state.serviceType = [];
-            state.skills = [];
+            return initialState;
         },
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCvForm.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchCvForm.fulfilled, (state, action) => {
+                return { ...state, ...action.payload, loading: false, error: null };
+            })
+            .addCase(fetchCvForm.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            });
+    },
 });
 
-// ייצוא הפעולות לשימוש ברכיבים
 export const {
     updatePersonalInformation,
     updateProfessionalSummary,
@@ -200,8 +199,7 @@ export const {
     addWorkExperience, updateWorkExperience, removeWorkExperience,
     addServiceType, updateServiceType, removeServiceType,
     addSkills, removeSkills, updateSkills,
-    clearCV, cVstate,
+    clearCV,
 } = cvSlice.actions;
 
-// ייצוא ה-reducer לשימוש ב-store
 export default cvSlice.reducer;
