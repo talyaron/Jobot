@@ -1,41 +1,32 @@
 import React from "react";
-import styles from "./professionalSummary.module.scss";
-import { professionalSummaryVM } from "./professionalSummaryVM";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
+import { updateProfessionalSummary } from "../../../../redux/cv/cvSlice";
 
 const ProfessionalSummary = () => {
-  const { professionalSummary, setProfessionalSummary } = professionalSummaryVM();
+  const dispatch = useDispatch();
+  const professionalSummary = useSelector((state: RootState) => state.cvForm.professionalSummary);
 
-  const handleProfessionalSummaryChange = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
-    const describeYourself = formData.get("describeYourself") as string;
-
-    setProfessionalSummary(describeYourself);
-  };
-
-  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setProfessionalSummary(e.target.value);
+  const handleProfessionalSummaryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newSummary = e.target.value;
+    dispatch(updateProfessionalSummary( newSummary ));
   };
 
   return (
-    <div className={styles.continer}>
-      <form onSubmit={handleProfessionalSummaryChange}>
-        <br />
+    <div>
+      <form>
         <h2>סיכום מקצועי:</h2>
         <label htmlFor="describeYourself">תאר את עצמך:</label>
         <br />
-        <textarea 
-          id="describeYourself" 
-          name="describeYourself" 
-          rows={4} 
+        <textarea
+          id="describeYourself"
+          name="describeYourself"
+          rows={4}
           cols={50}
-          value={professionalSummary}
-          onChange={handleTextAreaChange}
+          defaultValue={professionalSummary}
+          onChange={handleProfessionalSummaryChange}
         />
         <br />
-        {/* <button type="submit">שמור</button> */}
       </form>
     </div>
   );

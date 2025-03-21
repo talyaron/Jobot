@@ -8,6 +8,7 @@ import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
 import chatRoutes from './Routes/chatRoutes';
 import cookieParser from 'cookie-parser';
+import cvRoutes from "./Routes/cvFormRoutes"
 
 
 const app = express()
@@ -30,6 +31,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/cv", cvRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
