@@ -5,6 +5,7 @@ export async function getUserJobs(req: any, res: any) {
 
    
     const userId = req.userId; // Extract userId from middleware
+    console.log('user ID', userId);
 
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -12,6 +13,8 @@ export async function getUserJobs(req: any, res: any) {
 
     // Find all saved jobs by userId
     const savedJobs = await SavedJobsModel.find({ userId })
+    console.log('saved jobs', savedJobs);
+
 
     if (!savedJobs.length) {
       return res.status(200).json({ message: "No saved jobs found" });
