@@ -66,7 +66,7 @@ const Results = () => {
                 Save
               </button>
 
-              <button onClick={() => setIdJobInCvForm(jobId)}>
+              <button onClick={() => setIdJobInCvForm(job._id)}>
                 <Link to="cv" style={{ color: "white" }}>
                   {isCvFill ? "Update CV" : "Add CV"}
                 </Link>

@@ -5,7 +5,7 @@ import { request } from "http";
 export const getCvForm = async (req: any, res: Response): Promise<void> => {
     try {
         console.log("test");
-        // שליפת ה-userId מהעוגייה
+        // recived userId from the function that yuliya build
         const userId = req.userId;
         if (!userId) {
             res.status(400).json({ error: "User ID is required from cookies" });
