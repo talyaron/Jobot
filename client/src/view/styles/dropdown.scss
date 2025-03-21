@@ -1,0 +1,54 @@
+.dropdown {
+    position: relative;
+    width: 20rem;
+
+    &-toggle { 
+        background-color: #f8f9fa;
+        border: 0.2rem solid #ccc;
+        padding: 1rem;
+        cursor: pointer;
+        border-radius: 0.5rem;;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1rem;
+    }
+
+    &-menu {
+        position: absolute;
+        width: 100%;
+        background: white;
+        border-radius: 2rem;
+        max-height: 25rem; 
+        overflow-y: auto;
+        display: none; 
+
+        &.active {
+            display: block;
+        }
+
+        li {
+            list-style: none;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                background: #ABC89A; 
+            }
+
+            &.selected {
+                background: #ABC89A; 
+            }
+
+            img,
+            svg {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+    }
+}
