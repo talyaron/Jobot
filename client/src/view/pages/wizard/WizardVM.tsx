@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CityDropdown from '../cityDropdown/CityDropdown';
+import confetti from 'canvas-confetti';
+
 
 type AnswerType = "multiple-choice" | "rating"  | "dropdown";
 
@@ -94,7 +95,12 @@ export function useWizard() {
     if (currentQuestionIndex < careerQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      navigate('/candidate');
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+      navigate('/candidate'); 
     }
   };
 
