@@ -24,8 +24,12 @@ export async function loginUser(req:any, res:any) {
 
     const payload = { userId: user._id, email: user.email };
     const token = jwt.encode(payload, secretKey)
-    res.cookie('user', token, { maxAge: 1000 * 60 * 60 * 1500000 });
-    
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    });
+
     return res.status(200).json({ message: 'Login successful', user: user });
     
   } catch (error) {

@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import JobDetails from "../../components/jobDetails/JobDetails";
 import { useJobCandidateVM } from "./JobCandidateVM";
 import JobApply from "../../components/jobApply/JobApply";
