@@ -5,7 +5,7 @@ import JobApply from "../../components/jobApply/JobApply";
 import "./JobCandidate.nodule.scss";
 import { MessageSquareText } from 'lucide-react';
 
-import CandidateLogin from "../CandidateLogin/CandidateLogin";
+import CandidateLogin from "../../components/CandidateLogin/CandidateLogin";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../../redux/user/userSlice";
 import { Link } from "react-router";
