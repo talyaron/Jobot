@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import JobDetails from "../../components/jobDetails/JobDetails";
 import { useJobCandidateVM } from "./JobCandidateVM";
 import JobApply from "../../components/jobApply/JobApply";
 import "./JobCandidate.nodule.scss";
-import { useJobApplyVM } from "../../components/jobApply/JobApplyVM";
+
 import CandidateLogin from "../CandidateLogin/CandidateLogin";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../../redux/user/userSlice";
 
 const JobCandidate = () => {
 
   const { job } = useJobCandidateVM();
   const [isOpen, setIsOpen] = useState(false);
-  const { checkIfLoggedIn } = useJobApplyVM();
-  const [showLogIn, setShowLogIn] = useState(true);
-  const[isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    checkIfLoggedIn().then((isLoggedIn) => {
-      setIsLoggedIn(isLoggedIn);
-    });
-  }, []);
+  const user = useSelector(userSelector);
+
+
+
+ const isLoggedIn = user._id !== "";
+
 
   return (
     //when press on job to show, it will pass jobId to fetchJob function
@@ -29,9 +29,7 @@ const JobCandidate = () => {
           Apply to job
         </button>
       ) : (
-        showLogIn && <CandidateLogin
-          closeLoginBtn={()=>setShowLogIn(false)}
-        /> 
+        <CandidateLogin /> 
       )}
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
