@@ -36,12 +36,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="my-jobs" element={<MyJobs />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
-<<<<<<< HEAD
-            <Route path="cv" element={<DesignCvWizard />} />
-            
-=======
             <Route path="chat/:jobId" element={<Chat />} />
->>>>>>> talyaron/dev
+            <Route path="cv" element={<DesignCvWizard />} />
           </Route>
           <Route path="employer/login" element={<EmployerLogin />} />
           <Route path="employer" element={<EmployerWrapper />}>

@@ -6,12 +6,9 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
-<<<<<<< HEAD
-import cvRoutes from "./Routes/cvFormRoutes"
-=======
 import chatRoutes from './Routes/chatRoutes';
 import cookieParser from 'cookie-parser';
->>>>>>> talyaron/dev
+import cvRoutes from "./Routes/cvFormRoutes"
 
 
 const app = express()
@@ -33,11 +30,8 @@ app.use("/api/user", userPreferencesRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
-<<<<<<< HEAD
-app.use("/api/cv", cvRoutes);
-=======
 app.use("/api/chat", chatRoutes);
->>>>>>> talyaron/dev
+app.use("/api/cv", cvRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
