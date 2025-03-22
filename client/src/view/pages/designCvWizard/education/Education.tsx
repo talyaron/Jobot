@@ -18,8 +18,8 @@ const Education = () => {
           <label>שם מוסד לימודים:</label>
           <input
             type="text"
-            name="institutionName"
-            value={edu.institutionName}
+            name="institution"
+            value={edu.institution}
             onChange={(e) => handleChange(edu.id, e)}
           />
           <label>תואר:</label>

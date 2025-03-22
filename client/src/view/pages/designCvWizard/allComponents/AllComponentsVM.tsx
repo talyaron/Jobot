@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../../redux/store";
 // import { fetchCvForm } from "../../../../redux/cv/cvSlice"; // ייבוא הפעולה
-import { addEducation, addSkills, removeEducation, updateEducation, updatePersonalInformation, updateProfessionalSummary } from "../../../../redux/cv/cvSlice"
+import { getEducationFromServer, getServiceTypesFromServer, getSkillsFromServer, getWorkExperienceFromServer, updatePersonalInformation, updateProfessionalSummary } from "../../../../redux/cv/cvSlice"
+
 
 export const useAllComponentsVM = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -49,20 +50,20 @@ export const useAllComponentsVM = () => {
       }
 
       if (data.skills) {
-        console.log("Skills from server:", data.skills); // בדיקה אם הנתונים מתקבלים
-        data.skills.forEach((skill) => {
-            dispatch(addSkills(skill));
-        });
+        console.log("Skills from server:", data.skills); // לבדוק שהנתונים מגיעים
+        dispatch(getSkillsFromServer(data.skills)); // לשלוח את כל המערך במקום לרוץ ב-loop
     }
-    
 
-      // if (data.workExperience) {
-      //   data.workExperience.forEach((workExperience) => {
-      //     dispatch(addEducation(workExperience));
-      //   });
-      // }
-
+    if (data.educations){
+      dispatch(getEducationFromServer(data.educations));
     }
+    if (data.workExperience){
+      dispatch(getWorkExperienceFromServer(data.workExperience));
+    }
+    if (data.serviceType){
+      dispatch(getServiceTypesFromServer(data.serviceType));
+    }
+  }
 catch (error) {
       console.error("Error fetching CV data:", error);
     }

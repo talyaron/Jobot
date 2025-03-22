@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import PersonalInformation from "../personalInformation/PersonalInformation";
@@ -41,22 +40,11 @@ const AllComponents = () => {
       <PersonalInformation />
       <ProfessionalSummary />
       <Education />
-      <WorkExperience />
+     <WorkExperience />
       <ServiceType />
       <Skills />
       <br />
       <button onClick={sendCvFormToServer}>שלח קורות חיים</button>
-      <p>user id from ctypto is: {cvForm.personalInformation.userId}</p>
-      <p>{cvForm.personalInformation?.firstName}</p>
-      <p>{cvForm.personalInformation?.lastName}</p>
-      <div>
-        {cvForm.skills.map((x, index) => (
-          <div key={index}>
-            <p>{x.spokenLanguages}</p>
-            <p>{x.technicalSkills}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

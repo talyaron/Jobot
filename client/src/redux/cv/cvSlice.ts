@@ -14,7 +14,7 @@ interface PersonalInformationState {
 
 interface EducationState {
     id: number;
-    institutionName: string;
+    institution: string;
     degree: string;
     studyYears: string;
 }
@@ -37,9 +37,9 @@ interface ServiceState {
 }
 
 interface SkillsState {
-    id: string;
     technicalSkills: string;
     spokenLanguages: string;
+    _id: string;
 }
 
 // המבנה הכללי של ה-state
@@ -79,6 +79,7 @@ const cvSlice = createSlice({
     name: "cv",
     initialState,
     reducers: {
+        
         updatePersonalInformation(state, action: PayloadAction<Partial<PersonalInformationState>>) {
             state.personalInformation = { ...state.personalInformation, ...action.payload };
         },
@@ -88,7 +89,7 @@ const cvSlice = createSlice({
         addEducation(state) {
             const newEducation: EducationState = {
                 id: Date.now(),
-                institutionName: "",
+                institution: "",
                 degree: "",
                 studyYears: "",
             };
@@ -100,6 +101,11 @@ const cvSlice = createSlice({
                 state.educations[index] = { ...state.educations[index], ...action.payload.data };
             }
         },
+
+        getEducationFromServer(state, action: PayloadAction<EducationState[]>){
+            state.educations = action.payload;
+        },
+
         removeEducation(state, action: PayloadAction<number>) {
             state.educations = state.educations.filter((edu) => edu.id !== action.payload);
         },
@@ -121,6 +127,11 @@ const cvSlice = createSlice({
                 state.workExperience[index] = { ...state.workExperience[index], ...action.payload.data };
             }
         },
+
+        getWorkExperienceFromServer(state, action: PayloadAction<WorkExperienceState[]>){
+            state.workExperience = action.payload;
+        },
+
         removeWorkExperience(state, action: PayloadAction<number>) {
             state.workExperience = state.workExperience.filter((exp) => exp.id !== action.payload);
         },
@@ -139,41 +150,52 @@ const cvSlice = createSlice({
                 state.serviceType[index] = { ...state.serviceType[index], ...action.payload.data };
             }
         },
+
+        getServiceTypesFromServer(state, action: PayloadAction<ServiceState[]>){
+            state.serviceType = action.payload;
+        },
+
         removeServiceType(state, action: PayloadAction<string>) {
             state.serviceType = state.serviceType.filter((service) => service.id !== action.payload);
         },
         addSkills(state) {
             const newSkills: SkillsState = {
-                id: crypto.randomUUID(),
+                _id: crypto.randomUUID(),
                 technicalSkills: "",
                 spokenLanguages: "",
             };
             state.skills.push(newSkills);
         },
+        
         removeSkills(state, action: PayloadAction<string>) {
-            state.skills = state.skills.filter((skill) => skill.id !== action.payload);
+            state.skills = state.skills.filter((skill) => skill._id !== action.payload);
         },
-        updateSkills(state, action: PayloadAction<{ id: string, data: Partial<SkillsState> }>) {
-            const index = state.skills.findIndex((skill) => skill.id === action.payload.id);
+        updateSkills(state, action: PayloadAction<{ id: string; field: keyof SkillsState; value: string }>) {
+            const index = state.skills.findIndex(skill => skill._id === action.payload.id);
             if (index !== -1) {
-                state.skills[index] = { ...state.skills[index], ...action.payload.data };
+                state.skills[index] = { 
+                    ...state.skills[index], 
+                    [action.payload.field]: action.payload.value 
+                };
             }
         },
-        clearCV(state) {
-            return initialState;
+
+        getSkillsFromServer(state, action: PayloadAction<SkillsState[]>) {
+            state.skills = action.payload; // מחליף את המערך הקיים עם המידע שמגיע מהשרת
         },
+        
     },
+    
     
 });
 
 export const {
     updatePersonalInformation,
     updateProfessionalSummary,
-    addEducation, updateEducation, removeEducation,
-    addWorkExperience, updateWorkExperience, removeWorkExperience,
-    addServiceType, updateServiceType, removeServiceType,
-    addSkills, removeSkills, updateSkills,
-    clearCV,
+    addEducation, updateEducation, removeEducation,getEducationFromServer,
+    addWorkExperience, updateWorkExperience, removeWorkExperience,getWorkExperienceFromServer,
+    addServiceType, updateServiceType, removeServiceType,getServiceTypesFromServer,
+    addSkills, removeSkills, updateSkills,getSkillsFromServer,
 } = cvSlice.actions;
 
 export default cvSlice.reducer;
