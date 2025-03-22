@@ -32,6 +32,7 @@ const AllComponents = () => {
     }
   };
 
+
   return (
     <div>
       <h1>אשף קורות חיים</h1>

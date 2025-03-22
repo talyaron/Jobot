@@ -5,8 +5,9 @@ import { userIdMiddleware } from "../utils/authMiddleware";
 
 const router = express.Router();
 
-router.post(`/updateCvForm`, updateCvForm, userIdMiddleware);
-router.get(`/getCvForm`, userIdMiddleware, getCvForm);
+router.post(`/updateCvForm`, updateCvForm);
+// router.get(`/getCvForm`, userIdMiddleware, getCvForm);
+router.get("/getCvForm/:userId", getCvForm);
 
 
 export default router;
