@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // ממשקי הנתונים
 interface PersonalInformationState {
@@ -75,18 +75,6 @@ const initialState: CvState = {
     error: null,
 };
 
-// פעולה אסינכרונית למשיכת קורות חיים מהשרת
-// export const fetchCvForm = createAsyncThunk("cvForm/fetchCvForm", async (_, { rejectWithValue }) => {
-//     try {
-//         const response = await axios.get("/api/cv/getCvForm", { withCredentials: true }); // 🔹 עדכון הנתיב
-//         return response.data;
-//     } catch (error: any) {
-//         return rejectWithValue(error.response?.data || "Error fetching CV form");
-//     }
-// });
-
-
-// יצירת הסלייס
 const cvSlice = createSlice({
     name: "cv",
     initialState,
@@ -175,20 +163,6 @@ const cvSlice = createSlice({
             return initialState;
         },
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(fetchCvForm.pending, (state) => {
-    //             state.loading = true;
-    //             state.error = null;
-    //         })
-    //         .addCase(fetchCvForm.fulfilled, (state, action) => {
-    //             return { ...state, ...action.payload, loading: false, error: null };
-    //         })
-    //         .addCase(fetchCvForm.rejected, (state, action) => {
-    //             state.loading = false;
-    //             state.error = action.payload as string;
-    //         });
-    // },
     
 });
 
