@@ -1,8 +1,10 @@
 import express from "express";
 import { checkApplicationStatus } from "../Controllers/userJob/applicationStatus";
+import { applyToJob } from "../Controllers/userJob/userApplyToJob";
 
 const router = express.Router();
 
-router.get("/get-job-by-id/:jobId", checkApplicationStatus);
+router.post("/get-job-by-id/:jobId", checkApplicationStatus);
+router.post("/apply-job/:jobId", applyToJob);
 
 export default router;

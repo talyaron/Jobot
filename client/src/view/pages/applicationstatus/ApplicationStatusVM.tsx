@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 interface ApplicationStatusState {
   status: string | null;
   loading: boolean;
@@ -8,7 +10,7 @@ interface ApplicationStatusState {
 
 export function useApplicationStatusViewModel() {
   const { jobId } = useParams<{ jobId: string }>();
-
+  const candidateId = useSelector((state: any) => state.user?._id);
   const [state, setState] = useState<ApplicationStatusState>({
     status: null,
     loading: false,
@@ -24,8 +26,16 @@ export function useApplicationStatusViewModel() {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      const response = await fetch(`http://localhost:3000/api/userJobRoutes/status${jobId}`);
-      
+      const response = await fetch(`http://localhost:3000/api/userJob/get-job-by-id/${jobId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          candidateId: candidateId
+        })
+      });
+    
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }

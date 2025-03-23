@@ -27,7 +27,7 @@ app.use("/api/user", userPreferencesRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
-app.use("/api/userJobRoutes", userJobRoutes)
+app.use("/api/userJob", userJobRoutes)
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
