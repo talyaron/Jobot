@@ -6,18 +6,20 @@ import { EllipsisVertical } from 'lucide-react';
 import { Paperclip } from 'lucide-react';
 import { Send } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react';
+import { Message } from "../../../model/messageModel";
 // import { io, Socket } from "socket.io-client";
 
 function Chat() {
   const { job, user, chats, loading, messages, joinChatRoom, socket } = ChatMV();
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [messageInput, setMessageInput] = useState('');
-  const [messagesArray, setMessagesArray] = useState<string[]>([]);
+  const [selectedChatMessages, setSelectedChatMessages] = useState<Message[]>([]);
   // const socketRef = useRef<Socket | null>(null);
 
   // const socket: Socket = io("http://localhost:3000");
   // 
   if (loading) return <div className={styles.loading}>טוען...</div>;
+
   // useEffect(() => {
   //   // Initialize the socket only once
   //   // socketRef.current = io("http://localhost:3000", {
@@ -59,33 +61,51 @@ function Chat() {
   //   }
   // };
 
-  const handleOpenChat = (chat: Chat) => {
-    joinChatRoom(chat); // Join the chat room when a chat is selected
+  const handleOpenChat = async (chat: Chat) => {
+    setSelectedChat(chat);
+
+    // Join the socket room
+    if (socket && chat.job?._id) {
+      console.log("in socket")
+      joinChatRoom;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/chat/get-chat-messages`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ chatId: chat._id }),
+      });
+
+      const data = await res.json();
+      setSelectedChatMessages(data);
+      console.log("chat", data)
+    } catch (err) {
+      console.error("Failed to fetch messages", err);
+    }
   };
 
   const handleSendClick = () => {
-    if (messageInput.trim() && socket) {
-      const messagePayload = {
-        userId: user._id,
-        jobId: job?._id,
-        message: messageInput.trim(),
-      };
-      socket.emit('send_message', messagePayload);
+    if (messageInput.trim()) {
+      if (socket && socket.connected) {
+        const messagePayload = {
+          userId: user._id,
+          jobId: job?._id,
+          message: messageInput.trim(),
+        };
+
+        socket.emit('send_message', messagePayload);
+      } else {
+        console.warn("Socket is not connected. Message not sent via socket.");
+      }
 
       sendMessage(user._id, job?._id, messageInput.trim());
-
-      // setMessagesArray((prev) => [...prev, messageInput.trim()]);
       setMessageInput('');
     }
-    // if (socket) {
-    //   socket.emit("send_message", { messageInput });
-    // }
   };
-
-
-
-
-
 
   const sendMessage = async (userId: string, jobId: string | undefined, message: string) => {
     try {
@@ -166,20 +186,26 @@ function Chat() {
           </div>
 
           <div className={styles.chatArea}>
-            {!selectedChat ? (
+            {selectedChat === null ? (
               <div className={styles.emptyState}>
                 <p>עדיין אין הודעות</p>
               </div>
             ) : (
               <div className={styles.messages}>
-                {selectedChat.messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={
-                      msg.content === user._id ? styles.sentMessage : styles.receivedMessage
-                    }
-                  >
-                    {msg.content}
+                {selectedChatMessages.map((msg, index) => (
+                  <div className={styles.msgWrapper} key={index}>
+                    <div
+                      className={
+                        msg.senderId === user._id ? styles.sentMessage : styles.receivedMessage
+                      }
+                    >
+                      {msg.content}
+                    </div>
+                    <div className={styles.sentAt}>
+                      {new Date(msg.sentAt).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                    </div>
+
+
                   </div>
                 ))}
               </div>

@@ -16,19 +16,31 @@ export function ChatMV() {
   const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
-    // Initialize socket connection
     const socketInstance = io("http://localhost:3000", {
       withCredentials: true,
       transports: ["websocket"],
+      reconnection: true,
+    });
+
+    socketInstance.on("connect", () => {
+      console.log("Socket connected:", socketInstance.connected);
     });
 
     setSocket(socketInstance);
 
-    // Cleanup on component unmount
-    return () => {
-      socketInstance.disconnect();
-    };
+    // return () => {
+    //   socketInstance.disconnect();
+    // };
   }, []);
+
+  useEffect(() => {
+    if (socket?.connected) {
+      console.log("Socket is connected");
+    } else {
+      console.log("Socket is not connected");
+    }
+  }, []);
+
 
   // Fetching job and chats when the component is mounted
   useEffect(() => {
@@ -39,6 +51,8 @@ export function ChatMV() {
     };
     fetchData();
   }, [jobId, user]);
+
+  console.log("socket", socket)
 
   // Fetch job details
   async function fetchJob(jobId: string | undefined) {
@@ -87,6 +101,7 @@ export function ChatMV() {
   // Listen for new messages
   useEffect(() => {
     if (!socket) return;
+    console.log(" Listen for new messages")
 
     socket.on("receive_message", (data) => {
       console.log("Received message:", data);

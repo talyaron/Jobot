@@ -145,10 +145,6 @@
     flex-direction: column;
 }
 
-.price {
-    font-weight: bold;
-    color: #333;
-}
 
 .messagesArea {
     flex: 1;
@@ -204,6 +200,50 @@
         box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
     }
 
+}
+
+.messages {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.msgWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.sentMessage,
+.receivedMessage {
+    display: inline-block;
+    max-width: 80%;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    margin: 0.6rem;
+    word-break: break-word;
+}
+
+.sentMessage {
+    background-color: #eee;
+    align-self: flex-start;
+}
+
+.receivedMessage {
+    background-color: #5fa268;
+    align-self: flex-end;
+}
+
+.sentAt {
+    color: #666666;
+    font-size: 1rem;
 }
 
 .attachment {
