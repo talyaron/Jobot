@@ -17,7 +17,7 @@ export function ChatMV() {
 
   useEffect(() => {
     const socketInstance = io("http://localhost:3000", {
-      withCredentials: true,
+      // withCredentials: true,
       transports: ["websocket"],
       reconnection: true,
     });
@@ -26,11 +26,15 @@ export function ChatMV() {
       console.log("Socket connected:", socketInstance.connected);
     });
 
+    socketInstance.on("connect_error", (err) => {
+      console.error("Socket connection error:", err.message);
+    });
+
     setSocket(socketInstance);
 
-    // return () => {
-    //   socketInstance.disconnect();
-    // };
+    return () => {
+      socketInstance.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export function ChatMV() {
     } else {
       console.log("Socket is not connected");
     }
-  }, []);
+  }, [socket]);
 
 
   // Fetching job and chats when the component is mounted

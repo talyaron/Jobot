@@ -1,7 +1,7 @@
 import type { Chat } from "../../../model/ChatModel";
 import styles from './Chat.module.scss';
 import { ChatMV } from './ChatVM';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { EllipsisVertical } from 'lucide-react';
 import { Paperclip } from 'lucide-react';
 import { Send } from 'lucide-react';
@@ -14,52 +14,8 @@ function Chat() {
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [messageInput, setMessageInput] = useState('');
   const [selectedChatMessages, setSelectedChatMessages] = useState<Message[]>([]);
-  // const socketRef = useRef<Socket | null>(null);
 
-  // const socket: Socket = io("http://localhost:3000");
-  // 
   if (loading) return <div className={styles.loading}>טוען...</div>;
-
-  // useEffect(() => {
-  //   // Initialize the socket only once
-  //   // socketRef.current = io("http://localhost:3000", {
-  //   //   withCredentials: true,
-  //   //   transports: ["websocket"],
-  //   // });
-
-  //   // Event listener for receiving messages
-  //   // const socket = socketRef.current;
-  //   // if (socket) {
-  //   //   socket.on('receive_message', (data) => {
-  //   //     console.log('Received message via socket:', data);
-  //   //     setMessages((prev) => [...prev, data.message]);
-  //   //   });
-  //   // }
-
-  //   // // Cleanup socket events when component unmounts
-  //   // return () => {
-  //   //   if (socket) {
-  //   //     socket.off('receive_message');
-  //   //     socket.disconnect(); // disconnect socket
-  //   //   }
-  //   // };
-  // }, []);
-
-
-  // const handleOpenChat = (chat: Chat) => {
-  //   setSelectedChat(chat);
-
-  //   if (chat.job?._id) {
-  //     socket.emit("join_room", chat.job._id);
-  //   }
-  // };
-
-  // const handleOpenChat = (chat: Chat) => {
-  //   setSelectedChat(chat);
-  //   if (chat?.job?._id && socketRef.current) {
-  //     socketRef.current.emit("join_room", chat.job._id);
-  //   }
-  // };
 
   const handleOpenChat = async (chat: Chat) => {
     setSelectedChat(chat);
@@ -90,14 +46,18 @@ function Chat() {
 
   const handleSendClick = () => {
     if (messageInput.trim()) {
-      if (socket && socket.connected) {
-        const messagePayload = {
+      if (socket && socket.connected && job?._id && user?._id) {
+        const newMessage = {
           userId: user._id,
           jobId: job?._id,
-          message: messageInput.trim(),
+          content: messageInput.trim(),
+          sentAt: new Date(),
+          isRead: false,
         };
 
-        socket.emit('send_message', messagePayload);
+        setSelectedChatMessages((prev) => [...prev, newMessage]);
+
+        socket.emit('send_message', newMessage);
       } else {
         console.warn("Socket is not connected. Message not sent via socket.");
       }
@@ -196,7 +156,7 @@ function Chat() {
                   <div className={styles.msgWrapper} key={index}>
                     <div
                       className={
-                        msg.senderId === user._id ? styles.sentMessage : styles.receivedMessage
+                        msg.userId === user._id ? styles.sentMessage : styles.receivedMessage
                       }
                     >
                       {msg.content}

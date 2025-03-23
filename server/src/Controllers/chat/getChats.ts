@@ -24,10 +24,8 @@ export async function getChats(req: any, res: any) {
 
 export async function getChatMessages(req: any, res: any) {
     try {
-        console.log("in...")
         const { chatId } = req.body;
         const chat = await ChatModel.findOne({ _id: chatId });
-        console.log(chat);
 
         const messages = chat?.messages;
         if (!chat || !messages) {
