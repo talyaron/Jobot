@@ -202,13 +202,17 @@
 
 }
 
-.messages {
-    max-height: 400px;
-    overflow-y: auto;
+.messagesContainer {
+    height: 400px;
     display: flex;
     flex-direction: column;
     padding: 10px;
     gap: 8px;
+    justify-content: flex-end;
+}
+
+.messages {
+    overflow-y: auto;
 
     &::-webkit-scrollbar {
         width: 0;

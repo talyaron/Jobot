@@ -7,7 +7,6 @@ import { Paperclip } from 'lucide-react';
 import { Send } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react';
 import { Message } from "../../../model/messageModel";
-// import { io, Socket } from "socket.io-client";
 
 function Chat() {
   const { job, user, chats, loading, messages, joinChatRoom, socket } = ChatMV();
@@ -151,24 +150,29 @@ function Chat() {
                 <p>עדיין אין הודעות</p>
               </div>
             ) : (
-              <div className={styles.messages}>
-                {selectedChatMessages.map((msg, index) => (
-                  <div className={styles.msgWrapper} key={index}>
-                    <div
-                      className={
-                        msg.userId === user._id ? styles.sentMessage : styles.receivedMessage
-                      }
-                    >
-                      {msg.content}
-                    </div>
-                    <div className={styles.sentAt}>
-                      {new Date(msg.sentAt).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false })}
-                    </div>
+
+              <div className={styles.messagesContainer} id="messages-container">
+                <div className={styles.messages}>
+
+                  {selectedChatMessages.map((msg, index) => (
+                    <div className={styles.msgWrapper} key={index}>
+                      <div
+                        className={
+                          msg.userId === user._id ? styles.sentMessage : styles.receivedMessage
+                        }
+                      >
+                        {msg.content}
+                      </div>
+                      <div className={styles.sentAt}>
+                        {new Date(msg.sentAt).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                      </div>
 
 
-                  </div>
-                ))}
+                    </div>
+                  ))}
+                </div>
               </div>
+
             )}
           </div>
           <div className={styles.messageInputArea}>

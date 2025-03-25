@@ -56,7 +56,6 @@ export function ChatMV() {
     fetchData();
   }, [jobId, user]);
 
-  console.log("socket", socket)
 
   // Fetch job details
   async function fetchJob(jobId: string | undefined) {
