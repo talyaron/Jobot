@@ -1,0 +1,97 @@
+.jobsEmployer {
+  background-color: var(--background-primary);
+  padding: 2rem;
+  direction: rtl;
+  font-family: Arial, sans-serif;
+  color: var(--text-primary);
+
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--secondary-dark);
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #00000018;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+    padding-bottom: 2rem;
+
+
+  }
+
+  &__group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.8rem 2.2rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  input,
+  select,
+  textarea {
+    border: 1px solid var(--secondary-dark);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: var(--white);
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 4px var(--primary-dark);
+  }
+
+  textarea {
+    min-height: 130px;
+    resize: vertical;
+  }
+  button,
+  .btn {
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+  
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+}
