@@ -1,0 +1,70 @@
+@use '../../styles/style.scss';
+
+.CandidateLoginPage {
+    background-color: var(--background-primary);
+    border-radius: 30%;
+    padding: 50px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    font-family: Tahoma, sans-serif;
+
+    .closeLoginBtn {
+        border: none;
+        color: var(--text-primary); 
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        left: 320px;
+        top: 13px;
+    }
+
+    .RegisterText {
+        font-size: 30px;
+        color: var(--secondary);
+        margin-top: -70px;
+    }
+
+    .inputField {
+        width: 240px;
+        height: 35px;
+        border-radius: 20px;
+        border: 0.5px solid var(--text-primary); 
+        margin-top: 10px;
+        padding-left: 10px;
+        text-align: center;
+        background-color: var(--background-light); 
+        font-weight: 800;
+        font-size: 17px;
+        font-family: Tahoma, sans-serif;
+        color: var(--text-primary); 
+    }
+
+    .inputField::placeholder {
+        color: var(--text-primary); 
+        font-weight: 500;
+    }
+
+    .loginBtn {
+        width: 240px;
+        padding: 10px 0;
+        border-radius: 20px;
+        border: none;
+        background-color: var(--text-primary); 
+        color: var(--text-light);
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 30px;
+        cursor: pointer;
+        font-family: Tahoma, sans-serif;
+    }
+
+    .register {
+        font-size: 20px;
+        color: var(--text-primary); 
+        margin-top: 20px;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}

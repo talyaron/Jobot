@@ -7,19 +7,21 @@ export async function applyToJob(req: any, res: any) {
     const { candidateId, messageToEmployer } = req.body;
     const { jobId } = req.params;
 
+    console.log(candidateId, messageToEmployer, jobId);
+
     const job = await JobModel.findById(jobId).populate("employer");
     if (!job) {
-      return res.status(404).json({ message: "Job not found" });
+      return res.status(400).json({ message: "Job not found" });
     }
 
     const employerJob = await EmployerJobModel.findOne({ jobId }).exec();
     if (!employerJob) {
-      return res.status(404).json({ message: "EmployerJob not found for the provided jobId" });
+      return res.status(400).json({ message: "EmployerJob not found for the provided jobId" });
     }
 
     const employerResult = await EmployerJobModel.findOne({ jobId }).exec();
     if (!employerResult) {
-      return res.status(404).json({ message: "EmployerJob not found for the provided jobId" });
+      return res.status(400).json({ message: "EmployerJob not found for the provided jobId" });
     }
 
     const employerId = employerResult.employerId;

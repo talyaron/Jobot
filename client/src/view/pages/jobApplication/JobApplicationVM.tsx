@@ -6,7 +6,7 @@ import type { RootState } from "@reduxjs/toolkit/query";
 const JobApplicationVM = () => {
   const { jobId } = useParams();
   const [job, setJob] = useState(null);
-  const user = useSelector((state: RootState) => state.user);  
+  const user = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (jobId) getJobById(jobId);

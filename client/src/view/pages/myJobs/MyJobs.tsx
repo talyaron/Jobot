@@ -21,14 +21,13 @@ export const MyJobs: React.FC = () => {
       {jobs.length > 0 ? (
         <div className={styles.jobsList}>
           {jobs.map((job) => (
-            <div key={job._id} className={styles.jobItem}>
-              <JobCard job={job} />
-              <button
-                className={styles.deleteButton}
-                onClick={() => removeJob(job._id || "")}
-              >
-                Delete
-              </button>
+            <div className={styles.jobItem} key={job._id}>
+              <JobCard
+                job={job}
+                key={job._id}
+                showDeleteButton={true}
+                onDelete={removeJob}
+              />
             </div>
           ))}
         </div>
@@ -37,9 +36,7 @@ export const MyJobs: React.FC = () => {
       )}
       <div className="btns">
         <Link to="/">
-          <button className="btn">
-            Find Jobs
-          </button>
+          <button className="btn">Find Jobs</button>
         </Link>
       </div>
     </div>

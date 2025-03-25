@@ -26,25 +26,33 @@ export function useApplicationStatusViewModel() {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      console.log(`http://localhost:3000/api/userJob/get-job-by-id/${jobId}/${candidateId}`)
-      const response = await fetch(`http://localhost:3000/api/userJob/get-job-by-id/${jobId}/${candidateId}`, {
+      console.log(`${jobId}/${candidateId}`)
+      const response = await fetch(`http://localhost:3000/api/userJob/get-job-by-id/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          candidateId: candidateId
+          candidateId,
+          jobId
         })
       });
     
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+
+        const {error} = await response.json()
+        setState(prev => ({
+          ...prev,
+          error: `Error: ${response.status}, ${error}`,
+          loading: false
+        }));
+        throw new Error(`Error: ${response.status}, ${error}`);
       }
       
-      const data = await response.json();
+      const {jobUser} = await response.json();
       
-      if (data && data.jobUser) {
-        setState(prev => ({ ...prev, status: data.jobUser.applicationStatus, loading: false }));
+      if (jobUser) {
+        setState(prev => ({ ...prev, status: jobUser.status, loading: false }));
       } else {
         setState(prev => ({ 
           ...prev, 

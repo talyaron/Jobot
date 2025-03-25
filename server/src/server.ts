@@ -1,7 +1,6 @@
 import express from 'express'
 import authRoutes from "./Routes/authRoutes";
-import employerRoutes from "./Routes/employerRoutes"
-import cookieParser from 'cookie-parser';
+import employerRoutes from "./Routes/employerRoutes";
 import cors from "cors"
 import mongoose from 'mongoose';
 import 'dotenv/config';
@@ -9,15 +8,26 @@ import jobRoutes from './Routes/jobRoutes';
 import userPreferencesRouter from "./Routes/userRoutes";
 import userJobRoutes from "./Routes/userJobRoutes";
 
+import chatRoutes from './Routes/chatRoutes'
+import http from 'http';
+import { Server } from 'socket.io';
+import setupChatSocket from './sockets/chatSocket';
+import cookieParser from 'cookie-parser';
+
+
+
 const app = express()
 const port = 3000;
-app.use(cookieParser());
+
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static('public'));
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176'], // Array of allowed origins
-  credentials: true
+  credentials: true,
 }));
+app.use(cors({ origin: true, credentials: true }));
+const server = http.createServer(app);
 
 
 export const secretKey = String(process.env.SECRET_JWT) || "1234";
@@ -27,10 +37,26 @@ app.use("/api/user", userPreferencesRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
-app.use("/api/userJob", userJobRoutes)
+app.use("/api/chat", chatRoutes);
+app.use("/api/userJob", userJobRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
+
+//socket connection
+
+const io = new Server(server, {
+  cors: {
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176'],
+    methods: ['GET', 'POST'],
+    credentials: true
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('Socket connected:', socket.id);
+  setupChatSocket(socket, io);
+});
 
 
 //connection
@@ -39,6 +65,6 @@ mongoose.connect(`${dbUrl}/${database}`).then(()=>{
 }).catch((err)=>{
     console.error(err)
 });
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
