@@ -1,7 +1,7 @@
 import { useJobs } from "./ResultsVM";
 import JobCard from "../../components/jobCard/JobCard";
 import styles from "./Results.module.scss";
-
+import { saveJob } from "../../../db/jobs/setJobs";
 
 const Results = () => {
   const { jobs, loading, error } = useJobs();
@@ -13,7 +13,12 @@ const Results = () => {
   return (
     <div className={styles.resultsContainer}>
       {jobs.map((job) => (
-          <JobCard key={job._id} job={job} />
+        <JobCard
+          key={job._id}
+          job={job}
+          showSaveButton={true}
+          onSave={saveJob}
+        />
       ))}
     </div>
   );
