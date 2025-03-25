@@ -12,6 +12,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import setupChatSocket from './sockets/chatSocket';
 import cookieParser from 'cookie-parser';
+import cvRoutes from "./Routes/cvFormRoutes"
 
 
 
@@ -37,6 +38,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/employer/jobs", employerRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/cv", cvRoutes);
 
 const dbUrl = process.env.DB_URL;
 const database = 'jobot';
