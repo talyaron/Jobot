@@ -59,24 +59,7 @@ const Results = () => {
           key={job._id}
           job={job}
           showSaveButton={true}
-          onSave={saveJob}
-        />
-          {!savedJobsSet.has(job._id) && (
-            <>
-              <button
-                className={styles.saveButton}
-                onClick={() => saveJob(jobId)}
-              >
-                Save
-              </button>
-
-              <button onClick={() => setIdJobInCvForm(job._id)}>
-                <Link to="cv" style={{ color: "white" }}>
-                  {isCvFill ? "Update CV" : "Add CV"}
-                </Link>
-              </button>
-            </>
-          )}
+         />
       ))}
     </div>
   );
