@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import confetti from 'canvas-confetti';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 
-
-type AnswerType = "multiple-choice" | "rating"  | "dropdown";
+type AnswerType = "multiple-choice" | "rating" | "dropdown";
 
 interface CareerQuestion {
   id: number;
@@ -19,9 +18,8 @@ const careerQuestions: CareerQuestion[] = [
     id: 1,
     question: "איפה אתה מחפש עבודה? (עיר או אזור)",
     answerType: "dropdown",
-    apiUrl: "https://data.gov.il/api/3/action/datastore_search/", 
+    apiUrl: "https://data.gov.il/api/3/action/datastore_search/",
     placeholder: "באזרחות עובדים קל”ב",
-
   },
   {
     id: 2,
@@ -34,7 +32,6 @@ const careerQuestions: CareerQuestion[] = [
       "עבודה לפי שעות",
       "עבודה במשמרות",
     ],
-
   },
   {
     id: 3,
@@ -62,7 +59,7 @@ const careerQuestions: CareerQuestion[] = [
       "🗣️ כישורי שירות ותקשורת עם אנשים",
       "🛠️ ידע טכני (מחשבים, אלקטרוניקה, מכונאות וכו')",
       "🚀 יכולת עבודה פיזית / שטח",
-      "🔍 דיוק ושימת לב לפרטים קטנים", 
+      "🔍 דיוק ושימת לב לפרטים קטנים",
       "🌍 התנהלות מול מגוון אוכלוסיות ורקעים שונים",
       "❓ אחר",
     ],
@@ -90,7 +87,37 @@ export function useWizard() {
       setCurrentQuestionIndex((prev) => prev - 1);
     }
   };
-
+  const handleSavePreferenceToServer = async () => {
+    try {
+      const preferences = {
+        location: answers["1"],
+        jobType: answers["2"],
+        categories: answers["3"],
+        skills: answers["4"],
+        preferences: answers["5"],
+      };
+  
+      const response = await fetch(
+        `http://localhost:3000/api/user/set-user-preferences`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ preferences }),
+          credentials: "include",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("an error occurred");
+      }
+      const data = await response.json();
+      console.log(data);
+      navigate('/candidate');
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleNext = () => {
     if (currentQuestionIndex < careerQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -100,7 +127,7 @@ export function useWizard() {
         spread: 70,
         origin: { y: 0.6 },
       });
-      navigate('/candidate'); 
+      handleSavePreferenceToServer();
     }
   };
 
@@ -120,5 +147,5 @@ export function useWizard() {
     handleAnswerChange,
     progressPercentage,
     careerQuestions,
-  }; 
+  };
 }
