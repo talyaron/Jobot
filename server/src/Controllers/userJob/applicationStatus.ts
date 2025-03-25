@@ -2,8 +2,7 @@ import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
 
 export async function checkApplicationStatus(req:any, res:any){
     try {
-        const { jobId } = req.params;
-        const candidateId = req.query.candidateId;
+        const { jobId , candidateId } = req.params;
 
         if ( !jobId || !candidateId )
             return res.status(400).json({ message: 'Missing required fields' });

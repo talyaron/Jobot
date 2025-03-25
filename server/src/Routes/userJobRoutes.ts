@@ -4,7 +4,7 @@ import { applyToJob } from "../Controllers/userJob/userApplyToJob";
 
 const router = express.Router();
 
-router.post("/get-job-by-id/:jobId", checkApplicationStatus);
+router.post("/get-job-by-id/:jobId/:candidateId", checkApplicationStatus);
 router.post("/apply-job/:jobId", applyToJob);
 
 export default router;
