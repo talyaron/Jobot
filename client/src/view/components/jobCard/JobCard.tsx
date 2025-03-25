@@ -1,28 +1,39 @@
-
 import styles from "./JobCard.module.scss";
 import { Link } from "react-router-dom";
-import { saveJob } from "../../../db/jobs/setJobs";
+import { Job } from "../../../model/jobModel";
 import { useState } from "react";
-import { Job } from "../../pages/jobsEmployer/types";
-
 
 interface JobCardProps {
   job: Job;
+  showSaveButton?: boolean;
+  showDeleteButton?: boolean;
+  onSave?: (jobId: string) => void;
+  onDelete?: (jobId: string) => void;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job }) => {
- 
+const JobCard: React.FC<JobCardProps> = ({
+  job,
+  showSaveButton,
+  showDeleteButton,
+  onSave,
+  onDelete,
+}) => {
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const [jobAdded, setJobAdded] = useState<boolean>(false);
+  const handleSave = async (jobId: string) => {
+    setIsSaving(true);
+    setSaveError(null);
+    const success = onSave ? await onSave(jobId) : false;
+    setIsSaving(false);
 
-
-  function handleSaveJob() {
-    saveJob(job._id);
-    setJobAdded(true);
-  }
+    if (!success) {
+      setSaveError("Failed to save job. Please try again.");
+    }
+  };
 
   return (
-    <div className={styles.card} style={{ border: jobAdded ? "2px solid green" : "none" }}>
+    <div className={styles.card}>
       <Link to={`job-candidate/${job._id}`}>
         <h3 className={styles.jobTitle}>{job.jobName}</h3>
         <p className={styles.details}>
@@ -41,7 +52,24 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           <strong>Salary:</strong> ${job.salary}
         </p>
       </Link>
-      <button onClick={handleSaveJob}>Save</button>
+      {showSaveButton && onSave && (
+        <button
+          className={styles.saveButton}
+          onClick={() => handleSave(job._id)}
+          disabled={isSaving}
+        >
+          {isSaving ? "Saving..." : "Save"}
+        </button>
+      )}
+      {saveError && <p className={styles.error}>{saveError}</p>}
+      {showDeleteButton && onDelete && (
+        <button
+          className={styles.deleteButton}
+          onClick={() => onDelete(job._id)}
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 };

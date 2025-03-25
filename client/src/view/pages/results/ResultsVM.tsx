@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { Job } from "../jobsEmployer/types";
+import { Job } from "../../../model/jobModel";
 
 
 export const useJobs = (userId?: string) => {
   const [jobs, setJobs] = useState<Job[]>([]);
- 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +21,7 @@ export const useJobs = (userId?: string) => {
 
         const data = await response.json();
         console.log(data)
-        setJobs(data.jobs); // Get job IDs only
+        setJobs(data.jobs); 
       } catch (err) {
         console.error(err);
         setError("Failed to fetch job IDs");
@@ -33,7 +32,6 @@ export const useJobs = (userId?: string) => {
 
     fetchJobIds();
   }, []);
-
 
   return { jobs, loading, error };
 };

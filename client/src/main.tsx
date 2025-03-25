@@ -34,6 +34,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="my-jobs" element={<MyJobs />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
+            <Route path="chat/:jobId" element={<Chat />} />
           </Route>
           <Route path="employer/login" element={<EmployerLogin />} />
           <Route path="employer" element={<EmployerWrapper />}>
@@ -41,7 +42,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="candidates" element={<JobCandidate />} />
             <Route path="applications" element={<JobApplication />} />
             <Route path="applications/status" element={<ApplicationStatus />} />
-            <Route path="chat" element={<Chat />} />
+            <Route path="chat/:candidateId" element={<Chat />} />
           </Route>
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
