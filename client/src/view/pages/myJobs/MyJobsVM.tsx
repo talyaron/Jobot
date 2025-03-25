@@ -21,7 +21,7 @@ export const useMyJobs = () => {
   const removeJob = async (jobId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/jobs/user-jobs/${jobId}`,
+        `http://localhost:3000/api/jobs/saved-jobs/${jobId}`,
         {
           method: "DELETE",
           credentials: "include",
