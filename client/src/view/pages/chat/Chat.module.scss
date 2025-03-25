@@ -31,6 +31,9 @@
     font-weight: bold;
     margin-bottom: 1rem;
     text-align: right;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
 }
 
 .chatListItem {
@@ -40,6 +43,10 @@
     padding-bottom: 0.8rem;
     border-bottom: 1px solid #eee;
     cursor: pointer;
+
+    :hover {
+        background-color: #b0000098;
+    }
 }
 
 .chatAvatar {
@@ -51,13 +58,21 @@
 }
 
 .chatInfo {
+    display: flex;
     flex: 1;
     text-align: right;
 }
 
 .chatTitle {
+    display: flex;
     font-weight: bold;
     margin-bottom: 0.25rem;
+}
+
+.userIcon {
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1rem;
 }
 
 .chatMeta {
@@ -130,10 +145,6 @@
     flex-direction: column;
 }
 
-.price {
-    font-weight: bold;
-    color: #333;
-}
 
 .messagesArea {
     flex: 1;
@@ -189,6 +200,54 @@
         box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
     }
 
+}
+
+.messagesContainer {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.messages {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.msgWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.sentMessage,
+.receivedMessage {
+    display: inline-block;
+    max-width: 80%;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    margin: 0.6rem;
+    word-break: break-word;
+}
+
+.sentMessage {
+    background-color: #eee;
+    align-self: flex-start;
+}
+
+.receivedMessage {
+    background-color: #5fa268;
+    align-self: flex-end;
+}
+
+.sentAt {
+    color: #666666;
+    font-size: 1rem;
 }
 
 .attachment {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useWizard } from './WizardVM';
 import styles from './Wizard.module.scss';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -29,10 +28,9 @@ function Wizard({ closeButton }: Props) {
 
     switch (currentQuestion.answerType) {
       case 'multiple-choice':
+      case 'text':
       case 'dropdown':
         return !!answer;
-      case 'rating':
-        return typeof answer === 'number';
       default:
         return false;
     }

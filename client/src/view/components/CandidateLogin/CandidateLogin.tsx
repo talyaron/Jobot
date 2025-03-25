@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./CandidateLogin.module.scss";
-import { X } from "lucide-react";
 import { loginCandidate } from "./CandidateLoginVM";
 import CandidateRegister from "../candidateRegister/CandidateRegister";
 import { useDispatch } from "react-redux";
