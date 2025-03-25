@@ -16,23 +16,24 @@ const EmployerWrapperVM = () => {
     }
     fetchUserProfile()
       .then((data) => {
-        dispatch(
-          setUser({
-            _id: data._id,
-            fullName: data.userName,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-            password: "",
-            isHiring: data.isHiring,
-            isCandidate: data.isCandidate,
-            CV: data.CV,
-            experienceOfWork: data.experienceOfWork,
-          })
-        );
-        setShowLogin(false);
+          dispatch(
+            setUser({
+              _id: data._id,
+              fullName: data.userName,
+              email: data.email,
+              phoneNumber: data.phoneNumber,
+              password: "",
+              isHiring: data.isHiring,
+              isCandidate: data.isCandidate,
+              CV: data.CV,
+              experienceOfWork: data.experienceOfWork,
+            })
+          );
+          setShowLogin(false);
       })
       .catch((error: unknown) => {
         console.error("Error fetching user data:", error);
+        setShowLogin(true);
       });
   }, [dispatch, user]);
 
