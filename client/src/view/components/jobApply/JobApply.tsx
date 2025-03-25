@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useJobApplyVM } from "./JobApplyVM";
+import { useNavigate } from "react-router-dom";
 
 const JobApply: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const { handelApply, checkIfLoggedIn } = useJobApplyVM();
     const [message, setMessage] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -17,6 +19,7 @@ const JobApply: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await handelApply(e, message);
+        navigate(window.location.pathname + "/application-status");
         onClose();
     };
 
