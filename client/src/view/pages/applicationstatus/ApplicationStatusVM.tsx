@@ -26,7 +26,7 @@ export function useApplicationStatusViewModel() {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      console.log(`http://localhost:3000/api/userJob/get-job-by-id/${jobId}/${candidateId}`)
+      console.log(`${jobId}/${candidateId}`)
       const response = await fetch(`http://localhost:3000/api/userJob/get-job-by-id/${jobId}/${candidateId}`, {
         method: 'POST',
         headers: {
