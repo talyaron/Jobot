@@ -8,3 +8,9 @@ form{
     display: flex;
     flex-direction: column;
 }
+
+select{
+    background-color: var(--background-secondary);
+    border-radius: 3px;
+    padding: .3rem;
+}
