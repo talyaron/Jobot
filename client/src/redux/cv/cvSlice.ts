@@ -12,15 +12,15 @@ interface PersonalInformationState {
     city: string;
 }
 
-interface EducationState {
-    id: number;
+export interface EducationState {
+    id: string;
     institution: string;
     degree: string;
     studyYears: string;
 }
 
-interface WorkExperienceState {
-    id: number;
+export interface WorkExperienceState {
+    id: string;
     jobName: string;
     jobTitle: string;
     jobType: string;
@@ -29,17 +29,17 @@ interface WorkExperienceState {
     responsibility: string;
 }
 
-interface ServiceState {
+export interface ServiceState {
     id: string;
     serviceType: string;
     organizationName: string;
     serviceYears: string;
 }
 
-interface SkillsState {
+export interface SkillsState {
     technicalSkills: string;
     spokenLanguages: string;
-    _id: string;
+    id: string;
 }
 
 // המבנה הכללי של ה-state
@@ -88,30 +88,46 @@ const cvSlice = createSlice({
         },
         addEducation(state) {
             const newEducation: EducationState = {
-                id: Date.now(),
+                id: crypto.randomUUID(),
                 institution: "",
                 degree: "",
                 studyYears: "",
             };
             state.educations.push(newEducation);
         },
-        updateEducation(state, action: PayloadAction<{ id: number, data: Partial<EducationState> }>) {
+        updateEducation(state, action: PayloadAction<{ id: string; field: keyof EducationState; value: string}>) {
             const index = state.educations.findIndex((edu) => edu.id === action.payload.id);
             if (index !== -1) {
-                state.educations[index] = { ...state.educations[index], ...action.payload.data };
+                state.educations[index] = {
+                    ...state.educations[index],
+                    [action.payload.field]: action.payload.value,
+                }
             }
         },
 
-        getEducationFromServer(state, action: PayloadAction<EducationState[]>){
-            state.educations = action.payload;
+        getEducationFromServer(state, action: PayloadAction<EducationState[]>) {
+            // יצירת מפה של הרשומות הקיימות לפי המזהה
+            const existingEducationsMap = new Map(
+                state.educations.map(edu => [edu.id, edu])
+            );
+        
+            // עדכון הרשומות הקיימות והוספת חדשות
+            const updatedEducations = action.payload.map(serverEdu => {
+                const existingEdu = existingEducationsMap.get(serverEdu.id);
+                return existingEdu 
+                    ? { ...existingEdu, ...serverEdu } 
+                    : serverEdu;
+            });
+        
+            state.educations = updatedEducations;
         },
 
-        removeEducation(state, action: PayloadAction<number>) {
+        removeEducation(state, action: PayloadAction<string>) {
             state.educations = state.educations.filter((edu) => edu.id !== action.payload);
         },
         addWorkExperience(state) {
             const newExperience: WorkExperienceState = {
-                id: Date.now(),
+                id: crypto.randomUUID(),
                 jobName: "",
                 jobTitle: "",
                 jobType: "",
@@ -121,10 +137,13 @@ const cvSlice = createSlice({
             };
             state.workExperience.push(newExperience);
         },
-        updateWorkExperience(state, action: PayloadAction<{ id: number, data: Partial<WorkExperienceState> }>) {
+        updateWorkExperience(state, action: PayloadAction<{ id: string; field: keyof WorkExperienceState; value:string }>) {
             const index = state.workExperience.findIndex((exp) => exp.id === action.payload.id);
             if (index !== -1) {
-                state.workExperience[index] = { ...state.workExperience[index], ...action.payload.data };
+                state.workExperience[index] = {
+                    ...state.workExperience[index],
+                    [action.payload.field]: action.payload.value,
+                }
             }
         },
 
@@ -132,7 +151,7 @@ const cvSlice = createSlice({
             state.workExperience = action.payload;
         },
 
-        removeWorkExperience(state, action: PayloadAction<number>) {
+        removeWorkExperience(state, action: PayloadAction<string>) {
             state.workExperience = state.workExperience.filter((exp) => exp.id !== action.payload);
         },
         addServiceType(state) {
@@ -144,10 +163,13 @@ const cvSlice = createSlice({
             };
             state.serviceType.push(newService);
         },
-        updateServiceType(state, action: PayloadAction<{ id: string, data: Partial<ServiceState> }>) {
+        updateServiceType(state, action: PayloadAction<{ id: string; field: keyof ServiceState; value:string }>) {
             const index = state.serviceType.findIndex((service) => service.id === action.payload.id);
             if (index !== -1) {
-                state.serviceType[index] = { ...state.serviceType[index], ...action.payload.data };
+                state.serviceType[index] = {
+                    ...state.serviceType[index],
+                    [action.payload.field]: action.payload.value,
+                }
             }
         },
 
@@ -160,7 +182,7 @@ const cvSlice = createSlice({
         },
         addSkills(state) {
             const newSkills: SkillsState = {
-                _id: crypto.randomUUID(),
+                id: crypto.randomUUID(),
                 technicalSkills: "",
                 spokenLanguages: "",
             };
@@ -168,10 +190,11 @@ const cvSlice = createSlice({
         },
         
         removeSkills(state, action: PayloadAction<string>) {
-            state.skills = state.skills.filter((skill) => skill._id !== action.payload);
+            state.skills = state.skills.filter((skill) => skill.id !== action.payload);
         },
+        
         updateSkills(state, action: PayloadAction<{ id: string; field: keyof SkillsState; value: string }>) {
-            const index = state.skills.findIndex(skill => skill._id === action.payload.id);
+            const index = state.skills.findIndex(skill => skill.id === action.payload.id);
             if (index !== -1) {
                 state.skills[index] = { 
                     ...state.skills[index], 

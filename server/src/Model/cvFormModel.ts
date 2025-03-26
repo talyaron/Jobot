@@ -15,13 +15,13 @@ const cvFormModel = new Schema({
         professionalSummary: String,
     },
     educations: [{
-        _id: String,
+        id: String,
         institution: String,
         degree: String,
         studyYears: String,
     }],
     workExperience: [{
-        _id: String,
+        id: String,
         jobName: String,    
         jobTitle: String,    
         jobType: String,     
@@ -30,7 +30,7 @@ const cvFormModel = new Schema({
         responsibility: String, 
     }],
     serviceType:[{
-        _id: String,
+        id: String,
         serviceType: String,
         organizationName: String,
         serviceYears: String,
@@ -38,7 +38,7 @@ const cvFormModel = new Schema({
     skills: [{
         technicalSkills: String,
         spokenLanguages: String,
-        _id: String
+        id: String
     }],
 
 });

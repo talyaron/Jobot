@@ -4,7 +4,8 @@ import { RootState } from '../../../../redux/store'
 import { 
     addServiceType, 
     updateServiceType, 
-    removeServiceType 
+    removeServiceType, 
+    ServiceState
 } from '../../../../redux/cv/cvSlice'
 
 import styles from "./serviceType.module.scss";
@@ -17,8 +18,8 @@ const ServiceType: React.FC = () => {
         dispatch(addServiceType());
     };
 
-    const handleUpdateService = (id: string, field: string, value: string) => {
-        dispatch(updateServiceType({ id, data: { [field]: value } }));
+    const handleUpdateService = (id: string, field: keyof ServiceState, value: string) => {
+        dispatch(updateServiceType({ id, field, value }));
     };
 
     const handleRemoveService = (id: string) => {
