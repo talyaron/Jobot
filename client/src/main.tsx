@@ -18,6 +18,7 @@ import JobCandidate from "./view/pages/jobCandidate/JobCandidate.tsx";
 import Results from "./view/pages/results/Results.tsx";
 import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 import EmployerLogin from "./view/pages/employerLogin/EmployerLogin.tsx";
+import EmployerMain from "./view/pages/employerWrapper/employerMain/EmployeMain.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -38,9 +39,9 @@ createRoot(document.getElementById('root')!).render(
           </Route>
           <Route path="employer/login" element={<EmployerLogin />} />
           <Route path="employer" element={<EmployerWrapper />}>
-            <Route index element={<JobsEmployer />} />
+            <Route index element={<EmployerMain />} />
             <Route path="candidates" element={<JobCandidate />} />
-            <Route path="applications" element={<JobApplication />} />
+            <Route path="application/:applicationId" element={<JobApplication />} />
             <Route path="applications/status" element={<ApplicationStatus />} />
             <Route path="chat/:candidateId" element={<Chat />} />
           </Route>

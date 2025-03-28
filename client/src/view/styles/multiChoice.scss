@@ -1,64 +1,62 @@
 .multiChoiceContainer {
-    width: 100%;
-    max-width: 400px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .multiChoiceHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    background: #e3f2fd;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .multiChoiceHeader svg {
-    transition: transform 0.3s ease;
-  }
-  
-  .multiChoiceHeader.open svg {
-    transform: rotate(180deg);
-  }
-  
-  .multiChoiceList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .multiChoiceItem {
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #333;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .multiChoiceItem:hover {
-    background: #f5f5f5;
-  }
-  
-  .multiChoiceItem.selected {
-    background: #b8cf9f;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-  
-  .multiChoiceItem svg {
-    margin-left: 10px;
-    font-size: 18px;
-  }
-  
+  width: 100%;
+  max-width: 25rem; 
+  background: #ffffff;
+  border-radius: 0.625rem; 
+  box-shadow: 0px 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+  padding: 0.625rem;
+}
+
+.multiChoiceHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.9375rem; 
+  background: #ffffff;
+  border-radius: 0.5rem; 
+  cursor: pointer;
+  font-size: 1rem; 
+  font-weight: 600;
+  color: #333;
+}
+
+.multiChoiceHeader svg {
+  transition: transform 0.3s ease;
+}
+
+.multiChoiceHeader.open svg {
+  transform: rotate(180deg);
+}
+
+.multiChoiceList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 18.75rem; 
+  overflow-y: auto;
+}
+
+.multiChoiceItem {
+  padding: 0.75rem 0.9375rem; 
+  display: flex;
+  align-items: center;
+  font-size: 1rem; 
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.multiChoiceItem:hover {
+  background: #f5f5f5;
+}
+
+.multiChoiceItem.selected {
+  background: #b8cf9f;
+  font-weight: bold;
+  border-radius: 0.3125rem; 
+}
+
+.multiChoiceItem svg {
+  margin-left: 0.625rem;
+  font-size: 1.125rem;
+}

@@ -28,6 +28,7 @@ export async function loginUser(req:any, res:any) {
       httpOnly: true,
       secure: false,
       sameSite: "lax",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7) // 7 days
     });
 
     return res.status(200).json({ message: 'Login successful', user: user });

@@ -12,7 +12,7 @@ const TopNav = () => {
     return (
         <div className={styles.main}>
             <div className={styles.navButtons}>
-                { !isRegistered && <button onClick={() => setOpenCandidateLogin(true)}>התחברות</button>}
+                { !isRegistered && <button className="btn" onClick={() => setOpenCandidateLogin(true)}>התחברות</button>}
                 { openCandidateLogin && <CandidateLogin/> }
                 <Link to="/contact">צור קשר</Link>
                 <Link to="/employer">מעסיקים</Link>

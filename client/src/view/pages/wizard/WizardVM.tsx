@@ -4,6 +4,8 @@ import confetti from "canvas-confetti";
 
 type AnswerType = "multiple-choice" | "rating" | "dropdown";
 
+type AnswerType = "multiple-choice"  | "dropdown" | "text" | "CityDropdown";
+
 interface CareerQuestion {
   id: number;
   question: string;
@@ -17,8 +19,8 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 1,
     question: "איפה אתה מחפש עבודה? (עיר או אזור)",
-    answerType: "dropdown",
-    apiUrl: "https://data.gov.il/api/3/action/datastore_search/",
+    answerType: "CityDropdown",
+    apiUrl: "https://data.gov.il/api/3/action/datastore_search/", 
     placeholder: "באזרחות עובדים קל”ב",
   },
   {
@@ -36,7 +38,7 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 3,
     question: "בחר את תחום העבודה שמתאים לך",
-    answerType: "multiple-choice",
+    answerType: "dropdown",
     options: [
       "💻 הייטק וטכנולוגיה",
       "🏢 משרד וניהול",
@@ -52,7 +54,7 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 4,
     question: "איזה מיומנויות מהשירות אתה מביא איתך לאזרחות? (וכמובן לעבודה)",
-    answerType: "multiple-choice",
+    answerType: "dropdown",
     options: [
       "🎯 יכולת עבודה תחת לחץ",
       "👥 ניסיון בניהול ופיקוד",
@@ -74,6 +76,18 @@ const careerQuestions: CareerQuestion[] = [
       "⚖️ גמיש חלקית (רק לילות או רק סופי שבוע)",
       "🕒 מעדיף עבודה בשעות קבועות",
     ],
+  },
+  {
+    id: 6,
+    question: "מהם שלושת הדברים שהכי חשובים לך במקום העבודה?",
+    answerType: "text",
+    placeholder: "משכורת טובה? בוס נחמד? קפה חינם? ספר לנו מה הכי חשוב לך! 😊",
+  },
+  {
+    id: 7,
+    question: "אם כסף לא היה שיקול, באיזה תחום או סוג עבודה היית בוחר לעסוק?",
+    answerType: "text",
+    placeholder: "תשכח רגע מהמשכורת - מה העבודה שהכי תגרום לך לקום עם חיוך בבוקר",
   },
 ];
 

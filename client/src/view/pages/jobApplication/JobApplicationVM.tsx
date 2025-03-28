@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import type { RootState } from "@reduxjs/toolkit/query";
+import { userSelector } from "../../../redux/user/userSlice";
 
 const JobApplicationVM = () => {
-  const { jobId } = useParams();
+  const { applicationId } = useParams();
   const [job, setJob] = useState(null);
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector(userSelector);
 
   useEffect(() => {
-    if (jobId) getJobById(jobId);
+    if (applicationId) getJobById(applicationId);
     console.log(user)
   }, []);
 
-  async function getJobById(jobId: string) {
+  async function getJobById(applicationId: string) {
     try {
       const response = await fetch(`/api/jobs/${jobId}`);
       if (!response.ok) {

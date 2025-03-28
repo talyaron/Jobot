@@ -1,6 +1,6 @@
 import { JobModel } from "../../Model/jobModel";
 import { EmployerJobModel } from "../../Model/joinTables/employerJobJoinTable";
-import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
 
 export async function applyToJob(req: any, res: any) {
   try {
@@ -29,7 +29,7 @@ export async function applyToJob(req: any, res: any) {
       return res.status(400).json({ message: "Employer ID not found for this job" });
     }
 
-    await JobUserModel.create({
+    await ApplicationModel.create({
       candidateId,
       jobId,
       messageToEmployer,

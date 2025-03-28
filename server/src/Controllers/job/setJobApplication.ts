@@ -1,5 +1,5 @@
 import { EmployerJobModel } from "../../Model/joinTables/employerJobJoinTable";
-import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
 import { jobUserStatus } from "../../Model/utils/modelsEnums";
 
 export async function setJobApplication(req: any, res: any) {
@@ -23,7 +23,7 @@ export async function setJobApplication(req: any, res: any) {
     }
     const employerId = jobEmployerModel.employerId;
 
-    const newUserJob = await JobUserModel.create({
+    const newUserJob = await ApplicationModel.create({
       userId: userId,
       employerId: employerId,
       messageToEmployer: message,
