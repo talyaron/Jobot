@@ -4,15 +4,15 @@ import styles from "./JobApplication.module.scss"
 import JobInputBox from '../../components/jobInput/JobInputBox'
 
 const JobApplication = () => {
-  const { job ,user} = JobApplicationVM()
-  if(!job)return;
+  const { application, error, loading} = JobApplicationVM()
+  if(loading)return <h1>Loading...</h1>;
 
   return (
     <div>
     <div className={styles.JobDetailsWrapper}>
-      <JobDetails job={job} key={crypto.randomUUID()} />
+     {application && <p>{application.candidate.email}</p>}
     </div>
-    <JobInputBox job={job} user={user}></JobInputBox>
+    {/* <JobInputBox job={job} user={user}></JobInputBox> */}
     </div>
   )
 }

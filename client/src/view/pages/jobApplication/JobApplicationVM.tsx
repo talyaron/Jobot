@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 const JobApplicationVM = () => {
   const { applicationId } = useParams();
-  const [application, setApplication] = useState(null);
+  const [application, setApplication] = useState<null|any>(null);
 
 
   useEffect(() => {
@@ -13,17 +13,25 @@ const JobApplicationVM = () => {
 
   async function getJobById(applicationId: string) {
     try {
-      const response = await fetch(`/api/employer/get-application?applicationId=&${applicationId}`,{
+      console.log(`/api/employer/get-application?applicationId=${applicationId}`)
+      const response = await fetch(`/api/employer/get-application?applicationId=${applicationId}`,{
         credentials: "include",
       });
+
+      //TODO: there is a bug here, the response is not ok, so it throws an error
+      
+
       if (!response.ok) {
-        throw new Error("Job not found");
+        const data = await response.json();
+        console.log(data)
+        console.error("Error fetching application:", data.error);
+        throw new Error("Application not found");
       }
       const data = await response.json();
       console.log(data);
-      setApplication(data.application);
+      // setApplication(data.application);
     } catch (error) {
-      console.error("Error fetching job:", error);
+      console.error("Error fetching application:", error);
     }
   }
 
