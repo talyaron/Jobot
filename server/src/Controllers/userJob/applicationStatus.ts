@@ -1,22 +1,22 @@
-import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 export async function checkApplicationStatus(req:any, res:any){
     try {
 
-        const { jobId , candidateId } = req.body;
+        const { applicationId } = req.query;
 
-        if ( !jobId || !candidateId )
-            return res.status(400).json({ message: 'Missing required fields' });
+        if (!applicationId )
+            return res.status(400).json({ message: 'Missing applicationId' });
 
-        console.log(`${jobId}/${candidateId}`);
 
-        const jobUser = await ApplicationModel.findOne({ 
-            jobId,
-            candidateId,
-        });
+        const jobUser = await ApplicationModel.findById(applicationId)
+            .populate("userId", "-password -__v")
+            .populate("jobId", "-__v")
+            .exec();
+
 
         if (!jobUser) {
-            return res.status(400).json({ message: 'jobUser not found' });
+            return res.status(400).json({ message: 'Application not found' });
         }
 
         return res.status(200).json({ message: 'jobUser:', jobUser });

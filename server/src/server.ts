@@ -36,7 +36,7 @@ export const saltRounds = Number(process.env.SALT_BCRYPT) || 3;
 app.use("/api/user", userPreferencesRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
-app.use("/api/employer/jobs", employerRoutes);
+app.use("/api/employer", employerRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/userJob", userJobRoutes);
 

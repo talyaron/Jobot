@@ -1,6 +1,6 @@
 import { JobModel } from "../../Model/jobModel";
 import { EmployerJobModel } from "../../Model/joinTables/employerJobJoinTable";
-import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 export async function applyToJob(req: any, res: any) {
   try {

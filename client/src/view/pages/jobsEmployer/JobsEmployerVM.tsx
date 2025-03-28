@@ -92,7 +92,7 @@ const JobsEmployerVM = ({
   const fetchJobs = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/employer/jobs/get-jobs-by-employer",
+        "http://localhost:3000/api/employer/get-jobs-by-employer",
         {
           method: "GET",
           credentials: "include",
@@ -117,7 +117,7 @@ const JobsEmployerVM = ({
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/employer/jobs/create",
+        "http://localhost:3000/api/employer/create",
         {
           method: "POST",
           body: JSON.stringify(dataToSend),
@@ -144,7 +144,7 @@ const JobsEmployerVM = ({
   const deleteJob = async (id: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/employer/jobs/delete/${id}`,
+        `http://localhost:3000/api/employer/delete/${id}`,
         {
           method: "DELETE",
         }
@@ -164,7 +164,7 @@ const JobsEmployerVM = ({
   const editJob = async (jobData: Job) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/employer/jobs/edit/${jobData._id}`,
+        `http://localhost:3000/api/employer/edit/${jobData._id}`,
         {
           method: "PUT",
           headers: {

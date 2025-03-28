@@ -1,5 +1,5 @@
 import { JobModel } from "../../Model/jobModel";
-import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 
 export const getJobById = async (req: any, res: any) => {
@@ -46,6 +46,7 @@ export const getCandidatesByEmployerId = async (req: any, res: any) => {
 
     const candidates = candidatesDB.map((candidate) => {
       return {
+        applicationId: candidate._id,
         candidate: candidate.candidateId,
         job: candidate.jobId
       };

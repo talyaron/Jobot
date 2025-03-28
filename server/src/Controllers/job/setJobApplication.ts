@@ -1,5 +1,5 @@
 import { EmployerJobModel } from "../../Model/joinTables/employerJobJoinTable";
-import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 import { jobUserStatus } from "../../Model/utils/modelsEnums";
 
 export async function setJobApplication(req: any, res: any) {
