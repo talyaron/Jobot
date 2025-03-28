@@ -1,7 +1,7 @@
 import { Types, Schema, model } from "mongoose";
 import { jobUserStatus } from "../utils/modelsEnums";
 
-const JobUserSchema = new Schema({
+const ApplicationSchema = new Schema({
 
   candidateId: { 
     type: Types.ObjectId,
@@ -26,4 +26,4 @@ const JobUserSchema = new Schema({
   },
 });
 
-export const JobUserModel = model("jobUser", JobUserSchema);
+export const ApplicationModel = model("jobUser", ApplicationSchema);

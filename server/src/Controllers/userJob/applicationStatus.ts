@@ -1,7 +1,8 @@
-import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
 
 export async function checkApplicationStatus(req:any, res:any){
     try {
+
         const { jobId , candidateId } = req.body;
 
         if ( !jobId || !candidateId )
@@ -9,7 +10,7 @@ export async function checkApplicationStatus(req:any, res:any){
 
         console.log(`${jobId}/${candidateId}`);
 
-        const jobUser = await JobUserModel.findOne({ 
+        const jobUser = await ApplicationModel.findOne({ 
             jobId,
             candidateId,
         });
