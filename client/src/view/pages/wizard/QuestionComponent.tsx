@@ -1,3 +1,16 @@
+interface QuestionComponentProps {
+  question: {
+    id: number;
+    question: string;
+    answerType: 'multiple-choice' | 'dropdown' | 'text';
+    options?: string[];
+    placeholder?: string;
+    apiUrl?: string;
+  };
+  answer: any; 
+  onAnswerChange: (answer: any) => void;
+}
+
 const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer, onAnswerChange }) => {
   const isSingleChoice = question.id === 2 || question.id === 6; 
 
@@ -41,6 +54,18 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({ question, answer,
             </option>
           ))}
         </select>
+      );
+
+    case 'text':
+      return (
+        <div>
+          <input
+            type="text"
+            value={answer || ''}
+            onChange={(e) => onAnswerChange(e.target.value)}
+            placeholder={question.placeholder || 'הקלד כאן...'}
+          />
+        </div>
       );
 
     default:

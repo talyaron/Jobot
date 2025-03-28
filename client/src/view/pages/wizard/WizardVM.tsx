@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
 
-type AnswerType = "multiple-choice" | "rating"  | "dropdown";
+type AnswerType = "multiple-choice"  | "dropdown" | "text";
 
 interface CareerQuestion {
   id: number;
@@ -77,6 +77,18 @@ const careerQuestions: CareerQuestion[] = [
       "⚖️ גמיש חלקית (רק לילות או רק סופי שבוע)",
       "🕒 מעדיף עבודה בשעות קבועות",
     ],
+  },
+  {
+    id: 6,
+    question: "מהם שלושת הדברים שהכי חשובים לך במקום העבודה?",
+    answerType: "text",
+    placeholder: "משכורת טובה? בוס נחמד? קפה חינם? ספר לנו מה הכי חשוב לך! 😊",
+  },
+  {
+    id: 7,
+    question: "אם כסף לא היה שיקול, באיזה תחום או סוג עבודה היית בוחר לעסוק?",
+    answerType: "text",
+    placeholder: "תשכח רגע מהמשכורת - מה העבודה שהכי תגרום לך לקום עם חיוך בבוקר",
   },
 ];
 
