@@ -1,0 +1,47 @@
+import { User } from "../../../model/userModel";
+
+export interface CandidateLogin {
+    email: string;
+    password: string;
+}
+
+export function validateLoginInput(loginData: CandidateLogin): string | null {
+    if (!loginData.email.trim()) {
+        return "Email is required";
+    }
+    if (!loginData.password.trim()) {
+        return "Password is required";
+    }
+    if (loginData.password.length < 6) {
+        return "Password must be at least 6 characters long";
+    }
+    return null;
+}
+
+export async function loginCandidate(loginData: CandidateLogin): Promise<{ success: boolean; message: string, user:User|null }> {
+
+    const validationError = validateLoginInput(loginData);
+    if (validationError) {
+        return { success: false, message: validationError };
+    }
+
+    try {
+        const response = await fetch("http://localhost:3000/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(loginData),
+            credentials: "include",
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        console.log(data)
+
+        return { user:data.user, success: true, message: "Login successful" };
+    } catch (error) {
+        return {user:null, success: false, message: error instanceof Error ? error.message : "An unexpected error occurred" };
+    }
+}

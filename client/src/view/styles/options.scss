@@ -1,0 +1,15 @@
+.option {
+    border: 0.125rem solid black;  
+    border-radius: 1.5rem;         
+    color: black;             
+    padding: 0.625rem 1.25rem; 
+    font-size: 1rem;           
+    cursor: pointer;          
+    transition: all 0.3s ease-in-out;  
+}
+
+.option:hover {
+    background-color: #f0f0f0; 
+    color: grey;               
+    border-color: grey;        
+}

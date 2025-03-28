@@ -18,7 +18,7 @@ export function useAuthVM() {
       e.preventDefault();
       try {
         const endpoint = isLogin ? "http://localhost:3000/api/auth/login" : "http://localhost:3000/api/auth/register";    
-        const data = isLogin ? { email: formData.email, password: formData.password }: formData;
+        const data = isLogin ? { email: formData.email, password: formData.password,phoneNumber:formData.phoneNumber }: formData;
         
         const response = await fetch(endpoint, {
           method: "POST",

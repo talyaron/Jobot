@@ -1,0 +1,33 @@
+.chips {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: var(--text-primary);
+}
+
+.chip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.2rem;
+    color: var(--text-primary);
+    background-color: var(--background-secondary);
+
+    &--text {
+        margin: 0 0.5rem;
+        font-size: 1rem;
+        color: inherit;
+    }
+
+    &--close-button {
+        margin: 0;
+        color: var(--text-primary);
+        font-size: 0.8rem;
+
+        &:hover {
+            color: var(--error);
+        }
+    }
+}

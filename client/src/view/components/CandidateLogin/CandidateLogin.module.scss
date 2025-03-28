@@ -1,0 +1,75 @@
+.CandidateLoginPage {
+    position: absolute;
+    top: 4rem; 
+    left: 1rem;
+    width: 320px; 
+    background: #fff;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.closeLoginBtn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.loginText {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.inputField {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: right;
+    background-color: #d7e3f0 ;
+    color: #333;
+}
+
+.loginBtn {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.forgotPassword, .register {
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 0.5rem;
+
+    &:hover {
+        color: #0056b3;
+    }
+}
+.error{
+    color: rgb(153, 153, 153);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
