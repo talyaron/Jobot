@@ -7,10 +7,17 @@ export function useCandidates() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/employer/jobs/get-candidates-by-employer-id', { credentials: 'include' })
+        fetch('http://localhost:3000/api/employer/get-candidates-by-employer-id', { credentials: 'include' })
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                if (data.error) {
+                    setError(data.error)
+                    return
+                }
+                if (!data.candidates || data.candidates.length === 0) {
+                    return
+                }
                 setCandidates(data.candidates)
             });
     }, []);

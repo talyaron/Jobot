@@ -1,4 +1,4 @@
-import { ApplicationModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 export const getCandidatesByJobId = async (req: any, res: any) => {
     try{
