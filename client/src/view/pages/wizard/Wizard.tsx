@@ -49,7 +49,7 @@ function Wizard({ closeButton }: Props) {
         {currentQuestion && (
           <>
             <QuestionComponent
-              question={currentQuestion}
+              question={currentQuestion} 
               answer={answers[currentQuestion.id]}
               onAnswerChange={(answer) => handleAnswerChange(currentQuestion.id, answer)}
             />

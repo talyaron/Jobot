@@ -1,6 +1,6 @@
 .multiWizard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 3fr));
+  grid-template-columns: repeat(auto-fit, minmax(45%, 3fr));
   grid-gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -17,14 +17,14 @@
     border: 3px solid black;
     background: white;
     border-radius: 2rem;
-    padding: 1rem 1.5rem;
-    font-size: 1.125rem;
+    padding: 0rem 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     width: 100%;
     min-width: auto;
     max-width: 100%;
-    height: auto;
+    height: 3rem;
     text-align: center;
     overflow: hidden;
     word-wrap: break-word;
