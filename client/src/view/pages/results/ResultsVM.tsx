@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { Job } from "../../../model/jobModel";
 
 
-
 export const useJobs = (userId?: string) => {
   const [jobs, setJobs] = useState<Job[]>([]);
- 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,7 +32,6 @@ export const useJobs = (userId?: string) => {
 
     fetchJobIds();
   }, []);
-
 
   return { jobs, loading, error };
 };

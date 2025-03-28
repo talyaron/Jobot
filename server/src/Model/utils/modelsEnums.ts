@@ -16,9 +16,9 @@ export enum term{
 
 //jobUserSchema  Enum
   export enum jobUserStatus {
-    "pending",
-    "hired",
-    "rejected",
+    PENDING = "pending",
+    HIRED = "hired",
+    REJECTED = "rejected"
   }
   
   //employerJob Enum
