@@ -79,7 +79,7 @@ function CandidateRegister({ closeRegisterBtn }: Props) {
             />
             {error && <p className={styles.error}>{error}</p>}
 
-            <button className={styles.loginBtn} onClick={handleSubmit} disabled={loading}>
+            <button className={`${styles.btn} ${styles["btn--rounded"]}`} onClick={handleSubmit} disabled={loading}>
                 {loading ? "טוען..." : "הרשמה"}
             </button>
 

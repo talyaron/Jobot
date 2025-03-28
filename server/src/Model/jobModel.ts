@@ -14,6 +14,10 @@ const JobSchema = new Schema({
   salary: Number,
   housingIncluded: Boolean,
   type: String,
+  employer : { 
+    type: Types.ObjectId, 
+    ref: 'User'
+  },
   term: {
     type: String,
     enum: Object.values(term)
