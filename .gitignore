@@ -132,3 +132,6 @@ dist
 .env.local
 .env.development.local
 .env
+
+#visualStudio library inconsistencies
+.vscode/

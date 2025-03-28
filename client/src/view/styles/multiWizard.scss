@@ -1,0 +1,44 @@
+.multiWizard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 3fr));
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 1.25rem auto;
+  
+    button {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid black;
+      background: white;
+      border-radius: 2rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      min-width: auto;
+      max-width: 100%;
+      height: auto;
+      text-align: center;
+      overflow: hidden;
+      word-wrap: break-word;
+  
+      svg, img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+  
+      &:hover,
+      &.selected {
+        background: black;
+        color: white;
+      }
+    }
+  }
+  

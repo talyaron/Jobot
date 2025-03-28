@@ -3,6 +3,12 @@
 @use "cards";
 @use "wrappers";
 @use "chips";
+@use "popup";
+@use "dropdown";
+@use "overlay";
+@use "multiWizard";
+@use "questionContainer";
+@use "progress-bar";
 
 :root {
     /* Primary colors */
@@ -13,7 +19,7 @@
     /* Secondary colors */
     --secondary: #a1cb97;
     --secondary-light: #b4daab;
-    --secondary-dark: #439d6d; 
+    --secondary-dark: #1d8d062c; 
 
     /* Accent colors */
     --accent: #d6c8c3;
@@ -42,4 +48,9 @@
     --text-light: #ffffff;
 }
 
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1F2429;
+}
 

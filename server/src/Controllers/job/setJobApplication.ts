@@ -27,7 +27,7 @@ export async function setJobApplication(req: any, res: any) {
       userId: userId,
       employerId: employerId,
       messageToEmployer: message,
-      status: jobUserStatus.pending,
+      status: jobUserStatus.PENDING,
     });
     console.log(newUserJob);
 

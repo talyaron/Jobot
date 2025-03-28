@@ -7,25 +7,30 @@ interface CityDropdownProps {
 function CityDropdown({ onCityChange }: CityDropdownProps) {
   const [cities, setCities] = useState<string[]>([]);
   const [selectedCity, setSelectedCity] = useState('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCities();
   }, []);
 
   const fetchCities = async () => {
-    const apiUrl = 'https://data.gov.il/api/3/action/datastore_search?resource_id=d4901968-dad3-4845-a9b0-a57d027f11ab&limit=10000';
+    const apiUrl =
+      'https://data.gov.il/api/3/action/datastore_search?resource_id=d4901968-dad3-4845-a9b0-a57d027f11ab&limit=10000';
 
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
       if (data.success) {
         const cityNames = data.result.records.map((record: { שם_ישוב: string }) => record.שם_ישוב);
-        setCities(cityNames.sort()); 
+        setCities(cityNames.sort());
       } else {
-        console.error('Failed to fetch cities:', data.error);
+        setError('Failed to fetch cities');
       }
     } catch (error) {
-      console.error('Error fetching cities:', error);
+      setError('Error fetching cities');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,6 +39,14 @@ function CityDropdown({ onCityChange }: CityDropdownProps) {
     setSelectedCity(city);
     onCityChange(city);
   };
+
+  if (loading) {
+    return <div>Loading cities...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>

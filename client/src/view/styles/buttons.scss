@@ -26,3 +26,56 @@
     width: 10rem;
   }
 }
+
+.multiBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  background: white;
+  border-radius: 20px; 
+  padding: 5px 10px; 
+  font-size: 14px; 
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 100px; 
+  max-width: 140px;
+  height: 40px; 
+  text-align: center;
+  white-space: nowrap;
+  gap: 2rem; 
+  margin-top: 10rem;
+  
+
+
+  &:hover {
+    background: black;
+    color: white;
+  }
+
+  .option-button {
+    &:hover,
+    &.selected {
+      background: #000000;
+      color: white;
+    }
+  }
+}
+
+.multiWizard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; 
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--black);
+  margin-bottom: 3rem;
+}

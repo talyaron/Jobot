@@ -18,4 +18,5 @@ router.delete("/saved-jobs/:jobId", userIdMiddleware, removeSavedJob);
 router.post("/saved-jobs", userIdMiddleware, saveJobForUser);
 
 
+
 export default router;
