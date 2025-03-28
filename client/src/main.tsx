@@ -27,10 +27,10 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-
           <Route path="/candidate" element={<Candidate />}>
             <Route index element={<Results />} />
             <Route path="job-candidate/:jobId" element={<JobCandidate />} />
+            <Route path="job-candidate/:jobId/application-status" element={<ApplicationStatus />} />
             <Route path="my-jobs" element={<MyJobs />} />
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
@@ -46,7 +46,6 @@ createRoot(document.getElementById('root')!).render(
           </Route>
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
-
       </BrowserRouter>
     </Provider>
   </StrictMode>,
