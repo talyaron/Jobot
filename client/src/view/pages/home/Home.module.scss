@@ -73,3 +73,20 @@
   background-color: #0056b3;
 }
 }
+
+.main{
+  display: flex;
+  justify-content: space-between;
+  gap: 20rem;
+  align-items: center;
+  img{
+    width: 65rem;
+    height: auto;
+  }
+}
+
+.mainText{
+  display: flex;
+  flex-direction: column;
+}
+

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router'; 
-import TextChanger from '../textChanger/TextChanger';
+import React, { useState } from "react";
+import { Link } from "react-router";
+import TextChanger from "../textChanger/TextChanger";
 import styles from "./Home.module.scss";
-import Wizard from '../wizard/Wizard';
-import JobApplication from '../jobApplication/JobApplication';
-import TopNav from '../../components/topNav/topNav';
+import Wizard from "../wizard/Wizard";
+import JobApplication from "../jobApplication/JobApplication";
+import TopNav from "../../components/topNav/topNav";
+import homeImgae from "../../../assets/images/homeimAGE.png";
 
 const Home: React.FC = () => {
   const [openWizard, setOpenWizard] = useState(false);
@@ -15,19 +16,25 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <TopNav/>
+      <TopNav />
       <div className={styles.container}>
-        <JobApplication/>
-          
-        <h1 className={styles.header}>ג'ובוט</h1>
-        <TextChanger />
+        <JobApplication />
 
-        <div className={styles.buttonGroup}>
-          <button onClick={handleOpenWizard} className={styles.button}>העבודה המושלמת מחכה לך כאן</button>
+        <div className={styles.main}>
+          <div className={styles.mainText}>
+            <h1 className={styles.header}>ג'ובוט</h1>
+            <TextChanger />
+            <div className={styles.buttonGroup}>
+              <button onClick={handleOpenWizard} className={styles.button}>
+                העבודה המושלמת מחכה לך כאן
+              </button>
 
-          <Link to="/candidate">
-            <button className={styles.linkButton}>לכל המשרות</button>
-          </Link>
+              <Link to="/candidate">
+                <button className={styles.linkButton}>לכל המשרות</button>
+              </Link>
+            </div>
+          </div>
+          <img src={homeImgae} alt="" />
         </div>
 
         {openWizard && <Wizard closeButton={() => setOpenWizard(false)} />}
