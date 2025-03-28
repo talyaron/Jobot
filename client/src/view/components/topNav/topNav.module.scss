@@ -2,14 +2,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background: #f0f0f0;
+    padding: 1rem 2rem;
+    background: #fff;
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
-}
+    border-bottom: 1px solid #ddd;
 
-.navButtons {
-    display: flex;
-    gap: 10px;
+    .navButtons {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+
+        a {  
+            color: #5D5A88;
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    img {
+        height: 4rem;
+        margin-right:1rem;
+    }
 }
