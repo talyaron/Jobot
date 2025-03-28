@@ -19,6 +19,8 @@ import Results from "./view/pages/results/Results.tsx";
 import { MyJobs } from "./view/pages/myJobs/MyJobs.tsx";
 import EmployerLogin from "./view/pages/employerLogin/EmployerLogin.tsx";
 
+import JobList from "./view/components/jobsList/jobsList.tsx";
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
@@ -38,6 +40,7 @@ createRoot(document.getElementById('root')!).render(
           </Route>
           <Route path="employer/login" element={<EmployerLogin />} />
           <Route path="employer" element={<EmployerWrapper />}>
+          <Route path="employer/jobList" element={<JobList />} />
             <Route index element={<JobsEmployer />} />
             <Route path="candidates" element={<JobCandidate />} />
             <Route path="applications" element={<JobApplication />} />

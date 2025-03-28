@@ -6,7 +6,7 @@
   font-size: 1.125rem;
   font-weight: bold;
   color: var(--white);
-  background-color: rgba(171, 200, 154, 1); //need to be a variable
+  background-color: rgba(171, 200, 154, 1); // This can be a variable
   border: none;
   margin: 0.5rem;
 
@@ -44,9 +44,7 @@
   text-align: center;
   white-space: nowrap;
   gap: 2rem; 
-  margin-top: 10rem;
-  
-
+  margin-top: 5rem;
 
   &:hover {
     background: black;
