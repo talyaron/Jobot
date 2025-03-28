@@ -3,6 +3,12 @@
 @use "cards";
 @use "wrappers";
 @use "chips";
+@use "popup";
+@use "dropdown";
+@use "overlay";
+@use "multiWizard";
+@use "questionContainer";
+@use "progress-bar";
 
 :root {
     /* Primary colors */
@@ -42,4 +48,9 @@
     --text-light: #ffffff;
 }
 
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1F2429;
+}
 

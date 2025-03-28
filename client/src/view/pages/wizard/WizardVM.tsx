@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
 
-type AnswerType = "multiple-choice"  | "dropdown" | "text";
+type AnswerType = "multiple-choice"  | "dropdown" | "text" | "CityDropdown";
 
 interface CareerQuestion {
   id: number;
@@ -18,7 +18,7 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 1,
     question: "איפה אתה מחפש עבודה? (עיר או אזור)",
-    answerType: "dropdown",
+    answerType: "CityDropdown",
     apiUrl: "https://data.gov.il/api/3/action/datastore_search/", 
     placeholder: "באזרחות עובדים קל”ב",
 
@@ -39,7 +39,7 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 3,
     question: "בחר את תחום העבודה שמתאים לך",
-    answerType: "multiple-choice",
+    answerType: "dropdown",
     options: [
       "💻 הייטק וטכנולוגיה",
       "🏢 משרד וניהול",
@@ -55,7 +55,7 @@ const careerQuestions: CareerQuestion[] = [
   {
     id: 4,
     question: "איזה מיומנויות מהשירות אתה מביא איתך לאזרחות? (וכמובן לעבודה)",
-    answerType: "multiple-choice",
+    answerType: "dropdown",
     options: [
       "🎯 יכולת עבודה תחת לחץ",
       "👥 ניסיון בניהול ופיקוד",

@@ -1,9 +1,9 @@
-import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 export const getCandidatesByJobId = async (req: any, res: any) => {
     try{
         const { jobId } = req.params;
-        const candidates = await JobUserModel.find({ employerId: jobId }).populate("userId");
+        const candidates = await ApplicationModel.find({ employerId: jobId }).populate("userId");
         if (!candidates) {
             return res.status(404).json({ message: "candidates not found" });
         }

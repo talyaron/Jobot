@@ -1,5 +1,5 @@
 import { JobModel } from "../../Model/jobModel";
-import { JobUserModel } from "../../Model/joinTables/jobUserJoinTable";
+import { ApplicationModel } from "../../Model/joinTables/applicationModel";
 
 
 export const getJobById = async (req: any, res: any) => {
@@ -34,7 +34,7 @@ export const getCandidatesByEmployerId = async (req: any, res: any) => {
     const userId = "67dde52ea02050a125ee632e"; //just for development
     if(!userId) return res.status(401).json({message: "Unauthorized"});
 
-    const candidatesDB = await JobUserModel.find({ employerId: userId })
+    const candidatesDB = await ApplicationModel.find({ employerId: userId })
       .populate({
         path: 'candidateId',
         select: '-password -__v -_doc' // Exclude password and metadata
@@ -46,6 +46,7 @@ export const getCandidatesByEmployerId = async (req: any, res: any) => {
 
     const candidates = candidatesDB.map((candidate) => {
       return {
+        applicationId: candidate._id,
         candidate: candidate.candidateId,
         job: candidate.jobId
       };

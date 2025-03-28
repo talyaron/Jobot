@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
-import type { RootState } from "@reduxjs/toolkit/query";
 
 const JobApplicationVM = () => {
-  const { jobId } = useParams();
-  const [job, setJob] = useState(null);
-  const user = useSelector((state: RootState) => state.user);
+  const { applicationId } = useParams();
+  const [application, setApplication] = useState(null);
+
 
   useEffect(() => {
-    if (jobId) getJobById(jobId);
-    console.log(user)
-  }, []);
+    if (applicationId) getJobById(applicationId);
 
-  async function getJobById(jobId: string) {
+  }, [applicationId]);
+
+  async function getJobById(applicationId: string) {
     try {
-      const response = await fetch(`/api/jobs/${jobId}`);
+      const response = await fetch(`/api/employer/get-application?applicationId=&${applicationId}`,{
+        credentials: "include",
+      });
       if (!response.ok) {
         throw new Error("Job not found");
       }
-      const job = await response.json();
-      console.log(job);
-      setJob(job);
+      const data = await response.json();
+      console.log(data);
+      setApplication(data.application);
     } catch (error) {
       console.error("Error fetching job:", error);
     }
   }
 
-  return { job, user };
+  return { application };
 };
 
 export default JobApplicationVM;
