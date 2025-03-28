@@ -19,7 +19,6 @@ export const useJobs = () => {
       if (!response.ok) throw new Error("Failed to fetch job IDs");
 
       const data = await response.json();
-      console.log(data);
       if(data.filtered)
       setJobs(data.filtered);
     } catch (err) {
@@ -33,6 +32,7 @@ export const useJobs = () => {
   useEffect(() => {
     if (user?.userId) return;
     fetchJobIds();
+    console.log(user)
   }, [user]);
 
   return { jobs, loading, error };

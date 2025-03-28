@@ -19,7 +19,7 @@ const TopNav = () => {
                 <Link to="/about">מי אנחנו</Link>
                 <Link to="/">בית</Link>
             </div>
-            <img src={jobot} />
+            <img src={jobot} alt="jobot logo" />
         </div>
     )
 }

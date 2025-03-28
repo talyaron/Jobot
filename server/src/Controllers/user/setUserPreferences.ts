@@ -4,16 +4,20 @@ export async function setUserPreferences(req: any, res: any) {
   try {
     const { preferences } = req.body;
     const userId = req.body.userId || req.userId;
-console.log(preferences,userId)
+    console.log(preferences, userId);
     if (!userId || !preferences) {
       return res.status(400).json({ message: "Missing userId or preferences" });
     }
 
+    const preferenceExists = await UserJobPreferencesModel.find({ userId });
+    if (preferenceExists)
+      return res
+        .status(201)
+        .json({ message: "Preferences saved", data: preferenceExists });
     const newPreference = await UserJobPreferencesModel.create({
       userId,
       preferences,
     });
-
     res.status(201).json({ message: "Preferences saved", data: newPreference });
   } catch (error) {
     console.error(error);
