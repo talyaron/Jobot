@@ -1,5 +1,4 @@
 import { useWizard } from './WizardVM';
-import styles from './Wizard.module.scss';
 import QuestionComponent from './QuestionComponent';
 
 interface Props {
@@ -8,6 +7,7 @@ interface Props {
 
 function Wizard({ closeButton }: Props) {
   const {
+    isFinished,
     currentQuestionIndex,
     answers,
     handleNext,
@@ -45,15 +45,16 @@ function Wizard({ closeButton }: Props) {
           max={100}
           className="progress-bar"
         />
-
-        {currentQuestion && (
-          <>
+{isFinished ? (
+ <h2>בבקשה התחבר כדי להמשיך</h2>
+    
+) :
+        currentQuestion && (
             <QuestionComponent
               question={currentQuestion}
               answer={answers[currentQuestion.id]}
               onAnswerChange={(answer) => handleAnswerChange(currentQuestion.id, answer)}
             />
-          </>
         )}
 
         <div>
@@ -64,13 +65,19 @@ function Wizard({ closeButton }: Props) {
           >
             <h3>הקודם</h3>
           </button>
+         { isFinished ?
           <button className='multiBtn'
+            onClick={closeButton}
+            aria-label="Next Question"
+          >
+            <h3>סגירה</h3>
+          </button>:<button className='multiBtn'
             onClick={handleNext}
             disabled={!isAnswerValid()}
             aria-label="Next Question"
           >
             <h3>המשך</h3>
-          </button>
+          </button>}
         </div>
       </div>
     </div>

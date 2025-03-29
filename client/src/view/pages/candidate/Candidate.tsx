@@ -20,6 +20,9 @@ const Candidate = () => {
             <Link to="my-jobs">
               <button>My Jobs</button>
             </Link>
+            <Link to="results">
+              <button>results</button>
+            </Link>
             <Link to="/">
               <button>Find Jobs</button>
             </Link>

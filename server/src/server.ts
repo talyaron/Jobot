@@ -29,6 +29,7 @@ app.use(cors({
 app.use(cors({ origin: true, credentials: true }));
 const server = http.createServer(app);
 
+export const AI_API_KEY=process.env.AI_API_KEY;
 
 export const secretKey = String(process.env.SECRET_JWT) || "1234";
 export const saltRounds = Number(process.env.SALT_BCRYPT) || 3;
