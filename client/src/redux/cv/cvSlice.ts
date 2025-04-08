@@ -42,7 +42,7 @@ export interface SkillsState {
     id: string;
 }
 
-// המבנה הכללי של ה-state
+// The general structure
 interface CvState {
     personalInformation: PersonalInformationState;
     professionalSummary: string;
@@ -54,7 +54,7 @@ interface CvState {
     error: string | null;
 }
 
-// מצב התחלתי
+// Initial state
 const initialState: CvState = {
     personalInformation: {
         userId: crypto.randomUUID(),
@@ -106,12 +106,12 @@ const cvSlice = createSlice({
         },
 
         getEducationFromServer(state, action: PayloadAction<EducationState[]>) {
-            // יצירת מפה של הרשומות הקיימות לפי המזהה
+            // Create a map of existing records by ID
             const existingEducationsMap = new Map(
                 state.educations.map(edu => [edu.id, edu])
             );
         
-            // עדכון הרשומות הקיימות והוספת חדשות
+            // Updating existing records and adding new ones
             const updatedEducations = action.payload.map(serverEdu => {
                 const existingEdu = existingEducationsMap.get(serverEdu.id);
                 return existingEdu 
@@ -204,7 +204,7 @@ const cvSlice = createSlice({
         },
 
         getSkillsFromServer(state, action: PayloadAction<SkillsState[]>) {
-            state.skills = action.payload; // מחליף את המערך הקיים עם המידע שמגיע מהשרת
+            state.skills = action.payload; // change the data with data from the server
         },
         
     },

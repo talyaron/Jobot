@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../../redux/store";
-// import { fetchCvForm } from "../../../../redux/cv/cvSlice"; // ייבוא הפעולה
 import { getEducationFromServer, getServiceTypesFromServer, getSkillsFromServer, getWorkExperienceFromServer, updatePersonalInformation, updateProfessionalSummary } from "../../../../redux/cv/cvSlice"
 
 
 export const useAllComponentsVM = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isCvFill, setIsCvFill] = useState(false);
-  const [userId, setUserId] = useState(""); // שמור userId במצב
+  const [userId, setUserId] = useState(""); // save user id
   const cvForm = useSelector((state: RootState) => state.cvForm);
 
   async function getUserId() {
@@ -18,7 +17,7 @@ export const useAllComponentsVM = () => {
       });
       if (!response.ok) throw new Error("Failed to fetch user");
       const data = await response.json();
-      setUserId(data._id); // עדכן את משתנה המצב
+      setUserId(data._id);
       console.log(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -33,9 +32,8 @@ export const useAllComponentsVM = () => {
       const data = await response.json();
       console.log("CV data:", data);
       
-      // טפל במבנה הנתונים כראוי
       if (data.personalInformation) {
-        // אם זה מערך, קח את הפריט הראשון
+        // If it's an array, take the first item
         const personalInfo = Array.isArray(data.personalInformation) 
           ? data.personalInformation[0] 
           : data.personalInformation;
@@ -50,8 +48,7 @@ export const useAllComponentsVM = () => {
       }
 
       if (data.skills) {
-        console.log("Skills from server:", data.skills); // לבדוק שהנתונים מגיעים
-        dispatch(getSkillsFromServer(data.skills)); // לשלוח את כל המערך במקום לרוץ ב-loop
+        dispatch(getSkillsFromServer(data.skills));
     }
 
     if (data.educations){
@@ -70,16 +67,16 @@ catch (error) {
   }
   
   useEffect(() => {
-    getUserId(); // זה יעדכן את מצב ה-userId
-    foundIfCvFill(); // ��ה יקרא ל-foundIfCvFill כאשר המצב של הuserId משתנה
+    getUserId(); 
+    foundIfCvFill(); // for the button changed
   }, []);
   
   useEffect(() => {
-    // קרא ל-getMyCvForm רק כאשר userId זמין
+    // call only if user id changed
     if (userId) {
       getMyCvForm();
     }
-  }, [userId]); // הרץ מחדש כאשר userId משתנה
+  }, [userId]); 
   
 
   

@@ -7,8 +7,6 @@ const Skills: React.FC = () => {
     const dispatch = useDispatch();
     const skillsData = useSelector((state: RootState) => state.cvForm.skills)
 
-    console.log("Redux state - skills List:", skillsData);
-
     const handelAddSkills = () =>{
         dispatch(addSkills());
     }

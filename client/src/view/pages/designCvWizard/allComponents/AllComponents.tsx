@@ -10,9 +10,8 @@ import ServiceType from "../serviceType/ServiceType";
 const AllComponents = () => {
   const cvForm = useSelector((state: RootState) => state.cvForm); 
 
-  const sendCvFormToServer = async () => { // 🔹 פונקציה אסינכרונית תקינה
+  const sendCvFormToServer = async () => {
     try {
-      console.log("before send to the dada bate" , cvForm);
       const response = await fetch("http://localhost:3000/api/cv/updateCvForm", {
         method: "POST",
         headers: {

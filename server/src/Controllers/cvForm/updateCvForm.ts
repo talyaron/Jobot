@@ -11,12 +11,11 @@ export const updateCvForm = async (req: Request, res: Response): Promise<void> =
 
         if (!userId) {
             res.status(400).json({ error: "User ID is required" });
-            return; // מונע המשך ריצה
+            return; 
         }
 
         console.log("User ID:", userId, "Type:", typeof userId);
 
-        // חיפוש לפי personalInformation.userId
         const existingCvForm = await CvFormModel.findOne({ "personalInformation.userId": userId });
 
         console.log("Existing CV Form:", JSON.stringify(existingCvForm, null, 2));
@@ -29,10 +28,10 @@ export const updateCvForm = async (req: Request, res: Response): Promise<void> =
             );
 
             res.status(200).json({ message: "Updated successfully", ok: true });
-            return; // כדי שלא ימשיך לתחתית ויצור רשומה חדשה
+            return; // So that it doesn't continue to the bottom and create a new record
         }
 
-        // יצירת רשומה חדשה רק אם אין אחת קיימת
+        // Create a new record only if one does not exist
         const newCvForm = new CvFormModel({ personalInformation: { userId }, ...formData });
         await newCvForm.save();
 
