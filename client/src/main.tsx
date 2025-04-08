@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./view/styles/style.scss";
 
+import DesignCvWizard from './view/pages/designCvWizard/DesignCvWizard.tsx'
 
 import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path=":userId" element={<Results />} />
             <Route path="job-application/:user-jobId" element={<JobApplication />} />
             <Route path="chat/:jobId" element={<Chat />} />
+            <Route path="cv" element={<DesignCvWizard />} />
           </Route>
           <Route path="employer/login" element={<EmployerLogin />} />
           <Route path="employer" element={<EmployerWrapper />}>
@@ -49,5 +51,6 @@ createRoot(document.getElementById('root')!).render(
         </Routes>
       </BrowserRouter>
     </Provider>
+
   </StrictMode>,
 )
